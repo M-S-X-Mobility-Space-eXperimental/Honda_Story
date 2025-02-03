@@ -1,6 +1,6 @@
 //
-//  Honda_Immersive_StoryApp.swift
-//  Honda_Immersive_Story
+//  Honda_storyApp.swift
+//  Honda_story
 //
 //  Created by messitu on 2/3/25.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Honda_Immersive_StoryApp: App {
+struct Honda_storyApp: App {
 
     @State private var appModel = AppModel()
 
@@ -17,6 +17,7 @@ struct Honda_Immersive_StoryApp: App {
             ContentView()
                 .environment(appModel)
         }
+        .windowStyle(.volumetric)
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()
@@ -29,5 +30,5 @@ struct Honda_Immersive_StoryApp: App {
                 }
         }
         .immersionStyle(selection: .constant(.mixed), in: .mixed)
-     }
+    }
 }

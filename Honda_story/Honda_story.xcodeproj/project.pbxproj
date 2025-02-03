@@ -7,93 +7,68 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6EE6696E2D513CFB003BABE0 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 6EE6696D2D513CFB003BABE0 /* RealityKitContent */; };
+		6E8994C52D516884005161E2 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 6E8994C42D516884005161E2 /* RealityKitContent */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		6EE669842D513CFD003BABE0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6EE669602D513CFB003BABE0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6EE669672D513CFB003BABE0;
-			remoteInfo = Honda_Immersive_Story;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		6EE669682D513CFB003BABE0 /* Honda_Immersive_Story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Honda_Immersive_Story.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6EE6696C2D513CFB003BABE0 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
-		6EE669832D513CFD003BABE0 /* Honda_Immersive_StoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Honda_Immersive_StoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E8994BF2D516884005161E2 /* Honda_story.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Honda_story.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E8994C32D516884005161E2 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		6EE669892D513CFD003BABE0 /* Exceptions for "Honda_Immersive_Story" folder in "Honda_Immersive_Story" target */ = {
+		6E8994D62D516884005161E2 /* Exceptions for "Honda_story" folder in "Honda_story" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 6EE669672D513CFB003BABE0 /* Honda_Immersive_Story */;
+			target = 6E8994BE2D516883005161E2 /* Honda_story */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		6EE6696A2D513CFB003BABE0 /* Honda_Immersive_Story */ = {
+		6E8994C12D516884005161E2 /* Honda_story */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				6EE669892D513CFD003BABE0 /* Exceptions for "Honda_Immersive_Story" folder in "Honda_Immersive_Story" target */,
+				6E8994D62D516884005161E2 /* Exceptions for "Honda_story" folder in "Honda_story" target */,
 			);
-			path = Honda_Immersive_Story;
-			sourceTree = "<group>";
-		};
-		6EE669862D513CFD003BABE0 /* Honda_Immersive_StoryTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Honda_Immersive_StoryTests;
+			path = Honda_story;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6EE669652D513CFB003BABE0 /* Frameworks */ = {
+		6E8994BC2D516883005161E2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EE6696E2D513CFB003BABE0 /* RealityKitContent in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6EE669802D513CFD003BABE0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				6E8994C52D516884005161E2 /* RealityKitContent in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6EE6695F2D513CFB003BABE0 = {
+		6E8994B62D516883005161E2 = {
 			isa = PBXGroup;
 			children = (
-				6EE6696A2D513CFB003BABE0 /* Honda_Immersive_Story */,
-				6EE6696B2D513CFB003BABE0 /* Packages */,
-				6EE669862D513CFD003BABE0 /* Honda_Immersive_StoryTests */,
-				6EE669692D513CFB003BABE0 /* Products */,
+				6E8994C12D516884005161E2 /* Honda_story */,
+				6E8994C22D516884005161E2 /* Packages */,
+				6E8994C02D516884005161E2 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		6EE669692D513CFB003BABE0 /* Products */ = {
+		6E8994C02D516884005161E2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6EE669682D513CFB003BABE0 /* Honda_Immersive_Story.app */,
-				6EE669832D513CFD003BABE0 /* Honda_Immersive_StoryTests.xctest */,
+				6E8994BF2D516884005161E2 /* Honda_story.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6EE6696B2D513CFB003BABE0 /* Packages */ = {
+		6E8994C22D516884005161E2 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				6EE6696C2D513CFB003BABE0 /* RealityKitContent */,
+				6E8994C32D516884005161E2 /* RealityKitContent */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -101,100 +76,65 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6EE669672D513CFB003BABE0 /* Honda_Immersive_Story */ = {
+		6E8994BE2D516883005161E2 /* Honda_story */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6EE6698A2D513CFD003BABE0 /* Build configuration list for PBXNativeTarget "Honda_Immersive_Story" */;
+			buildConfigurationList = 6E8994D72D516884005161E2 /* Build configuration list for PBXNativeTarget "Honda_story" */;
 			buildPhases = (
-				6EE669642D513CFB003BABE0 /* Sources */,
-				6EE669652D513CFB003BABE0 /* Frameworks */,
-				6EE669662D513CFB003BABE0 /* Resources */,
+				6E8994BB2D516883005161E2 /* Sources */,
+				6E8994BC2D516883005161E2 /* Frameworks */,
+				6E8994BD2D516883005161E2 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				6EE6696A2D513CFB003BABE0 /* Honda_Immersive_Story */,
+				6E8994C12D516884005161E2 /* Honda_story */,
 			);
-			name = Honda_Immersive_Story;
+			name = Honda_story;
 			packageProductDependencies = (
-				6EE6696D2D513CFB003BABE0 /* RealityKitContent */,
+				6E8994C42D516884005161E2 /* RealityKitContent */,
 			);
-			productName = Honda_Immersive_Story;
-			productReference = 6EE669682D513CFB003BABE0 /* Honda_Immersive_Story.app */;
+			productName = Honda_story;
+			productReference = 6E8994BF2D516884005161E2 /* Honda_story.app */;
 			productType = "com.apple.product-type.application";
-		};
-		6EE669822D513CFD003BABE0 /* Honda_Immersive_StoryTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6EE6698F2D513CFD003BABE0 /* Build configuration list for PBXNativeTarget "Honda_Immersive_StoryTests" */;
-			buildPhases = (
-				6EE6697F2D513CFD003BABE0 /* Sources */,
-				6EE669802D513CFD003BABE0 /* Frameworks */,
-				6EE669812D513CFD003BABE0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6EE669852D513CFD003BABE0 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				6EE669862D513CFD003BABE0 /* Honda_Immersive_StoryTests */,
-			);
-			name = Honda_Immersive_StoryTests;
-			packageProductDependencies = (
-			);
-			productName = Honda_Immersive_StoryTests;
-			productReference = 6EE669832D513CFD003BABE0 /* Honda_Immersive_StoryTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		6EE669602D513CFB003BABE0 /* Project object */ = {
+		6E8994B72D516883005161E2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					6EE669672D513CFB003BABE0 = {
+					6E8994BE2D516883005161E2 = {
 						CreatedOnToolsVersion = 16.2;
-					};
-					6EE669822D513CFD003BABE0 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 6EE669672D513CFB003BABE0;
 					};
 				};
 			};
-			buildConfigurationList = 6EE669632D513CFB003BABE0 /* Build configuration list for PBXProject "Honda_Immersive_Story" */;
+			buildConfigurationList = 6E8994BA2D516883005161E2 /* Build configuration list for PBXProject "Honda_story" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 6EE6695F2D513CFB003BABE0;
+			mainGroup = 6E8994B62D516883005161E2;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 6EE669692D513CFB003BABE0 /* Products */;
+			productRefGroup = 6E8994C02D516884005161E2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6EE669672D513CFB003BABE0 /* Honda_Immersive_Story */,
-				6EE669822D513CFD003BABE0 /* Honda_Immersive_StoryTests */,
+				6E8994BE2D516883005161E2 /* Honda_story */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		6EE669662D513CFB003BABE0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6EE669812D513CFD003BABE0 /* Resources */ = {
+		6E8994BD2D516883005161E2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -204,14 +144,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6EE669642D513CFB003BABE0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6EE6697F2D513CFD003BABE0 /* Sources */ = {
+		6E8994BB2D516883005161E2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -220,23 +153,15 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		6EE669852D513CFD003BABE0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6EE669672D513CFB003BABE0 /* Honda_Immersive_Story */;
-			targetProxy = 6EE669842D513CFD003BABE0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		6EE6698B2D513CFD003BABE0 /* Debug */ = {
+		6E8994D82D516884005161E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Honda_Immersive_Story/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Honda_story/Preview Content\"";
 				DEVELOPMENT_TEAM = 2WKVLTW462;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -246,7 +171,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "MSX.Honda-Immersive-Story";
+				PRODUCT_BUNDLE_IDENTIFIER = "MSX.Honda-story";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -255,14 +180,14 @@
 			};
 			name = Debug;
 		};
-		6EE6698C2D513CFD003BABE0 /* Release */ = {
+		6E8994D92D516884005161E2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Honda_Immersive_Story/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Honda_story/Preview Content\"";
 				DEVELOPMENT_TEAM = 2WKVLTW462;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -272,7 +197,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "MSX.Honda-Immersive-Story";
+				PRODUCT_BUNDLE_IDENTIFIER = "MSX.Honda-story";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -281,7 +206,7 @@
 			};
 			name = Release;
 		};
-		6EE6698D2D513CFD003BABE0 /* Debug */ = {
+		6E8994DA2D516884005161E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -344,7 +269,7 @@
 			};
 			name = Debug;
 		};
-		6EE6698E2D513CFD003BABE0 /* Release */ = {
+		6E8994DB2D516884005161E2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -400,72 +325,23 @@
 			};
 			name = Release;
 		};
-		6EE669902D513CFD003BABE0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2WKVLTW462;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "MSX.Honda-Immersive-StoryTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 7;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Honda_Immersive_Story.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Honda_Immersive_Story";
-				XROS_DEPLOYMENT_TARGET = 2.2;
-			};
-			name = Debug;
-		};
-		6EE669912D513CFD003BABE0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2WKVLTW462;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "MSX.Honda-Immersive-StoryTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 7;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Honda_Immersive_Story.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Honda_Immersive_Story";
-				XROS_DEPLOYMENT_TARGET = 2.2;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6EE669632D513CFB003BABE0 /* Build configuration list for PBXProject "Honda_Immersive_Story" */ = {
+		6E8994BA2D516883005161E2 /* Build configuration list for PBXProject "Honda_story" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6EE6698D2D513CFD003BABE0 /* Debug */,
-				6EE6698E2D513CFD003BABE0 /* Release */,
+				6E8994DA2D516884005161E2 /* Debug */,
+				6E8994DB2D516884005161E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6EE6698A2D513CFD003BABE0 /* Build configuration list for PBXNativeTarget "Honda_Immersive_Story" */ = {
+		6E8994D72D516884005161E2 /* Build configuration list for PBXNativeTarget "Honda_story" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6EE6698B2D513CFD003BABE0 /* Debug */,
-				6EE6698C2D513CFD003BABE0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6EE6698F2D513CFD003BABE0 /* Build configuration list for PBXNativeTarget "Honda_Immersive_StoryTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6EE669902D513CFD003BABE0 /* Debug */,
-				6EE669912D513CFD003BABE0 /* Release */,
+				6E8994D82D516884005161E2 /* Debug */,
+				6E8994D92D516884005161E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -473,11 +349,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6EE6696D2D513CFB003BABE0 /* RealityKitContent */ = {
+		6E8994C42D516884005161E2 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 6EE669602D513CFB003BABE0 /* Project object */;
+	rootObject = 6E8994B72D516883005161E2 /* Project object */;
 }

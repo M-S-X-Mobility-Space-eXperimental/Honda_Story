@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "GridMaterial"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Sphere_Left", "Sphere_Right", "GridMaterial"]
+    reorder nameChildren = ["Sphere_Left", "Sphere_Right", "GridMaterial", "carlight", "carlightoff"]
     def Sphere "Sphere_Right" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
@@ -49,6 +49,212 @@ def Xform "Root"
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Honda_NSX_1990" (
+        active = true
+        references = @Honda_NSX_1990.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        float3 xformOp:translate = (0, -0.38758528, -2.3033566)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            uniform token info:id = "RealityKit.AnimationLibrary"
+
+            def RealityKitClipDefinition "Clip_default_subtree_animation"
+            {
+                uniform string[] clipNames = ["Clip", "Clip 1", "Clip 2", "Clip 3", "Clip 4"]
+                uniform string sourceAnimationName = "default subtree animation"
+                uniform double[] startTimes = [0, 1.9002777777777777, 4.217388888888889, 7.312055555555555, 8.933]
+            }
+        }
+
+        def RealityKitComponent "Collider" (
+            active = false
+        )
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (132.35611, 86.52606, 298.81683)
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 87.238266, 87.09747)
+                }
+            }
+        }
+
+        def RealityKitComponent "InputTarget" (
+            active = false
+        )
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/Honda_NSX_1990/OnTap>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/Honda_NSX_1990/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/Honda_NSX_1990/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/Honda_NSX_1990>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/carlight>
+                rel animationLibraryKeyOverrideKey = </Root/Honda_NSX_1990/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+    }
+
+    def RealityKitTimeline "carlight"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "Clip 1"
+                int blendLayer = 500
+                double duration = 2.3171111111111116
+                uniform token info:id = "F94E3EF6-4DE0-4533-8408-1798FF713361"
+                double loopCount = 1
+                bool parentControllers = 0
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/Honda_NSX_1990>
+
+                def RealityKitStruct "handoffType"
+                {
+                    bool applyToAllLayers = 1
+                    token type = "defaultHandoffType"
+                }
+            }
+
+            def RealityKitAction "Animation2"
+            {
+                string actionKind = "animation"
+                string animation = "Clip 2"
+                int blendLayer = 500
+                double duration = 3.094666666666666
+                uniform token info:id = "FF5B3CF2-ACD3-4074-BF23-A14B02E74A4E"
+                double loopCount = 0
+                bool parentControllers = 0
+                bool separateAnimatedValue = 1
+                double startTime = 2.3171111112111116
+                rel target = </Root/Honda_NSX_1990>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Replace_Behaviors"
+            {
+                string actionKind = "replaceBehaviors"
+                double duration = 0
+                uniform token info:id = "B41BDF1D-C8BB-4108-93BD-6C2CB3F6840E"
+                double startTime = 2.41619387594684
+                rel target = </Root/Honda_NSX_1990>
+
+                def RealityKitTrigger "Replacement" (
+                    active = true
+                )
+                {
+                    rel animationLibraryKeyOverrideKey = </Root/Honda_NSX_1990/OnTap/Trigger>
+                    rel selectedTimeline = </Root/carlightoff>
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "carlightoff"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "Clip 3"
+                int blendLayer = 500
+                double duration = 1.6209444444444445
+                uniform token info:id = "3E85225A-13E8-4238-BEF1-FC73AC7BA45D"
+                bool parentControllers = 0
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/Honda_NSX_1990>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+
+            def RealityKitAction "Animation2"
+            {
+                string actionKind = "animation"
+                string animation = "Clip 4"
+                int blendLayer = 500
+                double duration = 1.4420000000000002
+                uniform token info:id = "D92A5447-D381-4DFE-A3DC-D2EA4AD1DDD3"
+                double loopCount = 0
+                bool parentControllers = 0
+                bool separateAnimatedValue = 1
+                double startTime = 1.6209444445444448
+                rel target = </Root/Honda_NSX_1990>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Replace_Behaviors"
+            {
+                string actionKind = "replaceBehaviors"
+                uniform token info:id = "4102AE50-268C-4B2A-8583-E10681C1ABF2"
+                double startTime = 1.6486168907052725
+                rel target = </Root/Honda_NSX_1990>
+
+                def RealityKitTrigger "Replacement" (
+                    active = true
+                )
+                {
+                    rel animationLibraryKeyOverrideKey = </Root/Honda_NSX_1990/OnTap/Trigger>
+                    rel selectedTimeline = </Root/carlight>
+                }
+            }
+        }
     }
 }
 

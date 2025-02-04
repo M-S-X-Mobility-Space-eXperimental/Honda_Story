@@ -21,6 +21,10 @@ struct ImmersiveView: View {
                 // https://developer.apple.com/
             }
         }
+        .gesture(TapGesture().targetedToAnyEntity()
+            .onEnded { value in
+                _ = value.entity.applyTapForBehaviors()
+            })
     }
 }
 

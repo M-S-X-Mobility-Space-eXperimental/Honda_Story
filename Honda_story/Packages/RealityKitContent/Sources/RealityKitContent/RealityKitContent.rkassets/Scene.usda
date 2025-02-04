@@ -1,62 +1,57 @@
 #usda 1.0
 (
-    defaultPrim = "Root"
+    defaultPrim = "Honda_NSX_1990"
     metersPerUnit = 1
     upAxis = "Y"
 )
 
 reorder rootPrims = ["Root", "GridMaterial"]
 
-def Xform "Root"
+def "Honda_NSX_1990" (
+    active = true
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    references = @Honda_NSX_1990.usdz@
+)
 {
-    reorder nameChildren = ["GridMaterial", "Sphere"]
     rel material:binding = None (
         bindMaterialAs = "weakerThanDescendants"
     )
+    quatf xformOp:orient = (1, 0, 0, 0)
+    float3 xformOp:scale = (0.001, 0.001, 0.001)
+    float3 xformOp:translate = (-0.004908681, -0.058845684, -0.052826345)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-    def Sphere "Sphere" (
-        active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
+    over "Materials"
     {
-        reorder nameChildren = ["Collider", "InputTarget", "GridMaterial"]
-        rel material:binding = </Root/GridMaterial/GridMaterial> (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        double radius = 0.1
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0, 0)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def RealityKitComponent "Collider"
+        over "Material_006"
         {
-            uint group = 1
-            uniform token info:id = "RealityKit.Collider"
-            uint mask = 4294967295
-            token type = "Default"
-
-            def RealityKitStruct "Shape"
-            {
-                float3 extent = (0.2, 0.2, 0.2)
-                float radius = 0.1
-                token shapeType = "Sphere"
-            }
-        }
-
-        def RealityKitComponent "InputTarget"
-        {
-            uniform token info:id = "RealityKit.InputTarget"
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
         }
     }
 
-    def "GridMaterial" (
-        active = true
-        references = @Materials/GridMaterial.usda@
-    )
+    def RealityKitComponent "Collider"
     {
-        float3 xformOp:scale = (1, 1, 1)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (132.35611, 86.52606, 298.81683)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, 87.238266, 87.09747)
+            }
+        }
+    }
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
     }
 }
 

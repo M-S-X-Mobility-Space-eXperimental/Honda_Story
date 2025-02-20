@@ -16,9 +16,11 @@ struct Honda_storyApp: App {
         WindowGroup {
             ContentView()
                 .environment(appModel)
+                .frame(minWidth: 800, minHeight: 800)
+                .frame(minDepth: 800)
         }
         .windowStyle(.volumetric)
-        .defaultSize(width: 10, height: 10, depth: 10, in: .meters)
+        .defaultSize(width: 2, height: 2, depth: 2, in: .meters)
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()

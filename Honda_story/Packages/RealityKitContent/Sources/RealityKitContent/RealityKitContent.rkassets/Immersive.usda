@@ -74,12 +74,16 @@ def Xform "Root"
 
     def Xform "smoke" (
         prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.08726646, 0, 0)
+        }
         references = None
     )
     {
         rel material:binding = None (
             bindMaterialAs = "weakerThanDescendants"
         )
+        quatf xformOp:orient = (0.99904823, -0.043619387, 0, 0)
         float3 xformOp:translate = (0, 0.10997115, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -91,11 +95,11 @@ def Xform "Root"
             {
                 token birthDirection = "Local"
                 token birthLocation = "Volume"
-                int64 burstCount = 5000
+                int64 burstCount = 1000
                 float3 emissionDirection = (0, 1, 0)
                 double emissionDuration = 0.05
                 double emissionDurationVariation = 0
-                token emitterShape = "Point"
+                token emitterShape = "Cylinder"
                 double idleDuration = 3
                 double idleDurationVariation = 0
                 bool isEmitting = 1
@@ -104,7 +108,7 @@ def Xform "Root"
                 bool loops = 1
                 float particleSpeed = 5
                 float particleSpeedVariation = 0.1
-                float3 shapeSize = (0.1, 0.1, 0.1)
+                float3 shapeSize = (0.15, 0.1, 0.15)
                 bool spawnInheritParentColor = 0
                 token spawnOccasion = "OnUpdate"
                 float spawnSpreadFactor = 0.34906584
@@ -117,13 +121,13 @@ def Xform "Root"
                     float3 acceleration = (0, -0.2, 0)
                     token animationRepeatMode = "PlayOnce"
                     token billboardMode = "Billboard"
-                    float birthRate = 3000
+                    float birthRate = 2000
                     float birthRateVariation = 0
                     token blendMode = "Additive"
                     float colorEvolutionPower = 0.5
                     int64 columnCount = 4
                     float dampingFactor = 7
-                    float4 endColorA = (0.06896889, 0.08612627, 0.09874699, 0.6346195)
+                    float4 endColorA = (0.59084255, 0.82597685, 0.73522234, 0.14822492)
                     float4 endColorB = (0.11386989, 0.0064959256, 0.10626237, 1)
                     float frameRate = 0
                     float frameRateVariation = 0
@@ -140,7 +144,7 @@ def Xform "Root"
                     float particleAngularVelocity = 0
                     float particleAngularVelocityVariation = 1
                     asset particleImage = @ParticleEmitterPresetTextures/dustsheet.exr@
-                    double particleLifeSpan = 2
+                    double particleLifeSpan = 3
                     double particleLifeSpanVariation = 1
                     float particleMass = 1.1
                     float particleMassVariation = 0.8
@@ -153,14 +157,14 @@ def Xform "Root"
                     float sizeMultiplierAtEndOfLifespanPower = 0.5
                     token sortOrder = "IncreasingDepth"
                     float spreadingAngle = 0.17453292
-                    float4 startColorA = (0.5343751, 0.72773063, 0.7319911, 0.19882016)
+                    float4 startColorA = (0.8702364, 1, 0.8755672, 0.28039965)
                     float4 startColorB = (1, 1, 1, 0.07)
                     float stretchFactor = 0
                     bool useEndColor = 1
                     bool useEndColorRange = 0
                     bool useStartColorRange = 1
-                    float3 vortexDirection = (0.1, -1, 0)
-                    float vortexStrength = 0.1
+                    float3 vortexDirection = (0.1, -1, 0.1)
+                    float vortexStrength = 1
                 }
 
                 def RealityKitStruct "spawnedEmitter"
@@ -214,7 +218,7 @@ def Xform "Root"
         int ui:nodegraph:node:stackingOrder = 1
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0.10997115, 0)
+        float3 xformOp:translate = (0, -0.031540066, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def RealityKitComponent "VFXEmitter"
@@ -299,7 +303,7 @@ def Xform "Root"
 
                 def RealityKitStruct "spawnedEmitter"
                 {
-                    float3 acceleration = (0, -0.5, 0)
+                    float3 acceleration = (0, -0.3, 0)
                     token animationRepeatMode = "PlayOnce"
                     token billboardMode = "Billboard"
                     float birthRate = 2000
@@ -307,29 +311,30 @@ def Xform "Root"
                     token blendMode = "Alpha"
                     int64 columnCount = 8
                     float dampingFactor = -0.5
-                    float4 endColorA = (0.08145662, 0.12358204, 0.14560303, 0.07708865)
+                    float4 endColorA = (0.041238114, 0.05717579, 0.05487958, 0.15154654)
                     float frameRate = 32
                     int64 initialFrame = 1
                     bool isAnimated = 1
-                    float noiseScale = 0.1
-                    float noiseStrength = 0.2
+                    float noiseAnimationSpeed = 0.2
+                    float noiseScale = 0.01
+                    float noiseStrength = 0.1
                     float particleAngularVelocity = 0.1
                     asset particleImage = @New Folder/Water_002.png@
                     double particleLifeSpan = 1
                     double particleLifeSpanVariation = 0.5
-                    float particleMass = 1
+                    float particleMass = 0.9
                     float particleMassVariation = 0.5
                     float particleSize = 0.02
                     float3 radialGravityCenter = (0, 0.5, 0)
                     float radialGravityStrength = 0.2
                     int64 rowCount = 4
                     float spreadingAngle = 0.17453292
-                    float4 startColorA = (0.0045742616, 0.0061477674, 0.0061477674, 0)
+                    float4 startColorA = (0.04595764, 0.05729667, 0.056408543, 0.04737989)
                     float stretchFactor = 1
                     bool useEndColor = 1
                     bool useEndColorRange = 0
                     bool useStartColorRange = 0
-                    float3 vortexDirection = (0.1, -0.5, 0.1)
+                    float3 vortexDirection = (0.1, 0.3, 0.05)
                     float vortexStrength = 2
                 }
             }

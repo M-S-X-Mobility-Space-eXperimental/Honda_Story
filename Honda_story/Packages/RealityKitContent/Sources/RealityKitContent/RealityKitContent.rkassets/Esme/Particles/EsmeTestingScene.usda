@@ -1,0 +1,49 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "geyser" (
+        active = true
+        prepend references = @geyser/geyser.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        float3 xformOp:translate = (0, 0.008663982, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "holder" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        prepend references = @geyser/holder.usdz@
+    )
+    {
+        rel material:binding = </Root/Smooth_Concrete> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.303, 0.030299999, 0.303)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Smooth_Concrete" (
+        active = true
+        prepend references = @../SmoothConcrete.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+}
+

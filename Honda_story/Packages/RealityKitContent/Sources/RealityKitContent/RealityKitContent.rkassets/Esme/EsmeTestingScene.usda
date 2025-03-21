@@ -379,27 +379,29 @@ def Xform "Root"
 
             def Material "TubeShaderMaterial"
             {
-                float inputs:ConstantFloat = 0 (
+                float inputs:LiquidLevel = 20 (
                     customData = {
                         dictionary realitykit = {
-                            float2 positionInSubgraph = (-535.68774, 163.84904)
-                            int stackingOrderInSubgraph = 139
+                            float2 positionInSubgraph = (-776.8775, 434.28867)
+                            int stackingOrderInSubgraph = 188
                         }
                     }
                 )
-                float inputs:liquidSurfaceMax = 5 (
+                color4f inputs:SideColor = (0.2566038, 0.94687915, 0.0012408085, 0.43527526) (
+                    colorSpace = "lin_srgb"
                     customData = {
                         dictionary realitykit = {
-                            float2 positionInSubgraph = (-736.60944, 187.75972)
-                            int stackingOrderInSubgraph = 126
+                            float2 positionInSubgraph = (-829.7406, 24.791153)
+                            int stackingOrderInSubgraph = 273
                         }
                     }
                 )
-                float inputs:liquidSurfaceMin = -5 (
+                color4f inputs:TopColor = (0.4021462, 0.8098642, 0.20979916, 0.6210679) (
+                    colorSpace = "lin_srgb"
                     customData = {
                         dictionary realitykit = {
-                            float2 positionInSubgraph = (-737.6676, 114.600266)
-                            int stackingOrderInSubgraph = 126
+                            float2 positionInSubgraph = (-828.0124, 94.48712)
+                            int stackingOrderInSubgraph = 273
                         }
                     }
                 )
@@ -411,7 +413,7 @@ def Xform "Root"
                 def Shader "PreviewSurface"
                 {
                     uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
-                    color3f inputs:diffuseColor = (0.31456918, 0.46135616, 0.24544698) (
+                    color3f inputs:diffuseColor = (0.46135616, 0.30864826, 0.25930125) (
                         colorSpace = "srgb_texture"
                     )
                     float inputs:metallic
@@ -420,7 +422,7 @@ def Xform "Root"
                     float inputs:roughness
                     token outputs:out
                     float2 ui:nodegraph:node:pos = (159.74963, 35.662476)
-                    int ui:nodegraph:node:stackingOrder = 120
+                    int ui:nodegraph:node:stackingOrder = 139
                 }
 
                 def Shader "Position_World"
@@ -428,16 +430,16 @@ def Xform "Root"
                     uniform token info:id = "ND_position_vector3"
                     string inputs:space = "world"
                     float3 outputs:out
-                    float2 ui:nodegraph:node:pos = (-1024.013, -41.294617)
-                    int ui:nodegraph:node:stackingOrder = 106
+                    float2 ui:nodegraph:node:pos = (-836.76196, 229.98206)
+                    int ui:nodegraph:node:stackingOrder = 171
                 }
 
                 def Shader "Position_Object"
                 {
                     uniform token info:id = "ND_position_vector3"
                     float3 outputs:out
-                    float2 ui:nodegraph:node:pos = (-1022.9177, 51.438164)
-                    int ui:nodegraph:node:stackingOrder = 106
+                    float2 ui:nodegraph:node:pos = (-835.66675, 322.71484)
+                    int ui:nodegraph:node:stackingOrder = 171
                 }
 
                 def Shader "Subtract"
@@ -446,8 +448,8 @@ def Xform "Root"
                     float3 inputs:in1.connect = </Root/tube_re/mtl/TubeShaderMaterial/Position_World.outputs:out>
                     float3 inputs:in2.connect = </Root/tube_re/mtl/TubeShaderMaterial/Position_Object.outputs:out>
                     float3 outputs:out
-                    float2 ui:nodegraph:node:pos = (-802.8407, 17.365448)
-                    int ui:nodegraph:node:stackingOrder = 106
+                    float2 ui:nodegraph:node:pos = (-615.5897, 288.64212)
+                    int ui:nodegraph:node:stackingOrder = 171
                 }
 
                 def Shader "Swizzle"
@@ -456,8 +458,8 @@ def Xform "Root"
                     string inputs:channels = "y"
                     float3 inputs:in.connect = </Root/tube_re/mtl/TubeShaderMaterial/Subtract.outputs:out>
                     float outputs:out
-                    float2 ui:nodegraph:node:pos = (-656.69666, 20.9614)
-                    int ui:nodegraph:node:stackingOrder = 116
+                    float2 ui:nodegraph:node:pos = (-469.44568, 292.23807)
+                    int ui:nodegraph:node:stackingOrder = 171
                     string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out"]
                 }
 
@@ -465,18 +467,79 @@ def Xform "Root"
                 {
                     uniform token info:id = "ND_realitykit_step_float"
                     float inputs:edge = 0
-                    float inputs:edge.connect = </Root/tube_re/mtl/TubeShaderMaterial.inputs:liquidSurfaceMin>
+                    float inputs:edge.connect = </Root/tube_re/mtl/TubeShaderMaterial/Remap.outputs:out>
                     float inputs:in.connect = </Root/tube_re/mtl/TubeShaderMaterial/Swizzle.outputs:out>
                     float outputs:out
-                    float2 ui:nodegraph:node:pos = (-473.65738, 5.724294)
-                    int ui:nodegraph:node:stackingOrder = 124
+                    float2 ui:nodegraph:node:pos = (-286.4064, 277.00098)
+                    int ui:nodegraph:node:stackingOrder = 171
                 }
 
-                def Shader "Range"
+                def Shader "Remap"
                 {
-                    uniform token info:id = "ND_range_float"
-                    float2 ui:nodegraph:node:pos = (-893.1185, 215.7951)
-                    int ui:nodegraph:node:stackingOrder = 136
+                    uniform token info:id = "ND_remap_float"
+                    float inputs:in.connect = </Root/tube_re/mtl/TubeShaderMaterial.inputs:LiquidLevel>
+                    float inputs:inhigh = -5
+                    float inputs:inlow = 0
+                    float inputs:outhigh = 1
+                    float inputs:outlow
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-469.9338, 442.12546)
+                    int ui:nodegraph:node:stackingOrder = 198
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:inhigh"]
+                }
+
+                def Shader "Normal"
+                {
+                    uniform token info:id = "ND_normal_vector3"
+                    string inputs:space = "world"
+                    float3 outputs:out
+                    float2 ui:nodegraph:node:pos = (-917.7459, -259.6535)
+                    int ui:nodegraph:node:stackingOrder = 360
+                }
+
+                def Shader "CameraPosition"
+                {
+                    uniform token info:id = "ND_realitykit_cameraposition_vector3"
+                    float3 outputs:out
+                    float2 ui:nodegraph:node:pos = (-1141.6327, -193.45952)
+                    int ui:nodegraph:node:stackingOrder = 357
+                }
+
+                def Shader "Position"
+                {
+                    uniform token info:id = "ND_position_vector3"
+                    string inputs:space = "world"
+                    float3 outputs:out
+                    float2 ui:nodegraph:node:pos = (-1162.8699, -125.38953)
+                    int ui:nodegraph:node:stackingOrder = 357
+                }
+
+                def Shader "Subtract_1"
+                {
+                    uniform token info:id = "ND_subtract_vector3"
+                    float3 inputs:in1.connect = </Root/tube_re/mtl/TubeShaderMaterial/CameraPosition.outputs:out>
+                    float3 inputs:in2.connect = </Root/tube_re/mtl/TubeShaderMaterial/Position.outputs:out>
+                    float3 outputs:out
+                    float2 ui:nodegraph:node:pos = (-947.80774, -165.88805)
+                    int ui:nodegraph:node:stackingOrder = 357
+                }
+
+                def Shader "DotProduct"
+                {
+                    uniform token info:id = "ND_dotproduct_vector3"
+                    float3 inputs:in1.connect = </Root/tube_re/mtl/TubeShaderMaterial/Normal.outputs:out>
+                    float3 inputs:in2.connect = </Root/tube_re/mtl/TubeShaderMaterial/Subtract_1.outputs:out>
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-653.4104, -189.06183)
+                    int ui:nodegraph:node:stackingOrder = 363
+                }
+
+                def Shader "Step_1"
+                {
+                    uniform token info:id = "ND_realitykit_step_float"
+                    float inputs:in.connect = </Root/tube_re/mtl/TubeShaderMaterial/DotProduct.outputs:out>
+                    float2 ui:nodegraph:node:pos = (-447.95932, -187.76843)
+                    int ui:nodegraph:node:stackingOrder = 368
                 }
             }
         }

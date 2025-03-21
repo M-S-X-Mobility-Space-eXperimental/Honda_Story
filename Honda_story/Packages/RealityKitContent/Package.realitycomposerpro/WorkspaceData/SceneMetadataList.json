@@ -41,6 +41,27 @@
       }
     ]
   },
+  "3BE3E1C2-6FEB-419D-ABD1-5AEAD892E733" : {
+    "objectMetadataList" : [
+      [
+        "3BE3E1C2-6FEB-419D-ABD1-5AEAD892E733",
+        "Root",
+        "GeyserGroup"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "3BE3E1C2-6FEB-419D-ABD1-5AEAD892E733",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "65F6F990-A780-4474-B78B-572E0E4E273D" : {
     "objectMetadataList" : [
       [
@@ -75,9 +96,42 @@
       [
         "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
         "Root",
+        "foliage",
+        "Meshes"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
+        "Root",
+        "foliage",
+        "Meshes",
+        "Sketchfab_model"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
+        "Root",
         "tube_re",
-        "mtl",
-        "TubeShaderMaterial"
+        "mtl"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
+        "Root",
+        "foliage",
+        "Meshes",
+        "Sketchfab_model",
+        "_bee6a2d4ec6400d93e230c4f48752a2_obj_cleaner_materialmerger_gles",
+        "Object_3"
       ],
       {
         "isExpanded" : true,
@@ -94,7 +148,50 @@
       },
       [
         "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
+        "Root",
+        "Beaker"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
+        "Root",
+        "foliage",
+        "Meshes",
+        "Sketchfab_model",
+        "_bee6a2d4ec6400d93e230c4f48752a2_obj_cleaner_materialmerger_gles"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
         "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
+        "Root",
+        "GeyserGroup"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
+        "Root",
+        "foliage",
+        "Meshes",
+        "Sketchfab_model",
+        "_bee6a2d4ec6400d93e230c4f48752a2_obj_cleaner_materialmerger_gles",
+        "Object_2"
       ],
       {
         "isExpanded" : true,
@@ -114,26 +211,36 @@
       [
         "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
         "Root",
-        "GeyserGroup"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
-        "Root",
-        "Beaker"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
-        "Root",
         "tube_re",
-        "mtl"
+        "mtl",
+        "TubeShaderMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
+        "Root",
+        "foliage",
+        "Meshes",
+        "Sketchfab_model",
+        "_bee6a2d4ec6400d93e230c4f48752a2_obj_cleaner_materialmerger_gles",
+        "Object_3",
+        "Object_1"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      }
+    ]
+  },
+  "C868B84E-7ACD-463D-A3CF-0D5D0F822C78" : {
+    "objectMetadataList" : [
+      [
+        "C868B84E-7ACD-463D-A3CF-0D5D0F822C78",
+        "Root"
       ],
       {
         "isExpanded" : true,

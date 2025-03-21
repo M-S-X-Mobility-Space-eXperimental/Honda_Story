@@ -348,7 +348,7 @@ def Xform "Root"
     {
         quatf xformOp:orient = (0.7071069, -0.70710665, 0, 0)
         float3 xformOp:scale = (0.01, 0.01, 0.01)
-        float3 xformOp:translate = (-2.831842, 0, -4.06099)
+        float3 xformOp:translate = (-2.831842, -0.00000282377, 3.7087672)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "Materials"
@@ -378,6 +378,3332 @@ def Xform "Root"
                 over "PreviewSurface"
                 {
                     float inputs:opacityThreshold
+                }
+            }
+        }
+    }
+
+    def "YellowStone" (
+        active = true
+        prepend references = @YellowStone.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (17.721457, 4.7683716e-7, 10)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "BuildingMat_00050"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00050/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00050/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00050/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00050/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00050-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00050/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00050.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00056"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00056/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00056/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00056/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00056/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00056-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00056/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00056.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00057"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00057/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00057/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00057/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00057/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00057-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00057/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00057.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00064"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00064/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00064/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00064/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00064/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00064-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00064/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00064.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00065"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00065/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00065/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00065/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00065/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00065-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00065/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00065.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00067"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00067/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00067/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00067/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00067/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00067-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00067/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00067.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00071"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00071/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00071/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00071/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00071/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00071-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00071/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00071.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00073"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00073/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00073/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00073/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00073/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00073-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00073/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00073.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00074"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00074/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00074/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00074/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00074/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00074-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00074/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00074.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00075"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00075/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00075/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00075/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00075/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00075-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00075/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00075.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00076"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00076/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00076/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00076/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00076/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00076-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00076/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00076.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00077"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00077/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00077/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00077/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00077/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00077-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00077/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00077.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00079"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00079/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00079/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00079/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00079/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00079-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00079/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00079.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00080"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00080/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00080/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00080/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00080/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00080-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00080/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00080.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00081"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00081/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00081/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00081/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00081/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00081-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00081/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00081.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00083"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00083/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00083/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00083/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00083/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00083-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00083/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00083.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00084"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00084/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00084/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00084/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00084/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00084-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00084/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00084.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00085"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00085/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00085/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00085/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00085/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00085-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00085/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00085.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00086"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00086/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00086/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00086/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00086/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00086-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00086/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00086.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00087"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00087/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00087/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00087/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00087/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00087-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00087/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00087.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00088"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00088/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00088/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00088/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00088/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00088-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00088/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00088.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00090"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00090/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00090/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00090/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00090/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00090-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00090/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00090.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00091"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00091/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00091/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00091/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00091/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00091-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00091/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00091.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00093"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00093/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00093/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00093/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00093/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00093-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00093/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00093.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00095"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00095/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00095/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00095/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00095/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00095-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00095/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00095.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00096"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00096/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00096/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00096/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00096/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00096-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00096/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00096.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00097"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00097/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00097/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00097/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00097/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00097-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00097/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00097.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00098"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00098/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00098/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00098/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00098/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00098-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00098/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00098.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00101"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00101/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00101/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00101/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00101/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00101-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00101/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00101.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00102"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00102/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00102/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00102/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00102/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00102-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00102/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00102.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00104"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00104/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00104/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00104/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00104/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00104-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00104/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00104.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00105"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00105/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00105/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00105/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00105/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00105-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00105/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00105.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00106"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00106/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00106/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00106/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00106/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00106-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00106/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00106.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00107"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00107/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00107/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00107/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00107/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00107-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00107/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00107.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00108"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00108/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00108/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00108/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00108/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00108-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00108/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00108.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00109"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00109/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00109/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00109/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00109/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00109-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00109/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00109.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00110"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00110/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00110/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00110/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00110/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00110-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00110/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00110.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00111"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00111/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00111/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00111/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00111/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00111-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00111/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00111.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00112"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00112/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00112/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00112/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00112/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00112-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00112/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00112.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00114"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00114/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00114/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00114/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00114/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00114-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00114/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00114.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00115"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00115/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00115/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00115/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00115/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00115-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00115/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00115.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00117"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00117/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00117/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00117/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00117/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00117-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00117/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00117.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00119"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00119/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00119/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00119/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00119/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00119-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00119/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00119.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00121"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00121/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00121/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00121/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00121/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00121-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00121/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00121.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00122"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00122/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00122/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00122/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00122/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00122-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00122/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00122.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00123"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00123/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00123/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00123/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00123/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00123-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00123/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00123.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00124"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00124/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00124/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00124/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00124/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00124-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00124/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00124.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00125"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00125/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00125/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00125/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00125/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00125-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00125/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00125.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00130"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00130/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00130/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00130/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00130/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00130-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00130/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00130.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00131"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00131/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00131/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00131/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00131/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00131-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00131/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00131.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00136"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00136/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00136/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00136/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00136/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00136-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00136/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00136.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00138"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00138/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00138/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00138/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00138/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00138-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00138/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00138.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00139"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00139/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00139/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00139/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00139/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00139-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00139/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00139.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00140"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00140/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00140/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00140/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00140/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00140-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00140/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00140.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00141"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00141/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00141/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00141/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00141/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00141-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00141/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00141.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00144"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00144/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00144/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00144/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00144/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00144-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00144/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00144.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00146"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00146/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00146/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00146/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00146/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00146-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00146/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00146.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00147"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00147/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00147/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00147/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00147/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00147-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00147/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00147.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00148"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00148/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00148/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00148/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00148/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00148-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00148/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00148.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00149"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00149/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00149/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00149/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00149/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00149-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00149/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00149.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00152"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00152/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00152/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00152/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00152/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00152-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00152/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00152.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00155"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00155/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00155/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00155/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00155/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00155-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00155/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00155.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00157"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00157/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00157/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00157/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00157/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00157-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00157/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00157.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00158"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00158/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00158/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00158/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00158/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00158-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00158/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00158.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00159"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00159/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00159/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00159/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00159/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00159-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00159/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00159.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00160"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00160/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00160/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00160/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00160/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00160-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00160/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00160.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00162"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00162/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00162/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00162/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00162/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00162-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00162/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00162.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00164"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00164/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00164/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00164/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00164/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00164-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00164/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00164.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00165"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00165/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00165/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00165/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00165/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00165-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00165/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00165.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00168"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00168/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00168/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00168/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00168/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00168-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00168/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00168.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00169"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00169/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00169/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00169/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00169/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00169-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00169/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00169.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00170"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00170/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00170/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00170/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00170/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00170-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00170/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00170.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00171"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00171/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00171/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00171/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00171/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00171-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00171/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00171.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00173"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00173/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00173/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00173/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00173/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00173-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00173/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00173.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00174"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00174/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00174/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00174/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00174/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00174-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00174/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00174.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00176"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00176/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00176/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00176/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00176/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00176-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00176/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00176.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00177"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00177/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00177/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00177/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00177/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00177-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00177/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00177.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00178"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00178/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00178/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00178/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00178/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00178-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00178/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00178.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00180"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00180/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00180/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00180/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00180/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00180-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00180/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00180.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00181"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00181/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00181/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00181/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00181/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00181-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00181/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00181.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00183"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00183/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00183/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00183/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00183/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00183-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00183/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00183.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00184"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00184/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00184/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00184/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00184/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00184-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00184/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00184.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00185"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00185/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00185/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00185/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00185/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00185-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00185/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00185.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00189"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00189/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00189/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00189/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00189/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00189-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00189/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00189.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00190"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00190/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00190/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00190/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00190/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00190-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00190/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00190.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00192"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00192/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00192/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00192/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00192/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00192-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00192/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00192.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00194"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00194/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00194/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00194/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00194/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00194-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00194/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00194.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00198"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00198/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00198/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00198/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00198/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00198-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00198/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00198.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00199"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00199/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00199/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00199/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00199/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00199-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00199/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00199.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00203"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00203/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00203/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00203/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00203/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00203-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00203/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00203.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00212"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00212/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00212/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00212/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00212/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00212-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00212/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00212.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+
+            over "BuildingMat_00213"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float3 inputs:diffuseColor.connect = </Root/YellowStone/Materials/BuildingMat_00213/diffuseColor.outputs:rgb>
+                    delete float inputs:metallic.connect = </Root/YellowStone/Materials/BuildingMat_00213/metallicTextureShader.outputs:r>
+                    delete normal3f inputs:normal.connect = </Root/YellowStone/Materials/BuildingMat_00213/normalTextureShader.outputs:rgb>
+                    delete float inputs:roughness.connect = </Root/YellowStone/Materials/BuildingMat_00213/roughnessTextureShader.outputs:r>
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @Yellowstone6-00003-texture/Yellowstone6-00213-texture.png@
+                    float2 inputs:st.connect = </Root/YellowStone/Materials/BuildingMat_00213/diffuseColor/TexCoordReader.outputs:result>
+                    float3 outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/YellowStone/Materials/BuildingMat_00213.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
                 }
             }
         }

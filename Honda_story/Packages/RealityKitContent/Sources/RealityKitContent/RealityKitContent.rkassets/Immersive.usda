@@ -95,7 +95,7 @@ def Xform "Root"
             {
                 token birthDirection = "Local"
                 token birthLocation = "Volume"
-                int64 burstCount = 1000
+                int64 burstCount = 1
                 float3 emissionDirection = (0, 1, 0)
                 double emissionDuration = 0.05
                 double emissionDurationVariation = 0
@@ -121,13 +121,13 @@ def Xform "Root"
                     float3 acceleration = (0, -0.2, 0)
                     token animationRepeatMode = "PlayOnce"
                     token billboardMode = "Billboard"
-                    float birthRate = 2000
+                    float birthRate = 700
                     float birthRateVariation = 0
                     token blendMode = "Additive"
                     float colorEvolutionPower = 0.5
                     int64 columnCount = 4
                     float dampingFactor = 7
-                    float4 endColorA = (0.59084255, 0.82597685, 0.73522234, 0.14822492)
+                    float4 endColorA = (0.59082115, 0.7648289, 0.66320205, 0.3903327)
                     float4 endColorB = (0.11386989, 0.0064959256, 0.10626237, 1)
                     float frameRate = 0
                     float frameRateVariation = 0
@@ -157,7 +157,7 @@ def Xform "Root"
                     float sizeMultiplierAtEndOfLifespanPower = 0.5
                     token sortOrder = "IncreasingDepth"
                     float spreadingAngle = 0.17453292
-                    float4 startColorA = (0.8702364, 1, 0.8755672, 0.28039965)
+                    float4 startColorA = (0.8702364, 1, 0.8755672, 0.5153858)
                     float4 startColorB = (1, 1, 1, 0.07)
                     float stretchFactor = 0
                     bool useEndColor = 1
@@ -229,7 +229,7 @@ def Xform "Root"
             {
                 token birthDirection = "Local"
                 token birthLocation = "Volume"
-                int64 burstCount = 5000
+                int64 burstCount = 1
                 float3 emissionDirection = (0, 1, 0)
                 double emissionDuration = 0.05
                 double emissionDurationVariation = 0
@@ -255,7 +255,7 @@ def Xform "Root"
                     float3 acceleration = (0, -0.2, 0)
                     token animationRepeatMode = "PlayOnce"
                     token billboardMode = "Billboard"
-                    float birthRate = 3000
+                    float birthRate = 500
                     float birthRateVariation = 0
                     token blendMode = "Additive"
                     float colorEvolutionPower = 0.5

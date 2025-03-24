@@ -16,15 +16,6 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "Sphere_Left"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
         "Sphere_Right"
       ],
       {
@@ -34,20 +25,10 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "GridMaterial"
+        "Sphere_Left"
       ],
       {
         "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "smoke"
-      ],
-      {
-        "disallowsFraming" : false,
-        "isExpanded" : false,
         "isLocked" : false
       },
       [
@@ -66,6 +47,25 @@
       {
         "disallowsFraming" : false,
         "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "smoke"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
         "isLocked" : false
       }
     ]

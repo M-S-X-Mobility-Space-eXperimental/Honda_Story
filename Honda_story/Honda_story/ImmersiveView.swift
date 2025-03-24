@@ -10,18 +10,21 @@ import RealityKit
 import RealityKitContent
 import Combine
 
+
 struct ImmersiveView: View {
     @State private var environmentEntity: Entity?
     @State private var timerCancellable: Cancellable?
     @State private var bisonFoodsEntity: Entity?
+    @State private var bluegrassEntity: Entity?
     
-    @State private var isFollowingHand = false
-    @State private var handAnchor: Entity?
+
 
     var body: some View {
         RealityView { content in
             // Add the initial RealityKit content
             if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
+                
+                
                 content.add(immersiveContentEntity)
 
               
@@ -43,6 +46,10 @@ struct ImmersiveView: View {
                     
                 }
                 
+                if let bluegrass = immersiveContentEntity.findEntity(named: "bluegrass") {
+                    bluegrassEntity = bluegrass
+                }
+                
             
 
             }
@@ -52,16 +59,31 @@ struct ImmersiveView: View {
              .onEnded { value in
                  
                  let tappedEntity = value.entity
+                 
+                 
+                 
                  if tappedEntity.name == "GeyserSandbox" {
                      bisonFoodsEntity?.isEnabled = true
                  }
                  _ = value.entity.applyTapForBehaviors()
          })
+        .gesture(
+            DragGesture()
+                .targetedToAnyEntity()
+                .onChanged { value in
+                    if value.entity.name == "bluegrass" {
+                        // Update position to match drag location in 3D
+                        bluegrassEntity?.position = value.convert(value.location3D, from: .local, to: .scene)
+                    }
+                }
+        )
+        
         .onDisappear {
                 
             timerCancellable?.cancel()
         }
     }
+    
 }
 
 #Preview(immersionStyle: .mixed) {

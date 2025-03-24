@@ -43,10 +43,5 @@ struct ContentView: View {
                     .transition(.opacity)
             }
         }
-        .onChange(of: immersiveEntered) { entered in
-            if entered {
-                dismissWindow(id: "ContentView")
-            }
-        }
     }
 }

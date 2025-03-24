@@ -191,7 +191,7 @@ def Xform "BisonFoods" (
     active = true
 )
 {
-    reorder nameChildren = ["_apple", "wildflower", "flower", "PBR___Metallic_Roughness_Alpha_blend"]
+    reorder nameChildren = ["bluegrass", "_apple", "wildflower", "flower", "PBR___Metallic_Roughness_Alpha_blend"]
     quatf xformOp:orient = (1, 0, 0, 0)
     float3 xformOp:scale = (1, 1, 1)
     float3 xformOp:translate = (0, 0, 0)
@@ -239,6 +239,41 @@ def Xform "BisonFoods" (
         float3 xformOp:scale = (0.001, 0.001, 0.001)
         float3 xformOp:translate = (-1.0397427, 0.5889077, -0.44686377)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "bluegrass" (
+        active = true
+        prepend references = @BisonFoods/bluegrass.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (-0.02317512, 0.74373055, -0.044259995)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (1.4477186, 1.5373735, 1.3437186)
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (-0.59720755, 0.4779856, 0.3228675)
+                }
+            }
+        }
     }
 }
 

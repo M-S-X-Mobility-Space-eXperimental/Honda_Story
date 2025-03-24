@@ -8,8 +8,11 @@
 import SwiftUI
 import RealityKit
 import RealityKitContent
+import Combine
 
 struct ImmersiveView: View {
+    @State private var environmentEntity: Entity?
+    @State private var timerCancellable: Cancellable?
 
     var body: some View {
         RealityView { content in
@@ -17,8 +20,18 @@ struct ImmersiveView: View {
             if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
                 content.add(immersiveContentEntity)
 
-                // Put skybox here.  See example in World project available at
-                // https://developer.apple.com/
+              
+                if let environment = immersiveContentEntity.findEntity(named: "Environment") {
+                    environmentEntity = environment
+                    
+                    // Start a timer to move the object 1cm per second
+                    timerCancellable = Timer.publish(every: 0.01, on: .main, in: .common)
+                        .autoconnect()
+                        .sink { _ in
+                            environment.position += SIMD3<Float>(x: 0.002, y: 0, z: 0)
+                        }
+                }
+                
             }
         }
         
@@ -26,6 +39,10 @@ struct ImmersiveView: View {
              .onEnded { value in
                  _ = value.entity.applyTapForBehaviors()
          })
+        .onDisappear {
+                
+            timerCancellable?.cancel()
+        }
     }
 }
 

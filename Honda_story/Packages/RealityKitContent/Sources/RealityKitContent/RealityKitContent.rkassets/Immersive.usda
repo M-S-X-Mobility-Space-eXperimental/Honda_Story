@@ -10,204 +10,6 @@ reorder rootPrims = ["Root", "GridMaterial"]
 def Xform "Root"
 {
     reorder nameChildren = ["Sphere_Left", "AIBison", "bisonM", "testing", "Sphere_Right", "Timeline", "HondaCar", "HondaCar_M", "GeyserPlaceholder"]
-    def Sphere "Sphere_Right" (
-        active = false
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        rel material:binding = </Root/GridMaterial/GridMaterial> (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        double radius = 0.1
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0.5, 1.5, -1.5)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def Sphere "Sphere_Left" (
-        active = false
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        rel material:binding = </Root/GridMaterial/GridMaterial> (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        double radius = 0.1
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-0.5, 1.5, -1.5)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def "AIBison" (
-        active = false
-        prepend apiSchemas = ["MaterialBindingAPI"]
-        customData = {
-            float3 rotationEulerHint = (4.7123885, 0, 0)
-        }
-        references = @AIBison.usdc@
-    )
-    {
-        rel material:binding = </Root/testing> (
-            bindMaterialAs = "strongerThanDescendants"
-        )
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
-        float3 xformOp:scale = (800, 800, 800)
-        float3 xformOp:translate = (-1.7083516, -1.4901161e-8, -4.4492264)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "_materials"
-        {
-            over "Material_1"
-            {
-                token inputs:frame:stPrimvarName = "st" (
-                    customData = {
-                        dictionary realitykit = {
-                            bool hide = 1
-                        }
-                    }
-                )
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-
-                over "Principled_BSDF"
-                {
-                    color3f inputs:diffuseColor.connect = </Root/AIBison/_materials/Material_1/diffuseColor.outputs:rgb>
-                }
-
-                def Shader "diffuseColor"
-                {
-                    uniform token info:id = "UsdUVTexture"
-                    asset inputs:file = @A_stylized_fantastica_0224104537_texture.png@
-                    float2 inputs:st.connect = </Root/AIBison/_materials/Material_1/diffuseColor/TexCoordReader.outputs:result>
-                    color3f outputs:rgb
-
-                    def Shader "TexCoordReader"
-                    {
-                        uniform token info:id = "UsdPrimvarReader_float2"
-                        token inputs:varname.connect = </Root/AIBison/_materials/Material_1.inputs:frame:stPrimvarName>
-                        float2 outputs:result
-                    }
-                }
-            }
-        }
-
-        over "Armature"
-        {
-        }
-
-        def RealityKitComponent "AnimationLibrary"
-        {
-            uniform token info:id = "RealityKit.AnimationLibrary"
-        }
-    }
-
-    def Material "bisonM"
-    {
-        token outputs:mtlx:surface.connect = </Root/bisonM/PreviewSurface.outputs:out>
-        token outputs:realitykit:vertex
-        token outputs:surface.connect = </Root/bisonM/UsdPreviewSurface.outputs:surface>
-        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
-
-        def Shader "UsdPreviewSurface" (
-            active = false
-        )
-        {
-            uniform token info:id = "UsdPreviewSurface"
-            token outputs:surface
-        }
-
-        def Shader "PreviewSurface"
-        {
-            uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
-            float inputs:clearcoat
-            float inputs:clearcoatRoughness
-            color3f inputs:diffuseColor.connect = </Root/bisonM/Image.outputs:out>
-            color3f inputs:emissiveColor
-            float inputs:ior
-            float inputs:metallic
-            float3 inputs:normal
-            float inputs:occlusion
-            float inputs:opacity
-            float inputs:opacityThreshold
-            float inputs:roughness
-            token outputs:out
-            float2 ui:nodegraph:node:pos = (-288.88568, 136.5359)
-            int ui:nodegraph:node:stackingOrder = 9
-            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced"]
-        }
-
-        def Shader "Image"
-        {
-            uniform token info:id = "ND_image_color3"
-            asset inputs:file = @A_stylized_fantastica_0224104537_texture.png@
-            string inputs:filtertype
-            string inputs:uaddressmode
-            string inputs:vaddressmode
-            color3f outputs:out
-            float2 ui:nodegraph:node:pos = (-691, 138.82422)
-            int ui:nodegraph:node:stackingOrder = 7
-        }
-    }
-
-    def Material "testing"
-    {
-        token inputs:frame:stPrimvarName = "st" (
-            customData = {
-                dictionary realitykit = {
-                    bool hide = 1
-                }
-            }
-        )
-        token outputs:mtlx:surface
-        token outputs:realitykit:vertex
-        token outputs:surface.connect = </Root/testing/UsdPreviewSurface.outputs:surface>
-        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
-
-        def Shader "UsdPreviewSurface"
-        {
-            uniform token info:id = "UsdPreviewSurface"
-            color3f inputs:diffuseColor = (0.88728255, 0.88728255, 0.88728255) (
-                colorSpace = "srgb_texture"
-            )
-            color3f inputs:diffuseColor.connect = </Root/testing/diffuseColor.outputs:rgb>
-            color3f inputs:emissiveColor = (0, 0, 0)
-            color3f inputs:emissiveColor.connect = </Root/testing/emissiveColor.outputs:rgb>
-            token outputs:surface
-        }
-
-        def Shader "diffuseColor"
-        {
-            uniform token info:id = "UsdUVTexture"
-            asset inputs:file = @A_stylized_fantastica_0224104537_texture.png@
-            float2 inputs:st.connect = </Root/testing/diffuseColor/TexCoordReader.outputs:result>
-            color3f outputs:rgb
-
-            def Shader "TexCoordReader"
-            {
-                uniform token info:id = "UsdPrimvarReader_float2"
-                token inputs:varname.connect = </Root/testing.inputs:frame:stPrimvarName>
-                float2 outputs:result
-            }
-        }
-
-        def Shader "emissiveColor"
-        {
-            uniform token info:id = "UsdUVTexture"
-            asset inputs:file = @A_stylized_fantastica_0224104537_texture.png@
-            float2 inputs:st.connect = </Root/testing/emissiveColor/TexCoordReader.outputs:result>
-            color3f outputs:rgb
-
-            def Shader "TexCoordReader"
-            {
-                uniform token info:id = "UsdPrimvarReader_float2"
-                token inputs:varname.connect = </Root/testing.inputs:frame:stPrimvarName>
-                float2 outputs:result
-            }
-        }
-    }
-
     def RealityKitTimeline "Timeline"
     {
         reorder nameChildren = ["Track2", "Track"]
@@ -232,136 +34,6 @@ def Xform "Root"
         }
     }
 
-    def "HondaCar" (
-        prepend apiSchemas = ["MaterialBindingAPI"]
-        customData = {
-            float3 rotationEulerHint = (1.5707976, 1.2665987e-7, 3.1415927)
-        }
-        references = @HondaCar.usdc@
-    )
-    {
-        rel material:binding = </Root/HondaCar_M> (
-            bindMaterialAs = "strongerThanDescendants"
-        )
-        quatf xformOp:orient = (1.3872454e-8, -7.568964e-8, 0.7071072, 0.70710635)
-        float3 xformOp:scale = (0.001, 0.001, 0.001)
-        float3 xformOp:translate = (0, 0, 0)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-    }
-
-    def Material "HondaCar_M"
-    {
-        token outputs:mtlx:surface
-        token outputs:realitykit:vertex
-        token outputs:surface.connect = </Root/HondaCar_M/UsdPreviewSurface.outputs:surface>
-
-        def Shader "UsdPreviewSurface"
-        {
-            uniform token info:id = "UsdPreviewSurface"
-            token outputs:surface
-        }
-    }
-
-    def "WalkingBison" (
-        active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
-        customData = {
-            float3 rotationEulerHint = (4.7123885, 0, 0)
-        }
-        references = @WalkingBison.usdc@
-    )
-    {
-        rel material:binding = </Root/bisonM> (
-            bindMaterialAs = "strongerThanDescendants"
-        )
-        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
-        float3 xformOp:scale = (800, 800, 800)
-        float3 xformOp:translate = (-2.5389056, -0.28514147, -4.421588)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def RealityKitComponent "AnimationLibrary"
-        {
-            token info:id = "RealityKit.AnimationLibrary"
-
-            def RealityKitAnimationFile "default_subtree_animation"
-            {
-                uniform bool looping = 1
-                uniform string name = "default subtree animation"
-            }
-        }
-
-        def RealityKitComponent "RCP_BehaviorsContainer"
-        {
-            rel behaviors = [
-                </Root/WalkingBison/OnTap>,
-                </Root/WalkingBison/OnAddedToScene>,
-            ]
-            uniform token info:id = "RCP.BehaviorsContainer"
-        }
-
-        def Preliminary_Behavior "OnTap"
-        {
-            rel actions = </Root/WalkingBison/OnTap/Action>
-            uniform bool exclusive
-            rel triggers = </Root/WalkingBison/OnTap/Trigger>
-
-            def Preliminary_Trigger "Trigger"
-            {
-                rel affectedObjects = </Root/WalkingBison>
-                token info:id = "TapGesture"
-            }
-
-            def Preliminary_Action "Action"
-            {
-                rel affectedObjects = </Root>
-                rel animationLibraryKey = </Root/Timeline>
-                rel animationLibraryKeyOverrideKey = </Root/WalkingBison/OnTap/Trigger>
-                token info:id = "PlayTimeline"
-                int loops = 0
-                int performCount = 1
-                token type = "serial"
-            }
-        }
-
-        def Preliminary_Behavior "OnAddedToScene"
-        {
-            rel actions = </Root/WalkingBison/OnAddedToScene/Action>
-            uniform bool exclusive
-            rel triggers = </Root/WalkingBison/OnAddedToScene/Trigger>
-
-            def Preliminary_Trigger "Trigger"
-            {
-                rel affectedObjects = </Root/WalkingBison>
-                token info:id = "SceneTransition"
-            }
-
-            def Preliminary_Action "Action"
-            {
-                rel affectedObjects = </Root>
-                rel animationLibraryKey = </Root/Timeline>
-                rel animationLibraryKeyOverrideKey = </Root/WalkingBison/OnAddedToScene/Trigger>
-                token info:id = "PlayTimeline"
-                int loops = 0
-                int performCount = 1
-                token type = "serial"
-            }
-        }
-
-        def RealityKitComponent "InputTarget"
-        {
-            bool allowsDirectInput = 1
-            bool allowsIndirectInput = 0
-            uniform token info:id = "RealityKit.InputTarget"
-        }
-    }
-
-    def "BisonRoar" (
-        active = true
-        references = @BisonRoar.usdz@
-    )
-    {
-    }
-
     def "EsmeTestingScene" (
         active = true
         references = @EsmeTestingScene.usda@
@@ -369,7 +41,7 @@ def Xform "Root"
     {
         reorder nameChildren = ["GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube"]
         float3 xformOp:scale = (0.12, 0.12, 0.12)
-        float3 xformOp:translate = (-2.0986133, 0.6982096, 0)
+        float3 xformOp:translate = (-0.5863614, 0.6982096, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def RealityKitComponent "Collider"
@@ -457,6 +129,12 @@ def Xform "Root"
                 }
             }
         }
+
+        over "GeyserGroup"
+        {
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
     }
 
     def RealityKitTimeline "GeyserPlaceholder"
@@ -474,6 +152,26 @@ def Xform "Root"
                 rel target = </Root/EsmeTestingScene/Cube>
             }
         }
+    }
+
+    def "Car" (
+        active = true
+        prepend references = @Car.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, -3.7414205)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Environment" (
+        active = true
+        prepend references = @Environment.usdz@
+    )
+    {
+        float3 xformOp:scale = (2, 2, 2)
+        float3 xformOp:translate = (0, 1.5337582, 18.237839)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
 

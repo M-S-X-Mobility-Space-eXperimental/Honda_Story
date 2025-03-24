@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import RealityKitContent
 
 @main
 struct Honda_storyApp: App {
+    
+    init() {
+        RealityKitContent.GestureComponent.registerComponent()
+    }
 
     @State private var appModel = AppModel()
 

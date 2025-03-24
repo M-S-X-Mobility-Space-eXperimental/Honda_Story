@@ -13,6 +13,10 @@ import Combine
 struct ImmersiveView: View {
     @State private var environmentEntity: Entity?
     @State private var timerCancellable: Cancellable?
+    @State private var bisonFoodsEntity: Entity?
+    
+    @State private var isFollowingHand = false
+    @State private var handAnchor: Entity?
 
     var body: some View {
         RealityView { content in
@@ -32,11 +36,25 @@ struct ImmersiveView: View {
                         }
                 }
                 
+                // Find "BisonFoods" and deactivate it initially
+                if let bisonfood = immersiveContentEntity.findEntity(named: "BisonFoods"){
+                    bisonFoodsEntity = bisonfood
+                    bisonfood.isEnabled = false
+                    
+                }
+                
+            
+
             }
         }
         
         .gesture(TapGesture().targetedToAnyEntity()
              .onEnded { value in
+                 
+                 let tappedEntity = value.entity
+                 if tappedEntity.name == "GeyserSandbox" {
+                     bisonFoodsEntity?.isEnabled = true
+                 }
                  _ = value.entity.applyTapForBehaviors()
          })
         .onDisappear {

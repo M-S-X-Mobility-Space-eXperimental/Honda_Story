@@ -5,36 +5,12 @@
     upAxis = "Y"
 )
 
-reorder rootPrims = ["Root", "GridMaterial"]
+reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Sphere_Left", "AIBison", "bisonM", "testing", "Sphere_Right", "Timeline", "HondaCar", "HondaCar_M", "GeyserPlaceholder"]
-    def RealityKitTimeline "Timeline"
-    {
-        reorder nameChildren = ["Track2", "Track"]
-        def RealityKitTrack "Track2"
-        {
-            def RealityKitAction "Animation"
-            {
-                string actionKind = "animation"
-                string animation = "default subtree animation"
-                int blendLayer = 500
-                double duration = 1
-                uniform token info:id = "B826ECA1-7107-452D-8B13-76623C1A13AA"
-                double loopCount = 0
-                bool separateAnimatedValue = 1
-                double startTime = 0
-                rel target = </Root/WalkingBison>
-
-                def RealityKitStruct "handoffType"
-                {
-                }
-            }
-        }
-    }
-
-    def "EsmeTestingScene" (
+    reorder nameChildren = ["GeyserSandbox", "GeyserPlaceholder", "Car", "Environment", "Transform", "msx_geyser_sfx_v1_wav"]
+    def "GeyserSandbox" (
         active = true
         references = @EsmeTestingScene.usda@
     )
@@ -72,19 +48,19 @@ def Xform "Root"
 
         def RealityKitComponent "RCP_BehaviorsContainer"
         {
-            rel behaviors = </Root/EsmeTestingScene/OnTap>
+            rel behaviors = </Root/GeyserSandbox/OnTap>
             uniform token info:id = "RCP.BehaviorsContainer"
         }
 
         def Preliminary_Behavior "OnTap"
         {
-            rel actions = </Root/EsmeTestingScene/OnTap/Action>
+            rel actions = </Root/GeyserSandbox/OnTap/Action>
             uniform bool exclusive
-            rel triggers = </Root/EsmeTestingScene/OnTap/Trigger>
+            rel triggers = </Root/GeyserSandbox/OnTap/Trigger>
 
             def Preliminary_Trigger "Trigger"
             {
-                rel affectedObjects = </Root/EsmeTestingScene>
+                rel affectedObjects = </Root/GeyserSandbox>
                 token info:id = "TapGesture"
             }
 
@@ -92,7 +68,7 @@ def Xform "Root"
             {
                 rel affectedObjects = </Root>
                 rel animationLibraryKey = </Root/GeyserPlaceholder>
-                rel animationLibraryKeyOverrideKey = </Root/EsmeTestingScene/OnTap/Trigger>
+                rel animationLibraryKeyOverrideKey = </Root/GeyserSandbox/OnTap/Trigger>
                 token info:id = "PlayTimeline"
                 int loops = 0
                 int performCount = 1
@@ -109,7 +85,7 @@ def Xform "Root"
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </Root/EsmeTestingScene/Cube/DefaultMaterial>
+            rel material:binding = </Root/GeyserSandbox/Cube/DefaultMaterial>
             double size = 0.2
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (0.8333334, 0.8333334, 0.8333334)
@@ -118,7 +94,7 @@ def Xform "Root"
 
             def Material "DefaultMaterial"
             {
-                token outputs:surface.connect = </Root/EsmeTestingScene/Cube/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                token outputs:surface.connect = </Root/GeyserSandbox/Cube/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
 
                 def Shader "DefaultSurfaceShader"
                 {
@@ -135,10 +111,22 @@ def Xform "Root"
             float3 xformOp:translate = (0, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
         }
+
+        def RealityKitComponent "AudioLibrary"
+        {
+            uniform token info:id = "RealityKit.AudioLibrary"
+
+            def RealityKitDict "resources"
+            {
+                string[] keys = ["msx geyser sfx v1.wav"]
+                rel values = </Root/msx_geyser_sfx_v1_wav>
+            }
+        }
     }
 
     def RealityKitTimeline "GeyserPlaceholder"
     {
+        reorder nameChildren = ["Track", "Track2"]
         def RealityKitTrack "Track"
         {
             def RealityKitAction "Emphasize"
@@ -149,14 +137,32 @@ def Xform "Root"
                 uniform token info:id = "1E5DCCAA-1323-4763-96AE-E68889B3AC96"
                 double startTime = 0.021674107142857144
                 token style = "playful"
-                rel target = </Root/EsmeTestingScene/Cube>
+                rel target = </Root/GeyserSandbox/Cube>
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "msx geyser sfx v1.wav"
+                bool controlPlayback = 1
+                double duration = 10.037337443263572
+                uniform token info:id = "4460F7F5-0807-4692-9C2E-47FC5B7D0CAB"
+                double startTime = 0
+                rel target = </Root/GeyserSandbox>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
             }
         }
     }
 
     def "Car" (
         active = true
-        prepend references = @Car.usdz@
+        references = @Car.usdz@
     )
     {
         float3 xformOp:scale = (1, 1, 1)
@@ -166,11 +172,72 @@ def Xform "Root"
 
     def "Environment" (
         active = true
-        prepend references = @Environment.usdz@
+        references = @Environment.usdz@
     )
     {
         float3 xformOp:scale = (2, 2, 2)
         float3 xformOp:translate = (0, 1.5337582, 18.237839)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def RealityKitAudioFile "msx_geyser_sfx_v1_wav"
+    {
+        uniform asset file = @Sounds/msx geyser sfx v1.wav@
+        uniform bool shouldLoop = 0
+    }
+}
+
+def Xform "BisonFoods" (
+    active = true
+)
+{
+    reorder nameChildren = ["_apple", "wildflower", "flower", "PBR___Metallic_Roughness_Alpha_blend"]
+    quatf xformOp:orient = (1, 0, 0, 0)
+    float3 xformOp:scale = (1, 1, 1)
+    float3 xformOp:translate = (0, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def "_apple" (
+        active = true
+        references = @BisonFoods/ apple.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.02, 0.02, 0.02)
+        float3 xformOp:translate = (1.4970776, 0.40427256, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "wildflower" (
+        active = true
+        references = @BisonFoods/wildflower.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.001, 0.001, 0.001)
+        float3 xformOp:translate = (0.57583255, 0.4577253, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "flower" (
+        active = true
+        references = @BisonFoods/flower.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.1, 0.1, 0.1)
+        float3 xformOp:translate = (-0.7702482, 0.7183326, 0.8397063)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "PBR___Metallic_Roughness_Alpha_blend" (
+        active = true
+        references = @BisonFoods/PBR - Metallic Roughness Alpha-blend.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.001, 0.001, 0.001)
+        float3 xformOp:translate = (-1.0397427, 0.5889077, -0.44686377)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }

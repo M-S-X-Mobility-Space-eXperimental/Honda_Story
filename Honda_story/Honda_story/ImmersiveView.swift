@@ -35,7 +35,7 @@ struct ImmersiveView: View {
                     timerCancellable = Timer.publish(every: 0.01, on: .main, in: .common)
                         .autoconnect()
                         .sink { _ in
-                            environment.position += SIMD3<Float>(x: 0.002, y: 0, z: 0)
+                            environment.position += SIMD3<Float>(x: 0.02, y: 0, z: 0)
                         }
                 }
                 
@@ -60,8 +60,6 @@ struct ImmersiveView: View {
                  
                  let tappedEntity = value.entity
                  
-                 
-                 
                  if tappedEntity.name == "GeyserSandbox" {
                      bisonFoodsEntity?.isEnabled = true
                  }
@@ -77,6 +75,7 @@ struct ImmersiveView: View {
                     }
                 }
         )
+        
         
         .onDisappear {
                 

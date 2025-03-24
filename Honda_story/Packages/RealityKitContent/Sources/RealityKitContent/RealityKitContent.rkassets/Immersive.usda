@@ -94,6 +94,8 @@ def Xform "Root"
 
             def Material "DefaultMaterial"
             {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
                 token outputs:surface.connect = </Root/GeyserSandbox/Cube/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
 
                 def Shader "DefaultSurfaceShader"
@@ -126,7 +128,7 @@ def Xform "Root"
 
     def RealityKitTimeline "GeyserPlaceholder"
     {
-        reorder nameChildren = ["Track", "Track2"]
+        reorder nameChildren = ["Track", "Track2", "Track3", "Track4", "Track5", "Track6", "Track7"]
         def RealityKitTrack "Track"
         {
             def RealityKitAction "Emphasize"
@@ -158,6 +160,61 @@ def Xform "Root"
                 }
             }
         }
+
+        def RealityKitTrack "Track3"
+        {
+            def RealityKitAction "Enable_Entity"
+            {
+                string actionKind = "enable"
+                uniform token info:id = "773163C2-6A87-410C-A054-38A1B9898DA3"
+                double startTime = 0.9124186925299808
+                rel target = </BisonFoods/_apple>
+            }
+        }
+
+        def RealityKitTrack "Track4"
+        {
+            def RealityKitAction "Enable_Entity"
+            {
+                string actionKind = "enable"
+                uniform token info:id = "ABA63FB9-9DC8-4E6E-AE1B-170D5AF44F9D"
+                double startTime = 1.2510313977733882
+                rel target = </BisonFoods/wildflower>
+            }
+        }
+
+        def RealityKitTrack "Track5"
+        {
+            def RealityKitAction "Enable_Entity"
+            {
+                string actionKind = "enable"
+                uniform token info:id = "7CFDF398-4D8D-4F91-B4EE-D610B4855614"
+                double startTime = 1.8563620195274306
+                rel target = </BisonFoods/flower>
+            }
+        }
+
+        def RealityKitTrack "Track6"
+        {
+            def RealityKitAction "Enable_Entity"
+            {
+                string actionKind = "enable"
+                uniform token info:id = "038FC63A-5E6C-4BA0-BEB1-4AD45783F50E"
+                double startTime = 2.72914214213629
+                rel target = </BisonFoods/bluegrass>
+            }
+        }
+
+        def RealityKitTrack "Track7"
+        {
+            def RealityKitAction "Enable_Entity"
+            {
+                string actionKind = "enable"
+                uniform token info:id = "B6A54B2E-7D01-4F7A-B888-A8ACB3F15192"
+                double startTime = 3.749968332940479
+                rel target = </BisonFoods/PBR___Metallic_Roughness_Alpha_blend>
+            }
+        }
     }
 
     def "Car" (
@@ -175,8 +232,8 @@ def Xform "Root"
         references = @Environment.usdz@
     )
     {
-        float3 xformOp:scale = (2, 2, 2)
-        float3 xformOp:translate = (0, 1.5337582, 18.237839)
+        float3 xformOp:scale = (10, 10, 10)
+        float3 xformOp:translate = (-107.1257, 5.644663, 83.81017)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 

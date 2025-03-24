@@ -110,8 +110,84 @@ def Xform "Root"
 
         over "GeyserGroup"
         {
+            reorder nameChildren = ["Eruption", "geyser", "holder"]
             float3 xformOp:translate = (0, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def "Eruption" (
+                active = true
+                customData = {
+                    float3 rotationEulerHint = (0, 0, 0)
+                }
+                references = @Eruption.usdz@
+            )
+            {
+                quatf xformOp:orient = (1, 0, 0, 0)
+                float3 xformOp:scale = (8.333335, 8.333335, 8.333335)
+                float3 xformOp:translate = (0.18405247, -0.48607826, 0.5496606)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                over "smoke_1"
+                {
+                    float3 xformOp:translate = (0, -0.031540066, 0)
+
+                    over "VFXEmitter"
+                    {
+                        over "currentState"
+                        {
+                            over "mainEmitter"
+                            {
+                                float dampingFactor = 15
+                                float radialGravityStrength = -0.1
+                                float3 vortexDirection = (0.1, -1, 0)
+                            }
+
+                            over "spawnedEmitter"
+                            {
+                                float3 acceleration = (0, -0.1, 0)
+                                float dampingFactor = 0.1
+                                float particleAngle = 0.017453292
+                                float particleMass = 1
+                                float3 radialGravityCenter = (0, 0.1, 0)
+                                float3 vortexDirection = (0.02, -0.02, 0.02)
+                            }
+                        }
+                    }
+                }
+
+                over "smoke" (
+                    customData = {
+                        float3 rotationEulerHint = (-0.08726621, 0, 0)
+                    }
+                )
+                {
+                    quatf xformOp:orient = (0.99904823, -0.043619264, 0, 0)
+
+                    over "VFXEmitter"
+                    {
+                        over "currentState"
+                        {
+                            float3 shapeSize = (0.1, 0.1, 0.1)
+
+                            over "mainEmitter"
+                            {
+                                float3 acceleration = (0, -0.2, 0)
+                                float dampingFactor = 15
+                                float4 endColorA = (0.59082115, 0.7648289, 0.66320205, 0.3903327)
+                                float4 endColorB = (1, 1, 1, 1)
+                                float noiseScale = 0.5
+                                float particleMass = 1.3
+                                float particleSize = 0.03
+                                float3 radialGravityCenter = (0, 0, 0)
+                                float sizeMultiplierAtEndOfLifespan = 7
+                                bool useEndColor = 1
+                                bool useEndColorRange = 1
+                                float3 vortexDirection = (0.5, -0.5, 0.5)
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         def RealityKitComponent "AudioLibrary"
@@ -129,20 +205,6 @@ def Xform "Root"
     def RealityKitTimeline "GeyserPlaceholder"
     {
         reorder nameChildren = ["Track", "Track2", "Track3", "Track4", "Track5", "Track6", "Track7"]
-        def RealityKitTrack "Track"
-        {
-            def RealityKitAction "Emphasize"
-            {
-                string actionKind = "emphasize"
-                int blendLayer = 300
-                double duration = 10
-                uniform token info:id = "1E5DCCAA-1323-4763-96AE-E68889B3AC96"
-                double startTime = 0.021674107142857144
-                token style = "playful"
-                rel target = </Root/GeyserSandbox/Cube>
-            }
-        }
-
         def RealityKitTrack "Track2"
         {
             def RealityKitAction "Play_Audio"
@@ -213,6 +275,20 @@ def Xform "Root"
                 uniform token info:id = "B6A54B2E-7D01-4F7A-B888-A8ACB3F15192"
                 double startTime = 3.749968332940479
                 rel target = </BisonFoods/PBR___Metallic_Roughness_Alpha_blend>
+            }
+        }
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Emphasize"
+            {
+                string actionKind = "emphasize"
+                int blendLayer = 300
+                double duration = 10
+                uniform token info:id = "1E5DCCAA-1323-4763-96AE-E68889B3AC96"
+                double startTime = 0.021674107142857144
+                token style = "playful"
+                rel target = </Root/GeyserSandbox/Cube>
             }
         }
     }
@@ -300,7 +376,7 @@ def Xform "BisonFoods" (
 
     def "bluegrass" (
         active = true
-        prepend references = @BisonFoods/bluegrass.usdz@
+        references = @BisonFoods/bluegrass.usdz@
     )
     {
         quatf xformOp:orient = (1, 0, 0, 0)

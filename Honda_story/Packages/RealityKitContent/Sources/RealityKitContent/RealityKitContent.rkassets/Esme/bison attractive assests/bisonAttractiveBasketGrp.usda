@@ -1,0 +1,98 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "basket" (
+        active = true
+        prepend references = @basket.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "flower" (
+        active = true
+        prepend references = @flower.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.8, 0.8, 0.8)
+        float3 xformOp:translate = (2.685396, 0.5418396, 9.547754)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "pCylinder51" (
+            active = false
+        )
+        {
+        }
+    }
+
+    def "mushroom" (
+        active = true
+        prepend references = @mushroom.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.003, 0.003, 0.003)
+        float3 xformOp:translate = (-0.19778574, -0.41250336, 0.20481467)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "bluegrass" (
+        active = true
+        prepend references = @bluegrass.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.5, 0.5, 0.5)
+        float3 xformOp:translate = (0.7630204, -0.5866401, 0.2492634)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "wildflower" (
+        active = true
+        prepend references = @wildflower.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.003, 0.003, 0.003)
+        float3 xformOp:translate = (0.3220483, -0.47387755, -0.1709348)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "banana" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-0.0006905339, -0.47292802, 0)
+        }
+        prepend references = @banana.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.9721724, -0.000335659, -0.23426649, -0.00008088448)
+        float3 xformOp:scale = (0.3, 0.30000004, 0.30000004)
+        float3 xformOp:translate = (-0.34679058, -0.45317078, -0.21817216)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "apple" (
+        active = true
+        prepend references = @apple.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.04, 0.04, 0.04)
+        float3 xformOp:translate = (-0.5473226, -0.51944375, -0.3343737)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+}
+

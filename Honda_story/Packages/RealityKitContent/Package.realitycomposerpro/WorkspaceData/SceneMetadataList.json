@@ -62,10 +62,65 @@
       }
     ]
   },
+  "57D73C7A-24B1-4504-8638-9C4B38C5D02B" : {
+    "objectMetadataList" : [
+      [
+        "57D73C7A-24B1-4504-8638-9C4B38C5D02B",
+        "Root",
+        "SKYBOX",
+        "mtl"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "57D73C7A-24B1-4504-8638-9C4B38C5D02B",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "65F6F990-A780-4474-B78B-572E0E4E273D" : {
     "objectMetadataList" : [
       [
         "65F6F990-A780-4474-B78B-572E0E4E273D",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "75156143-2FEF-4740-88F4-B165507E2B4E" : {
+    "objectMetadataList" : [
+      [
+        "75156143-2FEF-4740-88F4-B165507E2B4E",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "75156143-2FEF-4740-88F4-B165507E2B4E",
+        "Root",
+        "flower"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "81DFEA20-B07C-4543-AB79-601DDCB38494" : {
+    "objectMetadataList" : [
+      [
+        "81DFEA20-B07C-4543-AB79-601DDCB38494",
         "Root"
       ],
       {

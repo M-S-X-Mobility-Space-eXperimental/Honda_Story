@@ -5,50 +5,392 @@
     upAxis = "Y"
 )
 
-reorder rootPrims = ["Root", "GridMaterial"]
+reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Sphere_Left", "Sphere_Right", "GridMaterial"]
-    def Sphere "Sphere_Right" (
+    reorder nameChildren = ["GeyserSandbox", "GeyserPlaceholder", "Car", "Environment", "msx_geyser_sfx_v1_wav", "Init", "BisonFoods"]
+    float3 xformOp:translate = (0, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def "GeyserSandbox" (
         active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
+        references = @EsmeTestingScene.usda@
     )
     {
-        rel material:binding = </Root/GridMaterial/GridMaterial> (
-            bindMaterialAs = "weakerThanDescendants"
+        reorder nameChildren = ["Eruption", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary"]
+        float3 xformOp:scale = (0.12, 0.12, 0.12)
+        float3 xformOp:translate = (-0.49829525, 0.6091858, -0.17059755)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (6.0065885, 0.6966542, 6.006589)
+                float height = 0.6966542
+                float radius = 3.0032945
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, -0.11140166, -5.9604645e-7)
+                }
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/GeyserSandbox/OnTap>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/GeyserSandbox/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/GeyserSandbox/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/GeyserSandbox>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/GeyserPlaceholder>
+                rel animationLibraryKeyOverrideKey = </Root/GeyserSandbox/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            uniform token info:id = "RealityKit.AnimationLibrary"
+        }
+
+        def Cube "Cube" (
+            active = false
+            prepend apiSchemas = ["MaterialBindingAPI"]
         )
-        double radius = 0.1
-        quatf xformOp:orient = (1, 0, 0, 0)
+        {
+            rel material:binding = </Root/GeyserSandbox/Cube/DefaultMaterial>
+            double size = 0.2
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.8333334, 0.8333334, 0.8333334)
+            float3 xformOp:translate = (0.24183846, 0.014605999, 0.42841068)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/GeyserSandbox/Cube/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+                def Shader "DefaultSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (1, 1, 1)
+                    float inputs:roughness = 0.75
+                    token outputs:surface
+                }
+            }
+        }
+
+        over "GeyserGroup"
+        {
+            reorder nameChildren = ["Eruption", "geyser", "holder"]
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def RealityKitComponent "AudioLibrary"
+        {
+            uniform token info:id = "RealityKit.AudioLibrary"
+
+            def RealityKitDict "resources"
+            {
+                string[] keys = ["msx geyser sfx v1.wav"]
+                rel values = </Root/msx_geyser_sfx_v1_wav>
+            }
+        }
+
+        def "Eruption" (
+            customData = {
+                float3 rotationEulerHint = (0, 0, 0)
+            }
+            references = @Eruption.usdz@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (8.333336, 8.333336, 8.333336)
+            float3 xformOp:translate = (0.18405199, -0.4860778, 0.54966074)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "smoke_1"
+            {
+                float3 xformOp:translate = (0, -0.031540066, 0)
+
+                over "VFXEmitter"
+                {
+                    over "currentState"
+                    {
+                        bool isEmitting = 1
+
+                        over "mainEmitter"
+                        {
+                            float dampingFactor = 15
+                            float radialGravityStrength = -0.1
+                            float3 vortexDirection = (0.1, -1, 0)
+                        }
+
+                        over "spawnedEmitter"
+                        {
+                            float3 acceleration = (0, -0.1, 0)
+                            float dampingFactor = 0.1
+                            float particleAngle = 0.017453292
+                            float particleMass = 1
+                            float3 radialGravityCenter = (0, 0.1, 0)
+                            float3 vortexDirection = (0.02, -0.02, 0.02)
+                        }
+                    }
+                }
+            }
+
+            over "smoke" (
+                customData = {
+                    float3 rotationEulerHint = (-0.08726621, 0, 0)
+                }
+            )
+            {
+                quatf xformOp:orient = (0.99904823, -0.043619264, 0, 0)
+
+                over "VFXEmitter"
+                {
+                    over "currentState"
+                    {
+                        float3 shapeSize = (0.1, 0.1, 0.1)
+
+                        over "mainEmitter"
+                        {
+                            float3 acceleration = (0, -0.2, 0)
+                            float dampingFactor = 15
+                            float4 endColorA = (0.59082115, 0.7648289, 0.66320205, 0.3903327)
+                            float4 endColorB = (1, 1, 1, 1)
+                            float noiseScale = 0.5
+                            float particleMass = 1.3
+                            float particleSize = 0.03
+                            float3 radialGravityCenter = (0, 0, 0)
+                            float sizeMultiplierAtEndOfLifespan = 7
+                            bool useEndColor = 1
+                            bool useEndColorRange = 1
+                            float3 vortexDirection = (0.5, -0.5, 0.5)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "GeyserPlaceholder"
+    {
+        reorder nameChildren = ["Track2", "Track"]
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "msx geyser sfx v1.wav"
+                bool controlPlayback = 1
+                double duration = 10.037337443263572
+                uniform token info:id = "4460F7F5-0807-4692-9C2E-47FC5B7D0CAB"
+                double startTime = 0
+                rel target = </Root/GeyserSandbox>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Enable_Entity"
+            {
+                string actionKind = "enable"
+                double duration = 0
+                uniform token info:id = "C573D36E-F272-4183-A82C-5CFFA4ED9638"
+                double startTime = 0.09971710817430922
+                rel target = </Root/GeyserSandbox/Eruption>
+            }
+        }
+    }
+
+    def "Car" (
+        active = true
+        references = @Car.usdz@
+    )
+    {
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0.5, 1.5, -1.5)
+        float3 xformOp:translate = (0, 0, -3.8746445)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
-    def Sphere "Sphere_Left" (
+    def "Environment" (
         active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
+        references = @Environment.usdz@
     )
     {
-        rel material:binding = </Root/GridMaterial/GridMaterial> (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        double radius = 0.1
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-0.5, 1.5, -1.5)
+        float3 xformOp:scale = (10, 10, 10)
+        float3 xformOp:translate = (-107.1257, 5.644663, 83.81017)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
-    def "GridMaterial" (
+    def RealityKitAudioFile "msx_geyser_sfx_v1_wav"
+    {
+        uniform asset file = @Sounds/msx geyser sfx v1.wav@
+        uniform bool shouldLoop = 0
+    }
+
+    def RealityKitTimeline "Init"
+    {
+        def RealityKitTrack "Track"
+        {
+        }
+    }
+
+    def Xform "BisonFoods" (
         active = true
-        references = @Materials/GridMaterial.usda@
     )
     {
+        reorder nameChildren = ["bluegrass", "_apple", "wildflower", "flower", "PBR___Metallic_Roughness_Alpha_blend"]
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def "_apple" (
+            active = true
+            references = @BisonFoods/ apple.usdz@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.02, 0.02, 0.02)
+            float3 xformOp:translate = (1.4970776, 0.40427256, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def "wildflower" (
+            active = true
+            references = @BisonFoods/wildflower.usdz@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            float3 xformOp:translate = (0.57583255, 0.4577253, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def "flower" (
+            active = true
+            references = @BisonFoods/flower.usdz@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.1, 0.1, 0.1)
+            float3 xformOp:translate = (-0.7702482, 0.7183326, 0.8397063)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def "PBR___Metallic_Roughness_Alpha_blend" (
+            active = true
+            references = @BisonFoods/PBR - Metallic Roughness Alpha-blend.usdz@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            float3 xformOp:translate = (-1.0397427, 0.5889077, -0.44686377)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def "bluegrass" (
+            active = true
+            references = @BisonFoods/bluegrass.usdz@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.1, 0.1, 0.1)
+            float3 xformOp:translate = (0.04312834, 0.74373156, -0.044259995)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (1.4477186, 1.5373735, 1.3437186)
+                    token shapeType = "Box"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (-0.59720755, 0.4779856, 0.3228675)
+                    }
+                }
+            }
+        }
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/BisonFoods/OnAddedToScene>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnAddedToScene"
+        {
+            rel actions = </Root/BisonFoods/OnAddedToScene/Action>
+            uniform bool exclusive
+            rel triggers = </Root/BisonFoods/OnAddedToScene/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/BisonFoods>
+                token info:id = "SceneTransition"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = None
+                rel animationLibraryKeyOverrideKey = </Root/BisonFoods/OnAddedToScene/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
     }
 }
 

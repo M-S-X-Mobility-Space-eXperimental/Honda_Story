@@ -1,53 +1,47 @@
-//
-//  ContentView.swift
-//  Honda_story
-//
-//  Created by messitu on 2/3/25.
-//
-
 import SwiftUI
 import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
 
-    @State private var enlarge = false
+    @State private var showTitle = true
+    @State private var immersiveEntered = false
+
+    @Environment(\.dismissWindow) private var dismissWindow
 
     var body: some View {
-        RealityView { content in
-            // Add the initial RealityKit content
-            if let scene = try? await Entity(named: "Scene", in: realityKitContentBundle) {
-                content.add(scene)
-            }
-        } update: { content in
-            // Update the RealityKit content when SwiftUI state changes
-            if let scene = content.entities.first {
-                let uniformScale: Float = enlarge ? 1.4 : 1.0
-                scene.transform.scale = [uniformScale, uniformScale, uniformScale]
-            }
-        }
-        .gesture(TapGesture().targetedToAnyEntity().onEnded { _ in
-            enlarge.toggle()
-        })
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomOrnament) {
-                VStack (spacing: 12) {
-                    Button {
-                        enlarge.toggle()
-                    } label: {
-                        Text(enlarge ? "Reduce RealityView Content" : "Enlarge RealityView Content")
-                    }
-                    .animation(.none, value: 0)
-                    .fontWeight(.semibold)
-
-                    ToggleImmersiveSpaceButton()
+        ZStack {
+            RealityView { content in
+                if let scene = try? await Entity(named: "Scene", in: realityKitContentBundle) {
+                    content.add(scene)
                 }
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomOrnament) {
+                    // Show immersive button only before entering
+                    if !immersiveEntered {
+                        ToggleImmersiveSpaceButton(
+                            immersiveEntered: $immersiveEntered,
+                            showTitle: $showTitle
+                        )
+                    }
+                }
+            }
+
+            // Persistent title overlay
+            if showTitle {
+                Text("Honda in 2040")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.black.opacity(0.7))
+                    )
+                    .multilineTextAlignment(.center)
+                    .transition(.opacity)
             }
         }
     }
-}
-
-#Preview(windowStyle: .volumetric) {
-    ContentView()
-        .environment(AppModel())
 }

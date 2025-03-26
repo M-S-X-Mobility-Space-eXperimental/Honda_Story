@@ -252,7 +252,6 @@ def Xform "Root"
     }
 
     def "Environment" (
-        active = true
         references = @Environment.usdz@
     )
     {

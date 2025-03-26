@@ -303,6 +303,27 @@
       }
     ]
   },
+  "D340353D-DAF6-4F0F-9A53-97BB1DA56844" : {
+    "objectMetadataList" : [
+      [
+        "D340353D-DAF6-4F0F-9A53-97BB1DA56844",
+        "pSphere1",
+        "mtl"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "D340353D-DAF6-4F0F-9A53-97BB1DA56844",
+        "pSphere1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "D66134B1-3681-4A8E-AFE5-29F257229F3B" : {
     "objectMetadataList" : [
       [

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25EB48012D9442FA0058BCC1 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 25EB48002D9442FA0058BCC1 /* FirebaseCore */; };
+		25EB48032D9442FA0058BCC1 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 25EB48022D9442FA0058BCC1 /* FirebaseDatabase */; };
 		6E8994C52D516884005161E2 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 6E8994C42D516884005161E2 /* RealityKitContent */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25EB48032D9442FA0058BCC1 /* FirebaseDatabase in Frameworks */,
+				25EB48012D9442FA0058BCC1 /* FirebaseCore in Frameworks */,
 				6E8994C52D516884005161E2 /* RealityKitContent in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +98,8 @@
 			name = Honda_story;
 			packageProductDependencies = (
 				6E8994C42D516884005161E2 /* RealityKitContent */,
+				25EB48002D9442FA0058BCC1 /* FirebaseCore */,
+				25EB48022D9442FA0058BCC1 /* FirebaseDatabase */,
 			);
 			productName = Honda_story;
 			productReference = 6E8994BF2D516884005161E2 /* Honda_story.app */;
@@ -123,6 +129,9 @@
 			);
 			mainGroup = 6E8994B62D516883005161E2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				25EB47FF2D9442FA0058BCC1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6E8994C02D516884005161E2 /* Products */;
 			projectDirPath = "";
@@ -348,7 +357,28 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		25EB47FF2D9442FA0058BCC1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		25EB48002D9442FA0058BCC1 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 25EB47FF2D9442FA0058BCC1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		25EB48022D9442FA0058BCC1 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 25EB47FF2D9442FA0058BCC1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
 		6E8994C42D516884005161E2 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;

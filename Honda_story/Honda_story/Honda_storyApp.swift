@@ -6,14 +6,22 @@
 //
 
 import SwiftUI
-//import RealityKitContent
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
+
 
 @main
 struct Honda_storyApp: App {
     
-//    init() {
-//        RealityKitContent.GestureComponent.registerComponent()
-//    }
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     @State private var appModel = AppModel()
 

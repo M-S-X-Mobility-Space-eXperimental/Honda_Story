@@ -9,6 +9,9 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 import Combine
+import FirebaseDatabase
+
+var ref: DatabaseReference!
 
 
 struct ImmersiveView: View {
@@ -16,6 +19,7 @@ struct ImmersiveView: View {
     @State private var timerCancellable: Cancellable?
     @State private var bisonFoodsEntity: Entity?
     @State private var bluegrassEntity: Entity?
+    @State private var EruptionEntity: Entity?
     
 
 
@@ -45,12 +49,22 @@ struct ImmersiveView: View {
                     bisonfood.isEnabled = false
                     
                 }
+                if let eruption = immersiveContentEntity.findEntity(named: "Eruption"){
+                    eruption.isEnabled = false
+                }
                 
                 if let bluegrass = immersiveContentEntity.findEntity(named: "bluegrass") {
                     bluegrassEntity = bluegrass
                 }
                 
-            
+                ref = Database.database().reference()
+                
+                do {
+                  try await ref.setValue(["Test": " This is working"])
+                  print("Data saved successfully!")
+                } catch {
+                  print("Data could not be saved: \(error).")
+                }
 
             }
         }
@@ -62,6 +76,7 @@ struct ImmersiveView: View {
                  
                  if tappedEntity.name == "GeyserSandbox" {
                      bisonFoodsEntity?.isEnabled = true
+                     EruptionEntity?.isEnabled = true	
                  }
                  _ = value.entity.applyTapForBehaviors()
          })

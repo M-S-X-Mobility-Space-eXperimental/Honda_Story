@@ -341,48 +341,6 @@ def Xform "Root"
         }
     }
 
-    def "carTex" (
-        active = true
-        prepend references = @carTex.usdz@
-    )
-    {
-        quatf xformOp:orient = (0.7071069, -0.70710665, 0, 0)
-        float3 xformOp:scale = (0.01, 0.01, 0.01)
-        float3 xformOp:translate = (-2.831842, -0.00000282377, 3.7087672)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Materials"
-        {
-            over "Opaque_0_128_255_"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-            }
-
-            over "Opaque_0_255_255_"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-
-                over "PreviewSurface"
-                {
-                    float inputs:opacity = 0.45
-                }
-            }
-
-            over "Opaque_95_95_95_"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-
-                over "PreviewSurface"
-                {
-                    float inputs:opacityThreshold
-                }
-            }
-        }
-    }
-
     def "YellowStone" (
         active = true
         prepend references = @YellowStone.usdz@

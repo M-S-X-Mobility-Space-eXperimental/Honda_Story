@@ -117,6 +117,12 @@ def Xform "Root"
             reorder nameChildren = ["Eruption", "geyser", "holder"]
             float3 xformOp:translate = (0, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "geyser" (
+                references = @ArtAssets/geyser.usdz@
+            )
+            {
+            }
         }
 
         def RealityKitComponent "AudioLibrary"
@@ -134,7 +140,7 @@ def Xform "Root"
             customData = {
                 float3 rotationEulerHint = (0, 0, 0)
             }
-            references = @Eruption.usdz@
+            references = @ArtAssets/Eruption.usdz@
         )
         {
             quatf xformOp:orient = (1, 0, 0, 0)

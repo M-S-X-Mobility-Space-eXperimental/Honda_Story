@@ -15,7 +15,7 @@ def Xform "Root"
 
     def "GeyserSandbox" (
         active = true
-        references = @EsmeTestingScene.usda@
+        references = @Sandbox.usda@
     )
     {
         reorder nameChildren = ["Eruption", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary"]

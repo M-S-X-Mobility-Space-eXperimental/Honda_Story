@@ -249,11 +249,15 @@ def Xform "Root"
 
     def "Car" (
         active = true
-        references = @ArtAssets/Car.usdz@
+        customData = {
+            float3 rotationEulerHint = (4.7123885, 0, 0)
+        }
+        references = @ArtAssets/Car_V1.usdz@
     )
     {
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0, -3.8746445)
+        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        float3 xformOp:translate = (-2.5645595, 0.0669359, -0.15368938)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 

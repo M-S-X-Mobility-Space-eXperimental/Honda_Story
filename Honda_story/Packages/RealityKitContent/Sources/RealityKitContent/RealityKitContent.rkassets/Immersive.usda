@@ -3666,5 +3666,30 @@ def Xform "Root"
             }
         }
     }
+
+    def "carTex" (
+        active = true
+        prepend references = @carTex.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.7071069, -0.70710665, 0, 0)
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        float3 xformOp:translate = (0.13608792, 0, 1.6537282)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "Window"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "PreviewSurface"
+                {
+                    float inputs:opacity = 0.5
+                }
+            }
+        }
+    }
 }
 

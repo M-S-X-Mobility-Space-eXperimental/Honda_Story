@@ -397,5 +397,57 @@ def Xform "Root"
             }
         }
     }
+
+    def "SKYBOX" (
+        active = true
+        prepend references = @ArtAssets/SKYBOX.usd@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1000, 1000, 1000)
+        float3 xformOp:translate = (44.513832, 0, 209.28337)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "mtl"
+        {
+            over "initialShadingGroup"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/SKYBOX/mtl/initialShadingGroup/UsdPreviewSurface.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+                def Shader "UsdPreviewSurface"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (0.18, 0.18, 0.18)
+                    color3f inputs:diffuseColor.connect = </Root/SKYBOX/mtl/initialShadingGroup/diffuseColor.outputs:rgb>
+                    token outputs:surface
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @ArtAssets/rosendal_mountain_midmorning_4k.hdr@
+                    float2 inputs:st.connect = </Root/SKYBOX/mtl/initialShadingGroup/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/SKYBOX/mtl/initialShadingGroup.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+            }
+        }
+    }
 }
 

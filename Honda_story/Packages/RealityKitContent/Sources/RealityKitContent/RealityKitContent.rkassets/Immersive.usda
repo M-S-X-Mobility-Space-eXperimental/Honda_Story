@@ -243,7 +243,7 @@ def Xform "Root"
 
     def "Car" (
         active = true
-        references = @Car.usdz@
+        references = @ArtAssets/Car.usdz@
     )
     {
         float3 xformOp:scale = (1, 1, 1)
@@ -252,7 +252,7 @@ def Xform "Root"
     }
 
     def "Environment" (
-        references = @Environment.usdz@
+        references = @ArtAssets/Environment.usdz@
     )
     {
         float3 xformOp:scale = (10, 10, 10)

@@ -15,7 +15,7 @@ def Xform "Root"
 
     def "GeyserSandbox" (
         active = true
-        references = @EsmeTestingScene.usda@
+        references = @Sandbox.usda@
     )
     {
         reorder nameChildren = ["Eruption", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary"]
@@ -117,6 +117,12 @@ def Xform "Root"
             reorder nameChildren = ["Eruption", "geyser", "holder"]
             float3 xformOp:translate = (0, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "geyser" (
+                references = @ArtAssets/geyser.usdz@
+            )
+            {
+            }
         }
 
         def RealityKitComponent "AudioLibrary"
@@ -134,7 +140,7 @@ def Xform "Root"
             customData = {
                 float3 rotationEulerHint = (0, 0, 0)
             }
-            references = @Eruption.usdz@
+            references = @ArtAssets/Eruption.usdz@
         )
         {
             quatf xformOp:orient = (1, 0, 0, 0)
@@ -243,17 +249,20 @@ def Xform "Root"
 
     def "Car" (
         active = true
-        references = @Car.usdz@
+        customData = {
+            float3 rotationEulerHint = (4.7123885, 0, 0)
+        }
+        references = @ArtAssets/Car_V1.usdz@
     )
     {
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0, -3.8746445)
+        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        float3 xformOp:translate = (-2.5645595, 0.0669359, -0.15368938)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
     def "Environment" (
-        active = true
-        references = @Environment.usdz@
+        references = @ArtAssets/Environment.usdz@
     )
     {
         float3 xformOp:scale = (10, 10, 10)
@@ -389,6 +398,58 @@ def Xform "Root"
                 int loops = 0
                 int performCount = 1
                 token type = "serial"
+            }
+        }
+    }
+
+    def "SKYBOX" (
+        active = true
+        prepend references = @ArtAssets/SKYBOX.usd@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1000, 1000, 1000)
+        float3 xformOp:translate = (44.513832, 0, 209.28337)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "mtl"
+        {
+            over "initialShadingGroup"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/SKYBOX/mtl/initialShadingGroup/UsdPreviewSurface.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+                def Shader "UsdPreviewSurface"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (0.18, 0.18, 0.18)
+                    color3f inputs:diffuseColor.connect = </Root/SKYBOX/mtl/initialShadingGroup/diffuseColor.outputs:rgb>
+                    token outputs:surface
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @ArtAssets/rosendal_mountain_midmorning_4k.hdr@
+                    float2 inputs:st.connect = </Root/SKYBOX/mtl/initialShadingGroup/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/SKYBOX/mtl/initialShadingGroup.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
             }
         }
     }

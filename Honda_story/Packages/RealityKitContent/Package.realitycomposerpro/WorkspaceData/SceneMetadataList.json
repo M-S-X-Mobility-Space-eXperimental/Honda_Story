@@ -16,7 +16,17 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "Sphere_Right"
+        "smoke"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -25,7 +35,8 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "Sphere_Left"
+        "bison1",
+        "mtl"
       ],
       {
         "isExpanded" : true,
@@ -44,11 +55,19 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "smoke"
+        "Sphere_Right"
       ],
       {
-        "disallowsFraming" : false,
-        "isExpanded" : false,
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Sphere_Left"
+      ],
+      {
+        "isExpanded" : true,
         "isLocked" : false
       },
       [
@@ -68,21 +87,14 @@
         "disallowsFraming" : false,
         "isExpanded" : false,
         "isLocked" : false
-      },
+      }
+    ]
+  },
+  "24CE9EE9-A930-49E4-80F6-A38D825B1B9C" : {
+    "objectMetadataList" : [
       [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "bison1",
-        "mtl"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "GridMaterial"
+        "24CE9EE9-A930-49E4-80F6-A38D825B1B9C",
+        "AmericanBison_walk"
       ],
       {
         "isExpanded" : true,

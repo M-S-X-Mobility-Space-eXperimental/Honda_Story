@@ -20,6 +20,8 @@ struct ImmersiveView: View {
     @State private var bluegrassEntity: Entity?
     @State private var EruptionEntity: Entity?
     
+    @State private var Timeline_GeyserEntity: Entity?
+    
     @StateObject private var viewModel: TapViewModel
     
     init() {
@@ -56,6 +58,7 @@ struct ImmersiveView: View {
                 }
                 if let eruption = immersiveContentEntity.findEntity(named: "Eruption"){
                     eruption.isEnabled = false
+                    EruptionEntity = eruption
                 }
                 
                 if let bluegrass = immersiveContentEntity.findEntity(named: "bluegrass") {
@@ -63,6 +66,20 @@ struct ImmersiveView: View {
                 }
 
             }
+        }
+        .task{
+            viewModel.observeGeyser()
+        }
+        
+        .onChange(of: viewModel.Geyser) {
+            if viewModel.Geyser {
+                print("Enabling Eruption")
+                EruptionEntity?.isEnabled = true
+               bisonFoodsEntity?.isEnabled = true
+           } else {
+               EruptionEntity?.isEnabled = false
+               bisonFoodsEntity?.isEnabled = false
+           }
         }
         
         .gesture(TapGesture().targetedToAnyEntity()
@@ -73,11 +90,11 @@ struct ImmersiveView: View {
                  if tappedEntity.name == "GeyserSandbox" {
                      viewModel.tap { bothTapped in
                          if bothTapped {
-                             print("Both players tapped!")
-                             EruptionEntity?.isEnabled = true
-                             bisonFoodsEntity?.isEnabled = true
+//                             print("Both players tapped!")
+//                             EruptionEntity?.isEnabled = true
+//                             bisonFoodsEntity?.isEnabled = true
                              _ = value.entity.applyTapForBehaviors()
-                         } else {
+                         } else {	
                              print("Waiting on opponent.")
                          }
                      }

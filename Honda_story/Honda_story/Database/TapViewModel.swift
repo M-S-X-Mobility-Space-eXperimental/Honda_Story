@@ -13,9 +13,11 @@ class TapViewModel: ObservableObject {
     private var ref: DatabaseReference = Database.database().reference()
     private var userId: String
     @Published var tapped = false
+    @Published var Geyser: Bool = false
     
     init(userId: String) {
         self.userId = userId
+        ref.child("Geyser").setValue(false)
     }
     
     func tap(completion: @escaping (Bool) -> Void) {
@@ -29,22 +31,18 @@ class TapViewModel: ObservableObject {
         
         let opponentId = userId == "0" ? "1" : "0"
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.ref.child("players").observeSingleEvent(of: .value) { [weak self] snapshot in
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            self.ref.child("players/\(opponentId)/tapped").observeSingleEvent(of: .value) { [weak self] snapshot in
                 guard let self = self,
-                      let data = snapshot.value as? [String: Any],
-                      let userData = data[self.userId] as? [String: Any],
-                      let opponentData = data[opponentId] as? [String: Any],
-                      let userTapped = userData["tapped"] as? Bool,
-                      let opponentTapped = opponentData["tapped"] as? Bool else{
+                      let opponentTapped = snapshot.value as? Bool else {
                     self?.resetTapAfterDelay()
                     completion(false)
                     return
                 }
-                
-                
-                if userTapped && opponentTapped {
+
+                if opponentTapped {
                     print("Both tapped!")
+                    self.ref.child("Geyser").setValue(true)
                     completion(true)
                 } else {
                     self.resetTapAfterDelay()
@@ -54,10 +52,25 @@ class TapViewModel: ObservableObject {
         }
     }
     
-    private func resetTapAfterDelay() {	
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+    private func resetTapAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.tapped = false
             self.ref.child("players/\(self.userId)/tapped").setValue(false)
         }
+    }
+    
+    func observeGeyser() {
+        ref.child("Geyser").observe(.value, with: { [weak self] snapshot in
+            guard let self = self else { return }
+            
+            if let geyserValue = snapshot.value as? Bool {
+                DispatchQueue.main.async {
+                    self.Geyser = geyserValue
+                    print("Geyser value changed to: \(geyserValue)")
+                }
+            } else {
+                print("Failed to read Geyser value")
+            }
+        })
     }
 }

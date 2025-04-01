@@ -41,6 +41,100 @@
       }
     ]
   },
+  "28877226-8CBF-4E27-9D30-123DB5038339" : {
+    "objectMetadataList" : [
+      [
+        "28877226-8CBF-4E27-9D30-123DB5038339",
+        "Root",
+        "water_fallingshadertesting"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "28877226-8CBF-4E27-9D30-123DB5038339",
+        "Root",
+        "EsmeTestingScene",
+        "GeyserGroup"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "28877226-8CBF-4E27-9D30-123DB5038339",
+        "Root",
+        "EsmeTestingScene",
+        "GeyserGroup",
+        "geyser"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "28877226-8CBF-4E27-9D30-123DB5038339",
+        "Root",
+        "water_fallingshadertesting",
+        "waterfallingtest"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "28877226-8CBF-4E27-9D30-123DB5038339",
+        "Root",
+        "uvtesting",
+        "Materials",
+        "standardSurface1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "28877226-8CBF-4E27-9D30-123DB5038339",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "28877226-8CBF-4E27-9D30-123DB5038339",
+        "Root",
+        "EsmeTestingScene",
+        "GeyserGroup",
+        "geyser",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "28877226-8CBF-4E27-9D30-123DB5038339",
+        "Root",
+        "uvtesting",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "28877226-8CBF-4E27-9D30-123DB5038339",
+        "Root",
+        "uvtesting"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "3BE3E1C2-6FEB-419D-ABD1-5AEAD892E733" : {
     "objectMetadataList" : [
       [
@@ -133,6 +227,15 @@
     "objectMetadataList" : [
       [
         "934914B6-F049-446C-8817-00D10C8E6B14",
+        "Plane",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "934914B6-F049-446C-8817-00D10C8E6B14",
         "Plane"
       ],
       {
@@ -141,16 +244,9 @@
       },
       [
         "934914B6-F049-446C-8817-00D10C8E6B14",
-        "water_fallingshadertesting",
-        "waterfallingtest"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "934914B6-F049-446C-8817-00D10C8E6B14",
-        "water_fallingshadertesting"
+        "Plane",
+        "Materials",
+        "New_Shader_Graph_49834"
       ],
       {
         "isExpanded" : true,
@@ -214,6 +310,16 @@
       [
         "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
         "Root",
+        "testingscene0401",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
+        "Root",
         "foliage",
         "Meshes",
         "Sketchfab_model"
@@ -228,6 +334,15 @@
         "waterfallingtest",
         "Materials",
         "standardSurface1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "B5C81A91-EC27-4A48-AAE0-183397FE04F7",
+        "Root",
+        "testingscene0401"
       ],
       {
         "isExpanded" : true,

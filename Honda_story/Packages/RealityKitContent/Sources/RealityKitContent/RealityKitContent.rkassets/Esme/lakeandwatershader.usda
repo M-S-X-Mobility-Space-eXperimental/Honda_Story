@@ -1,0 +1,335 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = ""
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "water_fallingshadertesting" (
+        active = true
+        references = @water fallingshadertesting.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0.14780423, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "uvtesting" (
+        active = true
+        references = @uvtesting.usdz@
+    )
+    {
+        reorder nameChildren = ["Materials", "pDisc1", "ParticleEmitter"]
+        float3 xformOp:scale = (0.3, 0.3, 0.3)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Xform "ParticleEmitter"
+        {
+            float2 ui:nodegraph:node:pos = (-126.125, 109)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.16666663, 0.1666666, 0.1666666)
+            float3 xformOp:translate = (0.0000010554988, -0.0041343267, 1.6763805e-7)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "VFXEmitter"
+            {
+                token info:id = "RealityKit.VFXEmitter"
+
+                def RealityKitStruct "currentState"
+                {
+                    token birthDirection = "Normal"
+                    token birthLocation = "Surface"
+                    int64 burstCount = 100
+                    float3 emissionDirection = (0, 1, 0)
+                    double emissionDuration = 4
+                    double emissionDurationVariation = 0
+                    token emitterShape = "Plane"
+                    double idleDuration = 0
+                    double idleDurationVariation = 0
+                    bool isLocal = 0
+                    bool isSpawningEnabled = 0
+                    bool loops = 1
+                    float particleSpeed = 0.2
+                    float particleSpeedVariation = 0.1
+                    float3 shapeSize = (4, 0.001, 4)
+                    bool spawnInheritParentColor = 0
+                    token spawnOccasion = "OnDeath"
+                    float spawnSpreadFactor = 0
+                    float spawnSpreadFactorVariation = 0
+                    float spawnVelocityFactor = 1
+                    double warmupDuration = 0
+
+                    def RealityKitStruct "mainEmitter"
+                    {
+                        float3 acceleration = (0, -0.5, 0)
+                        token animationRepeatMode = "PlayOnce"
+                        token billboardMode = "Billboard"
+                        float birthRate = 1000
+                        float birthRateVariation = 0
+                        token blendMode = "Alpha"
+                        float colorEvolutionPower = 1
+                        int64 columnCount = 4
+                        float dampingFactor = 8
+                        float4 endColorA = (0.0013309671, 0.03458923, 1, 1)
+                        float4 endColorB = (0.11386989, 0.0064959256, 0.10626237, 1)
+                        float frameRate = 0
+                        float frameRateVariation = 0
+                        int64 initialFrame = 2
+                        int64 initialFrameVariation = 6
+                        bool isAnimated = 1
+                        bool isLightingEnabled = 0
+                        float noiseAnimationSpeed = 0
+                        float noiseScale = 1
+                        float noiseStrength = 0.1
+                        token opacityOverLife = "EaseFadeOut"
+                        float particleAngle = 0
+                        float particleAngleVariation = 0
+                        float particleAngularVelocity = 0
+                        float particleAngularVelocityVariation = 1
+                        asset particleImage = @../ParticleEmitterPresetTextures/dustsheet.exr@
+                        double particleLifeSpan = 5
+                        double particleLifeSpanVariation = 1
+                        float particleMass = 1
+                        float particleMassVariation = 0.8
+                        float particleSize = 0.01
+                        float particleSizeVariation = 0
+                        float3 radialGravityCenter = (0, -0.1, 0)
+                        float radialGravityStrength = -0.1
+                        int64 rowCount = 4
+                        float sizeMultiplierAtEndOfLifespan = 8
+                        float sizeMultiplierAtEndOfLifespanPower = 0.2
+                        token sortOrder = "DecreasingDepth"
+                        float spreadingAngle = 0
+                        float4 startColorA = (0.8662761, 0.9394064, 0.94687915, 0.5740887)
+                        float4 startColorB = (1, 1, 1, 0.07)
+                        float stretchFactor = 0
+                        bool useEndColor = 0
+                        bool useEndColorRange = 0
+                        bool useStartColorRange = 1
+                        float3 vortexDirection = (0, 1, 0)
+                        float vortexStrength = 0
+                    }
+
+                    def RealityKitStruct "spawnedEmitter"
+                    {
+                    }
+                }
+            }
+        }
+
+        over "Materials"
+        {
+            over "standardSurface1"
+            {
+                token outputs:mtlx:surface.connect = </Root/uvtesting/Materials/standardSurface1/PreviewSurface.outputs:out>
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/uvtesting/Materials/standardSurface1/standardSurface1PreviewSurface.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+                over "standardSurface1PreviewSurface" (
+                    active = false
+                )
+                {
+                }
+
+                def Shader "PreviewSurface"
+                {
+                    uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                    float inputs:clearcoat
+                    float inputs:clearcoatRoughness
+                    color3f inputs:diffuseColor.connect = </Root/uvtesting/Materials/standardSurface1/image.outputs:out>
+                    color3f inputs:emissiveColor
+                    float3 inputs:normal.connect = </Root/uvtesting/Materials/standardSurface1/image_1.outputs:out>
+                    float inputs:roughness
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-255, 105)
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["Advanced"]
+                }
+
+                def Shader "Add_1"
+                {
+                    uniform token info:id = "ND_add_float"
+                    float inputs:in1.connect = </Root/uvtesting/Materials/standardSurface1/Multiply_1.outputs:out>
+                    float inputs:in2.connect = </Root/uvtesting/Materials/standardSurface1/Separate2_3.outputs:outy>
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-1061.4066, 361.97693)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "TextureCoordinates_2"
+                {
+                    uniform token info:id = "ND_texcoord_vector2"
+                    float2 outputs:out
+                    float2 ui:nodegraph:node:pos = (-1289.1442, -427.93542)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "Multiply_1"
+                {
+                    uniform token info:id = "ND_multiply_float"
+                    float inputs:in1.connect = </Root/uvtesting/Materials/standardSurface1/Time_1.outputs:out>
+                    float inputs:in2.connect = </Root/uvtesting/Materials/standardSurface1/Separate2_2.outputs:outx>
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-1263.6818, 223.00876)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "ConstantFloat2_1"
+                {
+                    uniform token info:id = "ND_constant_vector2"
+                    float2 inputs:value = (0.01, 0)
+                    float2 outputs:out
+                    float2 ui:nodegraph:node:pos = (-1624.612, 358.53082)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "Time"
+                {
+                    uniform token info:id = "ND_time_float"
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-1403.969, -127.42838)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "Multiply"
+                {
+                    uniform token info:id = "ND_multiply_float"
+                    float inputs:in1.connect = </Root/uvtesting/Materials/standardSurface1/Time.outputs:out>
+                    float inputs:in2.connect = </Root/uvtesting/Materials/standardSurface1/Separate2.outputs:outx>
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-1219.478, -115.88889)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "Separate2_3"
+                {
+                    uniform token info:id = "ND_separate2_vector2"
+                    float2 inputs:in.connect = </Root/uvtesting/Materials/standardSurface1/TextureCoordinates_1.outputs:out>
+                    float outputs:outx
+                    float outputs:outy
+                    float2 ui:nodegraph:node:pos = (-1226.0903, 443.34332)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "Time_1"
+                {
+                    uniform token info:id = "ND_time_float"
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-1434.7883, 221.28094)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "ConstantFloat2"
+                {
+                    uniform token info:id = "ND_constant_vector2"
+                    float2 inputs:value = (0.01, 0)
+                    float2 outputs:out
+                    float2 ui:nodegraph:node:pos = (-1580.4084, 19.633184)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "Combine2"
+                {
+                    uniform token info:id = "ND_combine2_vector2"
+                    float inputs:in1.connect = </Root/uvtesting/Materials/standardSurface1/Add.outputs:out>
+                    float inputs:in2.connect = </Root/uvtesting/Materials/standardSurface1/Add_1.outputs:out>
+                    float2 outputs:out
+                    float2 ui:nodegraph:node:pos = (-877.11646, 169.84995)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "image_1"
+                {
+                    uniform token info:id = "ND_image_vector3"
+                    float3 inputs:default
+                    asset inputs:file = @../Water_0341normal.jpg@
+                    string inputs:filtertype
+                    float2 inputs:texcoord.connect = </Root/uvtesting/Materials/standardSurface1/Combine2.outputs:out>
+                    string inputs:uaddressmode
+                    string inputs:vaddressmode
+                    float3 outputs:out
+                    float2 ui:nodegraph:node:pos = (-600.89404, 288.89914)
+                    int ui:nodegraph:node:stackingOrder = 1733
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:texcoord"]
+                }
+
+                def Shader "image"
+                {
+                    uniform token info:id = "ND_image_color3"
+                    asset inputs:file = @../BASE.png@
+                    string inputs:filtertype
+                    float2 inputs:texcoord.connect = </Root/uvtesting/Materials/standardSurface1/TextureCoordinates_2.outputs:out>
+                    string inputs:uaddressmode
+                    string inputs:vaddressmode
+                    color3f outputs:out
+                    float2 ui:nodegraph:node:pos = (-576.53503, -345.8902)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:uaddressmode"]
+                }
+
+                def Shader "Separate2"
+                {
+                    uniform token info:id = "ND_separate2_vector2"
+                    float2 inputs:in.connect = </Root/uvtesting/Materials/standardSurface1/ConstantFloat2.outputs:out>
+                    float outputs:outx
+                    float2 ui:nodegraph:node:pos = (-1377.9373, 16.967627)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "Add"
+                {
+                    uniform token info:id = "ND_add_float"
+                    float inputs:in1.connect = </Root/uvtesting/Materials/standardSurface1/Multiply.outputs:out>
+                    float inputs:in2.connect = </Root/uvtesting/Materials/standardSurface1/Separate2_1.outputs:outx>
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-1058.0221, 23.664312)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "TextureCoordinates"
+                {
+                    uniform token info:id = "ND_texcoord_vector2"
+                    float2 outputs:out
+                    float2 ui:nodegraph:node:pos = (-1388.9698, 105.515205)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "Separate2_2"
+                {
+                    uniform token info:id = "ND_separate2_vector2"
+                    float2 inputs:in.connect = </Root/uvtesting/Materials/standardSurface1/ConstantFloat2_1.outputs:out>
+                    float outputs:outx
+                    float2 ui:nodegraph:node:pos = (-1422.141, 355.8653)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "TextureCoordinates_1"
+                {
+                    uniform token info:id = "ND_texcoord_vector2"
+                    float2 outputs:out
+                    float2 ui:nodegraph:node:pos = (-1433.1735, 444.4129)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+
+                def Shader "Separate2_1"
+                {
+                    uniform token info:id = "ND_separate2_vector2"
+                    float2 inputs:in.connect = </Root/uvtesting/Materials/standardSurface1/TextureCoordinates.outputs:out>
+                    float outputs:outx
+                    float outputs:outy
+                    float2 ui:nodegraph:node:pos = (-1181.8867, 104.445564)
+                    int ui:nodegraph:node:stackingOrder = 1731
+                }
+            }
+        }
+    }
+}
+

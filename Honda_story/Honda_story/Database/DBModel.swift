@@ -73,8 +73,10 @@ class DBModel: ObservableObject {
             DispatchQueue.main.async {
                 self.AllTapped = allTapped
                 if(!self.Geyser){
-                    self.Geyser = true
-                    self.ref.child("Geyser").setValue(true)
+                    if(self.AllTapped){
+                        self.Geyser = true
+                        self.ref.child("Geyser").setValue(true)
+                    }
                 }
                 print("All players tapped: \(allTapped)")
             }

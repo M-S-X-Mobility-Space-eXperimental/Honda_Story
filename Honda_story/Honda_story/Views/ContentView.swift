@@ -5,7 +5,7 @@ import RealityKitContent
 struct ContentView: View {
     @State private var showTitle = true
     @State private var immersiveEntered = false
-    @StateObject private var dbModel = DBModel(userId: "")
+    @StateObject private var dbModel = DBModel()
 
     @Environment(\.dismissWindow) private var dismissWindow
 

@@ -3,12 +3,9 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
-
     @State private var showTitle = true
     @State private var immersiveEntered = false
-    
-    @AppStorage("playerID") var playerID: Int = -1
-    @State private var playerChosen = false
+    @StateObject private var dbModel = DBModel()
 
     @Environment(\.dismissWindow) private var dismissWindow
 
@@ -21,30 +18,15 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .bottomOrnament) {
-                    // Show immersive button only before entering
                     if !immersiveEntered {
                         ToggleImmersiveSpaceButton(
                             immersiveEntered: $immersiveEntered,
                             showTitle: $showTitle
                         )
                     }
-                    
-                    if !playerChosen {
-                        Button("Set Player 0") {
-                            playerID = 0
-                            playerChosen = true
-                        }
-
-                        Button("Set Player 1") {
-                            playerID = 1
-                            playerChosen = true
-                        }
-                    }
                 }
-                
             }
 
-            // Persistent title overlay
             if showTitle {
                 Text("Honda in 2040")
                     .font(.largeTitle)

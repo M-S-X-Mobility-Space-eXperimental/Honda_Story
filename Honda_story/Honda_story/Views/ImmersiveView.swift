@@ -22,12 +22,12 @@ struct ImmersiveView: View {
     
     @State private var Timeline_GeyserEntity: Entity?
     
-    @StateObject private var viewModel: TapViewModel
+    @StateObject private var dbModel: DBModel
     
     init() {
-          // Initialize the viewModel with playerID from AppStorage
+          // Initialize the DBModel with playerID from AppStorage
           let playerIDFromStorage = UserDefaults.standard.integer(forKey: "playerID")
-          _viewModel = StateObject(wrappedValue: TapViewModel(userId: String(playerIDFromStorage)))
+          _dbModel = StateObject(wrappedValue: DBModel(userId: String(playerIDFromStorage)))
       }
 
     var body: some View {
@@ -68,11 +68,11 @@ struct ImmersiveView: View {
             }
         }
         .task{
-            viewModel.observeGeyser()
+            dbModel.observeGeyser()
         }
         
-        .onChange(of: viewModel.Geyser) {
-            if viewModel.Geyser {
+        .onChange(of: dbModel.Geyser) {
+            if dbModel.Geyser {
                 print("Enabling Eruption")
                 EruptionEntity?.isEnabled = true
                bisonFoodsEntity?.isEnabled = true
@@ -88,7 +88,7 @@ struct ImmersiveView: View {
                  let tappedEntity = value.entity
                  
                  if tappedEntity.name == "GeyserSandbox" {
-                     viewModel.tap { bothTapped in
+                     dbModel.tap { bothTapped in
                          if bothTapped {
 //                             print("Both players tapped!")
 //                             EruptionEntity?.isEnabled = true

@@ -20,14 +20,16 @@ struct ImmersiveView: View {
     @State private var bluegrassEntity: Entity?
     @State private var EruptionEntity: Entity?
     
+    @State private var GeyserErupt: Bool = false
+    
     @State private var Timeline_GeyserEntity: Entity?
     
     @StateObject private var dbModel: DBModel
     
+    
     init() {
           // Initialize the DBModel with playerID from AppStorage
-          let playerIDFromStorage = UserDefaults.standard.integer(forKey: "playerID")
-          _dbModel = StateObject(wrappedValue: DBModel(userId: String(playerIDFromStorage)))
+          _dbModel = StateObject(wrappedValue: DBModel())
       }
 
     var body: some View {
@@ -75,10 +77,9 @@ struct ImmersiveView: View {
             if dbModel.Geyser {
                 print("Enabling Eruption")
                 EruptionEntity?.isEnabled = true
-               bisonFoodsEntity?.isEnabled = true
-           } else {
-               EruptionEntity?.isEnabled = false
-               bisonFoodsEntity?.isEnabled = false
+                bisonFoodsEntity?.isEnabled = true
+                GeyserErupt = true
+                
            }
         }
         
@@ -88,16 +89,14 @@ struct ImmersiveView: View {
                  let tappedEntity = value.entity
                  
                  if tappedEntity.name == "GeyserSandbox" {
-                     dbModel.tap { bothTapped in
-                         if bothTapped {
-//                             print("Both players tapped!")
-//                             EruptionEntity?.isEnabled = true
-//                             bisonFoodsEntity?.isEnabled = true
-                             _ = value.entity.applyTapForBehaviors()
-                         } else {	
-                             print("Waiting on opponent.")
+                     dbModel.tapGeyser()
+                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                         if GeyserErupt {
+                             // apply to behavior
+                             _ = tappedEntity.applyTapForBehaviors()
                          }
                      }
+                     
                  }
                  
          })

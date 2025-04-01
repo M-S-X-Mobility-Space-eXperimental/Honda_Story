@@ -21,7 +21,7 @@ class DBModel: ObservableObject {
     @Published var AllTapped: Bool = false
     	
     
-    init(userId: String) {
+    init() {
         self.userId = UIDevice.current.identifierForVendor?.uuidString ?? "unknown"
         print(self.userId)
        
@@ -31,7 +31,7 @@ class DBModel: ObservableObject {
         ref.child("Geyser").setValue(false)
     }
     
-    func tap(completion: @escaping (Bool) -> Void) {
+    func tapGeyser() {
         ref.child("players/\(userId)").updateChildValues([
             "tapped": true,
         ])
@@ -39,10 +39,7 @@ class DBModel: ObservableObject {
         self.resetTapAfterDelay()
         self.ObserveAllTapped()
     }
-    
-    func tapGeyser(){
-        
-    }
+
     
     private func resetTapAfterDelay() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -75,6 +72,10 @@ class DBModel: ObservableObject {
 
             DispatchQueue.main.async {
                 self.AllTapped = allTapped
+                if(!self.Geyser){
+                    self.Geyser = true
+                    self.ref.child("Geyser").setValue(true)
+                }
                 print("All players tapped: \(allTapped)")
             }
         })

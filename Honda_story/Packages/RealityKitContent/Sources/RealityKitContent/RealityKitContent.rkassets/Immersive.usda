@@ -463,5 +463,59 @@ def Xform "Root"
         uniform asset file = @Sounds/msx geyser sfx v1.wav@
         uniform bool shouldLoop = 0
     }
+
+    def "lakeandwatershader" (
+        active = true
+        prepend references = @EsmeTestingScene_references/lakeandwatershader.usdz@</Root>
+    )
+    {
+        float3 xformOp:translate = (0.09316762, 0.43582088, 0.12842488)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "uvtesting"
+        {
+            over "Materials"
+            {
+                over "standardSurface1"
+                {
+                    over "image_1"
+                    {
+                        asset inputs:file = @EsmeTestingScene_references/Water_0341normal.jpg@
+                        int ui:nodegraph:node:stackingOrder = 1737
+                    }
+
+                    over "image"
+                    {
+                        asset inputs:file = @EsmeTestingScene_references/BASE.png@
+                        int ui:nodegraph:node:stackingOrder = 1738
+                    }
+                }
+            }
+        }
+
+        over "water_fallingshadertesting"
+        {
+            over "waterfallingtest"
+            {
+                over "Materials"
+                {
+                    over "standardSurface1"
+                    {
+                        over "image_1"
+                        {
+                            asset inputs:file = @EsmeTestingScene_references/Noise_013.png@
+                            int ui:nodegraph:node:stackingOrder = 1689
+                        }
+
+                        over "image"
+                        {
+                            asset inputs:file = @EsmeTestingScene_references/2.jpeg@
+                            int ui:nodegraph:node:stackingOrder = 1692
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 

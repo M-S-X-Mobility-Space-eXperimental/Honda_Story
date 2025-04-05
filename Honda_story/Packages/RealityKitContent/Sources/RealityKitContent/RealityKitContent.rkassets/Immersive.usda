@@ -108,6 +108,31 @@ def Xform "Root"
             {
                 uniform token info:id = "RealityKit.HierarchicalFade"
             }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (6.575633, 8.043767, 6.575635)
+                    float radius = 4.0218835
+                    token shapeType = "Sphere"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (-3.5762787e-7, 1.0932437, -5.9604645e-7)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
         }
 
         def "wildflower" (
@@ -124,6 +149,31 @@ def Xform "Root"
             {
                 uniform token info:id = "RealityKit.HierarchicalFade"
             }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (324.88168, 178.63387, 327.91165)
+                    float radius = 163.95583
+                    token shapeType = "Sphere"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (2.8071136, 60.59014, 0.014160156)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
         }
 
         def "PBR___Metallic_Roughness_Alpha_blend" (
@@ -139,6 +189,31 @@ def Xform "Root"
             def RealityKitComponent "HierarchicalFade"
             {
                 uniform token info:id = "RealityKit.HierarchicalFade"
+            }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (196.76712, 200, 196.7605)
+                    float radius = 100
+                    token shapeType = "Sphere"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (0.0000038146973, 0, 0.0000038146973)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
             }
         }
 
@@ -167,7 +242,8 @@ def Xform "Root"
                 def RealityKitStruct "Shape"
                 {
                     float3 extent = (1.4477186, 1.5373735, 1.3437186)
-                    token shapeType = "Box"
+                    float radius = 0.7686868
+                    token shapeType = "Sphere"
 
                     def RealityKitStruct "pose"
                     {

@@ -23,10 +23,17 @@ struct ImmersiveView: View {
     @State private var BisonEntity: Entity?
     @State private var CountDownEntity: Entity?
     
+//    @State private var RootEntity: Entity?
+    
     @State private var GeyserErupt: Bool = false
     @State private var BisonAttracted: Bool = false
     
     @State private var Timeline_GeyserEntity: Entity?
+    
+    @State private var handAnchor: AnchorEntity?
+    
+    
+    @State private var SceneRootContent: RealityViewContent?
     
     
     @StateObject private var dbModel: DBModel
@@ -45,23 +52,35 @@ struct ImmersiveView: View {
                 
                 content.add(immersiveContentEntity)
                 
+                SceneRootContent = content
                 
                 let session = SpatialTrackingSession()
-                let configuration = SpatialTrackingSession.Configuration(tracking: [.hand])
+                let configuration = SpatialTrackingSession.Configuration(tracking: [.hand, .world])
                 _ = await session.run(configuration)
                 self.session = session
                //Setup an anchor at the user's left palm.
-                let handAnchor = AnchorEntity(.hand(.left, location: .palm), trackingMode: .continuous)
+                self.handAnchor = AnchorEntity(.hand(.right, location: .indexFingerTip), trackingMode: .continuous)
+//                let worldAnchor = AnchorEntity(.world(transform: float4x4(0)), trackingMode: .continuous)
+//                
+//                if let root = immersiveContentEntity.findEntity(named: "Root"){
+//                               
+//                    //Child the gauntlet scene to the handAnchor.
+//                    worldAnchor.addChild(root)
+//                    
+//                    // Add the handAnchor to the RealityView scene.
+//                    content.add(worldAnchor)
+//                   
+//                }
                 
-                if let sphere = immersiveContentEntity.findEntity(named: "Sphere"){
-                               
-                    //Child the gauntlet scene to the handAnchor.
-                    handAnchor.addChild(sphere)
-                    
-                    // Add the handAnchor to the RealityView scene.
-                    content.add(handAnchor)
-                   
-                }
+//                if let sphere = immersiveContentEntity.findEntity(named: "Sphere"){
+//                               
+//                    //Child the gauntlet scene to the handAnchor.
+//                    handAnchor.addChild(sphere)
+//                    
+//                    // Add the handAnchor to the RealityView scene.
+//                    content.add(handAnchor)
+//                   
+//                }
 
                 
                 if let environment = immersiveContentEntity.findEntity(named: "Environment") {
@@ -140,7 +159,8 @@ struct ImmersiveView: View {
             DragGesture()
                 .targetedToAnyEntity()
                 .onChanged { value in
-                    if value.entity.name == "bluegrass" {
+                    if value.entity.parent?.name == "BisonFoods"{
+//                    if value.entity.name == "bluegrass" {
                         // Update position to match drag location in 3D
                         
                         if(!BisonAttracted){
@@ -148,8 +168,24 @@ struct ImmersiveView: View {
                             BisonAttracted = true
                         }
                         
-                        bluegrassEntity?.position = value.convert(value.location3D, from: .local, to: .scene)
+//                        let initialPosition: SIMD3<Float> = bluegrassEntity?.position ?? SIMD3<Float>(0,0,0)
+//                        bluegrassEntity?.position = value.convert(value.location3D, from: .local, to: .scene)
+                        value.entity.position = SIMD3<Float>(0,0,0)
+                        self.handAnchor?.addChild(value.entity)
+                        SceneRootContent?.add(handAnchor!)
+                        
+                        
                     }
+                }
+                .onEnded { value in
+                       let draggedEntity = value.entity
+                       let worldPosition = draggedEntity.position(relativeTo: bisonFoodsEntity)
+
+                       draggedEntity.removeFromParent()
+
+                       draggedEntity.position = worldPosition
+
+                       bisonFoodsEntity?.addChild(draggedEntity)
                 }
         )
         

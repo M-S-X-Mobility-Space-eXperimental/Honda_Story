@@ -71,7 +71,7 @@ struct ImmersiveView: View {
                     timerCancellable = Timer.publish(every: 0.01, on: .main, in: .common)
                         .autoconnect()
                         .sink { _ in
-                            environment.position += SIMD3<Float>(x: 0.02, y: 0, z: 0)
+                            environment.position += SIMD3<Float>(x: 0, y: 0, z: 0.01)
                         }
                 }
                 
@@ -113,6 +113,8 @@ struct ImmersiveView: View {
                 EruptionEntity?.isEnabled = true
                 bisonFoodsEntity?.isEnabled = true
                 GeyserErupt = true
+                
+                CountDownEntity?.isEnabled = false
                 
            }
         }

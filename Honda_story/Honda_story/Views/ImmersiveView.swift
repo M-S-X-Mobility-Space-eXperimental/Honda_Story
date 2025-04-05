@@ -30,7 +30,9 @@ struct ImmersiveView: View {
     
     @State private var Timeline_GeyserEntity: Entity?
     
-    @State private var handAnchor: AnchorEntity?
+    @State private var LeftHandAnchor: AnchorEntity?
+    @State private var RightHandAnchor: AnchorEntity?
+    @State private var CurrentHandAnchor: AnchorEntity?
     
     
     @State private var SceneRootContent: RealityViewContent?
@@ -59,7 +61,8 @@ struct ImmersiveView: View {
                 _ = await session.run(configuration)
                 self.session = session
                //Setup an anchor at the user's left palm.
-                self.handAnchor = AnchorEntity(.hand(.right, location: .indexFingerTip), trackingMode: .continuous)
+                self.LeftHandAnchor = AnchorEntity(.hand(.left, location: .indexFingerTip), trackingMode: .continuous)
+                self.RightHandAnchor = AnchorEntity(.hand(.right, location: .indexFingerTip), trackingMode: .continuous)
 //                let worldAnchor = AnchorEntity(.world(transform: float4x4(0)), trackingMode: .continuous)
 //                
 //                if let root = immersiveContentEntity.findEntity(named: "Root"){
@@ -168,12 +171,28 @@ struct ImmersiveView: View {
                             BisonAttracted = true
                         }
                         
-//                        let initialPosition: SIMD3<Float> = bluegrassEntity?.position ?? SIMD3<Float>(0,0,0)
-//                        bluegrassEntity?.position = value.convert(value.location3D, from: .local, to: .scene)
-                        value.entity.position = SIMD3<Float>(0,0,0)
-                        self.handAnchor?.addChild(value.entity)
-                        SceneRootContent?.add(handAnchor!)
+                        let entityWorldPos = value.entity.convert(position: .zero, to: nil)
+                        let leftHandWorldPos = self.LeftHandAnchor?.convert(position: .zero, to: nil) ?? SIMD3<Float>(10000,10000,10000)
+                        let rightHandWorldPos = self.RightHandAnchor?.convert(position: .zero, to: nil) ?? SIMD3<Float>(10000,10000,10000)
                         
+                        let leftDist = distance(leftHandWorldPos, entityWorldPos)
+                        let rightDist = distance(rightHandWorldPos, entityWorldPos)
+                        
+                        print("left Dist:",leftDist)
+                        print("right dist:",rightDist)
+                        
+                        if(leftDist < rightDist){
+                            print("Assign Left")
+                            CurrentHandAnchor = self.LeftHandAnchor
+                            
+                        }else{
+                            print("Assign Right")
+                            CurrentHandAnchor = self.RightHandAnchor
+                        }
+                        
+                        value.entity.position = SIMD3<Float>(0,0,0)
+                        self.CurrentHandAnchor?.addChild(value.entity)
+                        SceneRootContent?.add(CurrentHandAnchor!)
                         
                     }
                 }

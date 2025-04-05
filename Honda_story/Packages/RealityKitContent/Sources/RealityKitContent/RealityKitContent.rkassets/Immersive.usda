@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "GeyserErupt", "Car", "Environment", "msx_geyser_sfx_v1_wav", "Init", "BisonFoods", "SKYBOX"]
+    reorder nameChildren = ["Eruption", "Audios", "GeyserSandbox", "GeyserErupt", "Car", "Environment", "Init", "BisonFoods", "SKYBOX", "GeyserBisonTrans", "Geyser_End_mp3", "Bison", "BisonParent", "BisonIdle", "BisonWalk"]
     float3 xformOp:translate = (0, 0, 0)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -131,15 +131,20 @@ def Xform "Root"
 
             def RealityKitDict "resources"
             {
-                string[] keys = ["msx geyser sfx v1.wav"]
-                rel values = </Root/msx_geyser_sfx_v1_wav>
+                string[] keys = ["msx geyser sfx v1.wav", "msx geyser sfx v1.wav 1"]
+                rel values = </Root/Audios/msx_geyser_sfx_v1_wav>
             }
+        }
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
         }
     }
 
     def RealityKitTimeline "GeyserErupt"
     {
-        reorder nameChildren = ["Track2", "Track"]
+        reorder nameChildren = ["Track2", "Track", "Track3", "Track4"]
         def RealityKitTrack "Track2"
         {
             def RealityKitAction "Play_Audio"
@@ -147,7 +152,8 @@ def Xform "Root"
                 string actionKind = "audio"
                 string audioResourceName = "msx geyser sfx v1.wav"
                 bool controlPlayback = 1
-                double duration = 10.037337443263572
+                double duration = 20.439504058367262
+                double gain = -32.515554298642535
                 uniform token info:id = "4460F7F5-0807-4692-9C2E-47FC5B7D0CAB"
                 double startTime = 0
                 rel target = </Root/GeyserSandbox>
@@ -156,11 +162,6 @@ def Xform "Root"
                 {
                 }
             }
-        }
-
-        def RealityKitTrack "Track"
-        {
-            bool isActive = 0
         }
     }
 
@@ -187,12 +188,6 @@ def Xform "Root"
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
-    def RealityKitAudioFile "msx_geyser_sfx_v1_wav"
-    {
-        uniform asset file = @Sounds/msx geyser sfx v1.wav@
-        uniform bool shouldLoop = 0
-    }
-
     def RealityKitTimeline "Init"
     {
         def RealityKitTrack "Track"
@@ -204,7 +199,7 @@ def Xform "Root"
         active = true
     )
     {
-        reorder nameChildren = ["bluegrass", "_apple", "wildflower", "flower", "PBR___Metallic_Roughness_Alpha_blend"]
+        reorder nameChildren = ["bluegrass", "RCP_BehaviorsContainer", "OnAddedToScene", "AudioLibrary", "HierarchicalFade", "_apple", "wildflower", "PBR___Metallic_Roughness_Alpha_blend", "_bison_basket"]
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0, 0, 0)
@@ -217,8 +212,13 @@ def Xform "Root"
         {
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (0.02, 0.02, 0.02)
-            float3 xformOp:translate = (1.4970776, 0.40427256, 0)
+            float3 xformOp:translate = (-0.42092538, 0.70718277, -0.22732228)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+            }
         }
 
         def "wildflower" (
@@ -228,19 +228,13 @@ def Xform "Root"
         {
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (0.001, 0.001, 0.001)
-            float3 xformOp:translate = (0.57583255, 0.4577253, 0)
+            float3 xformOp:translate = (-0.5569175, 0.74326295, -0.2917847)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-        }
 
-        def "flower" (
-            active = true
-            references = @BisonFoods/flower.usdz@
-        )
-        {
-            quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (0.1, 0.1, 0.1)
-            float3 xformOp:translate = (-0.7702482, 0.7183326, 0.8397063)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+            }
         }
 
         def "PBR___Metallic_Roughness_Alpha_blend" (
@@ -250,8 +244,13 @@ def Xform "Root"
         {
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (0.001, 0.001, 0.001)
-            float3 xformOp:translate = (-1.0397427, 0.5889077, -0.44686377)
+            float3 xformOp:translate = (-0.58251977, 0.7531353, -0.033406764)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+            }
         }
 
         def "bluegrass" (
@@ -261,7 +260,7 @@ def Xform "Root"
         {
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (0.1, 0.1, 0.1)
-            float3 xformOp:translate = (0.04312834, 0.74373156, -0.044259995)
+            float3 xformOp:translate = (-0.29634574, 0.74373317, -0.10018117)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "InputTarget"
@@ -287,6 +286,11 @@ def Xform "Root"
                     }
                 }
             }
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+            }
         }
 
         def RealityKitComponent "RCP_BehaviorsContainer"
@@ -309,13 +313,45 @@ def Xform "Root"
 
             def Preliminary_Action "Action"
             {
-                rel affectedObjects = None
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/GeyserBisonTrans>
                 rel animationLibraryKeyOverrideKey = </Root/BisonFoods/OnAddedToScene/Trigger>
                 token info:id = "PlayTimeline"
                 int loops = 0
                 int performCount = 1
                 token type = "serial"
             }
+        }
+
+        def RealityKitComponent "AudioLibrary"
+        {
+            uniform token info:id = "RealityKit.AudioLibrary"
+
+            def RealityKitDict "resources"
+            {
+                string[] keys = ["Geyser End.mp3"]
+                rel values = </Root/Audios/Geyser_End_mp3_1>
+            }
+        }
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
+        }
+
+        def "_bison_basket" (
+            active = true
+            customData = {
+                float3 rotationEulerHint = (0, 1.5707963, 0)
+            }
+            references = @BisonFoods/ bison_basket.usdz@
+        )
+        {
+            quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+            float3 xformOp:scale = (0.003, 0.003, 0.003)
+            float3 xformOp:translate = (-0.48961073, 0.77127147, -0.16279852)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
         }
     }
 
@@ -453,66 +489,435 @@ def Xform "Root"
             def RealityKitDict "resources"
             {
                 string[] keys = ["msx geyser sfx v1.wav"]
-                rel values = </Root/msx_geyser_sfx_v1_wav2>
+                rel values = </Root/Audios/msx_geyser_sfx_v1_wav2>
+            }
+        }
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 1
+        }
+    }
+
+    def Xform "Audios" (
+        active = true
+    )
+    {
+        reorder nameChildren = ["Geyser_End_mp3", "msx_geyser_sfx_v1_wav", "AudioEmitter", "Bison_Intro_mp3", "Bison_Eating_wav", "Geyser_End_mp3_1"]
+        def RealityKitAudioFile "msx_geyser_sfx_v1_wav"
+        {
+            uniform asset file = @Sounds/msx geyser sfx v1.wav@
+            uniform bool shouldLoop = 0
+        }
+
+        def Xform "AudioEmitter" (
+            active = true
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "AudioLibrary"
+            {
+                uniform token info:id = "RealityKit.AudioLibrary"
+
+                def RealityKitDict "resources"
+                {
+                    string[] keys = ["Bison Intro.mp3", "Bison Eating.wav", "Geyser End.mp3"]
+                    rel values = [
+                        </Root/Audios/Bison_Intro_mp3>,
+                        </Root/Audios/Bison_Eating_wav>,
+                        </Root/Audios/Geyser_End_mp3_1>,
+                    ]
+                }
+            }
+        }
+
+        def RealityKitAudioFile "Bison_Intro_mp3"
+        {
+            uniform asset file = @Sounds/Bison Intro.mp3@
+            uniform bool shouldLoop = 0
+        }
+
+        def RealityKitAudioFile "Bison_Eating_wav"
+        {
+            uniform asset file = @Sounds/Bison Eating.wav@
+            uniform bool shouldLoop = 0
+        }
+
+        def RealityKitAudioFile "Geyser_End_mp3_1"
+        {
+            uniform asset file = @Sounds/Geyser End.mp3@
+            uniform bool shouldLoop = 0
+        }
+    }
+
+    def RealityKitTimeline "GeyserBisonTrans"
+    {
+        reorder nameChildren = ["Track", "Track2", "Track_3", "Track_1", "Track3"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "Geyser End.mp3"
+                bool controlPlayback = 1
+                double duration = 56.595540734085205
+                uniform token info:id = "95B8B835-4C0D-438B-AC10-19B5B237C5DE"
+                double startTime = 0
+                rel target = </Root/BisonFoods>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+
+            def RealityKitAction "Play_Audio2"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "Bison Intro.mp3"
+                bool controlPlayback = 1
+                double duration = 44.98285416666667
+                uniform token info:id = "987429BA-FE06-4263-924B-6025A6CCD932"
+                double startTime = 56.60131879509593
+                rel target = </Root/Audios/AudioEmitter>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            reorder nameChildren = ["Hide", "Disable_Entity", "Hide_12", "Disable_Entity_1", "Show"]
+            def RealityKitAction "Hide_12"
+            {
+                string actionKind = "hide"
+                int blendLayer = 300
+                double duration = 5
+                uniform token info:id = "35A010AA-5FC9-4D19-A56A-E52F2F250F56"
+                double startTime = 51.59174354550458
+                rel target = </Root/GeyserSandbox>
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Disable_Entity_1"
+            {
+                string actionKind = "disable"
+                double duration = 0
+                uniform token info:id = "E71480E4-3EB4-4887-888C-2A1F7492E9BB"
+                double startTime = 56.72242203034002
+                rel target = </Root/Eruption>
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+            }
+        }
+
+        def RealityKitTrack "Track_1"
+        {
+            def RealityKitAction "Show"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 5
+                uniform token info:id = "76F9D941-4022-45C7-93D7-132F27654DBD"
+                double startTime = 56.643216772881885
+                rel target = </Root/BisonFoods>
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track_3"
+        {
+            reorder nameChildren = ["Disable_Entity_1", "Hide"]
+            def RealityKitAction "Hide"
+            {
+                string actionKind = "hide"
+                int blendLayer = 300
+                double duration = 5
+                uniform token info:id = "B52A2139-20BC-48CF-B9FD-2E6CCB7CC441"
+                double startTime = 51.58784153172642
+                rel target = </Root/Eruption>
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Disable_Entity"
+            {
+                string actionKind = "disable"
+                double duration = 0
+                uniform token info:id = "387D65B5-14A0-4CD6-8D55-05192242CD57"
+                double startTime = 56.72776674983105
+                rel target = </Root/GeyserSandbox>
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+            }
+        }
+
+        def RealityKitTrack "Track3"
+        {
+            def RealityKitAction "Show"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 5
+                uniform token info:id = "7625FC0A-2882-4A00-88FA-A0FCA65D1439"
+                double startTime = 56.64120986647835
+                rel target = </Root/Bison>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
             }
         }
     }
 
-    def RealityKitAudioFile "msx_geyser_sfx_v1_wav2"
-    {
-        uniform asset file = @Sounds/msx geyser sfx v1.wav@
-        uniform bool shouldLoop = 0
-    }
-
-    def "lakeandwatershader" (
+    def Xform "Bison" (
         active = true
-        prepend references = @EsmeTestingScene_references/lakeandwatershader.usdz@</Root>
     )
     {
-        float3 xformOp:translate = (0.09316762, 0.43582088, 0.12842488)
+        reorder nameChildren = ["BisonParent", "Bison_eat01"]
+        float3 xformOp:translate = (-0.9715884, 0, -7.4655337)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-        over "uvtesting"
+        def Xform "BisonParent" (
+            active = true
+            customData = {
+                float3 rotationEulerHint = (1.5707964, 0, 0)
+            }
+        )
         {
-            over "Materials"
+            quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
+            float3 xformOp:scale = (0.01, 0.01, 0.01)
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def "Bison_Model" (
+                active = true
+                references = @ArtAssets/Bisons/Bison_eat01.usdz@
+            )
             {
-                over "standardSurface1"
+                quatf xformOp:orient = (0.70710677, -0.7071067, -5.0129303e-15, -5.0129303e-15)
+                quatf xformOp:orient.timeSamples = {
+                    0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+                }
+                float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+                float3 xformOp:scale.timeSamples = {
+                    0: (1, 1, 1),
+                }
+                float3 xformOp:translate = (0, 0, 0)
+                float3 xformOp:translate.timeSamples = {
+                    0: (0, 0, 0),
+                }
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "AnimationLibrary"
                 {
-                    over "image_1"
+                    token info:id = "RealityKit.AnimationLibrary"
+
+                    def RealityKitAnimationFile "Bison_eat02"
                     {
-                        asset inputs:file = @EsmeTestingScene_references/Water_0341normal.jpg@
-                        int ui:nodegraph:node:stackingOrder = 1737
+                        uniform asset file = @ArtAssets/Bisons/Bison_eat02.usdz@
+                        uniform bool looping = 1
+                        uniform string name = "Bison_eat02"
                     }
 
-                    over "image"
+                    def RealityKitAnimationFile "default_subtree_animation"
                     {
-                        asset inputs:file = @EsmeTestingScene_references/BASE.png@
-                        int ui:nodegraph:node:stackingOrder = 1738
+                        uniform bool looping = 1
+                        uniform string name = "default subtree animation"
+                    }
+
+                    def RealityKitAnimationFile "Bison_walk03"
+                    {
+                        uniform asset file = @ArtAssets/Bisons/Bison_walk03.usdz@
+                        uniform bool looping = 1
+                        uniform string name = "Bison_walk03"
                     }
                 }
             }
         }
 
-        over "water_fallingshadertesting"
+        def RealityKitComponent "HierarchicalFade"
         {
-            over "waterfallingtest"
-            {
-                over "Materials"
-                {
-                    over "standardSurface1"
-                    {
-                        over "image_1"
-                        {
-                            asset inputs:file = @EsmeTestingScene_references/Noise_013.png@
-                            int ui:nodegraph:node:stackingOrder = 1689
-                        }
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
+        }
 
-                        over "image"
-                        {
-                            asset inputs:file = @EsmeTestingScene_references/2.jpeg@
-                            int ui:nodegraph:node:stackingOrder = 1692
-                        }
-                    }
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = [
+                </Root/Bison/OnAddedToScene>,
+                </Root/Bison/OnTap>,
+            ]
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnAddedToScene"
+        {
+            rel actions = </Root/Bison/OnAddedToScene/Action>
+            uniform bool exclusive
+            rel triggers = </Root/Bison/OnAddedToScene/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/Bison>
+                token info:id = "SceneTransition"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/BisonIdle>
+                rel animationLibraryKeyOverrideKey = </Root/Bison/OnAddedToScene/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            token info:id = "RealityKit.AnimationLibrary"
+
+            def RealityKitAnimationFile "default_subtree_animation"
+            {
+                uniform bool looping = 1
+                uniform string name = "default subtree animation"
+            }
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/Bison/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/Bison/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/Bison>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/BisonWalk>
+                rel animationLibraryKeyOverrideKey = </Root/Bison/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+    }
+
+    def RealityKitTimeline "BisonIdle"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "Bison_eat02"
+                int blendLayer = 500
+                double duration = 5
+                uniform token info:id = "F5445744-646D-4751-AA79-D74A860A55C1"
+                double loopCount = 0
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/Bison/BisonParent/Bison_Model>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "BisonWalk"
+    {
+        reorder nameChildren = ["Track", "Track2", "Track3", "Track4"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "Bison_walk03"
+                int blendLayer = 500
+                double duration = 2
+                uniform token info:id = "89ECAE7B-8B72-4134-9C63-3303DBE117BF"
+                double loopCount = 1
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/Bison/BisonParent/Bison_Model>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track3"
+        {
+            def RealityKitAction "Transform_To"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 0.0001
+                uniform token info:id = "B1F0E635-9B88-46CD-8E12-602735FF7510"
+                float3 position = (0, 0, 0.5)
+                quatf rotation = (0.70710677, 0.70710677, 0, 0)
+                float3 scale = (0.009999999, 0.009999999, 0.009999999)
+                double startTime = 1.9832181373429314
+                rel target = </Root/Bison/BisonParent>
+
+                def RealityKitStruct "transformMode"
+                {
+                    rel referenceEntity = </Root>
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track4"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "default subtree animation"
+                int blendLayer = 500
+                double duration = 11.366666793823242
+                uniform token info:id = "E2E77FA7-A8C9-40C1-9A5C-AEF8E534A8D9"
+                bool separateAnimatedValue = 1
+                double startTime = 2.0171534270047142
+                rel target = </Root/Bison/BisonParent/Bison_Model>
+
+                def RealityKitStruct "handoffType"
+                {
                 }
             }
         }

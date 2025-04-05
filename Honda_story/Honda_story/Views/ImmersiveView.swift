@@ -11,18 +11,19 @@ import RealityKitContent
 import Combine
 import FirebaseDatabase
 
-var ref: DatabaseReference!
-
 struct ImmersiveView: View {
     @State private var environmentEntity: Entity?
     @State private var timerCancellable: Cancellable?
     @State private var bisonFoodsEntity: Entity?
     @State private var bluegrassEntity: Entity?
     @State private var EruptionEntity: Entity?
+    @State private var BisonEntity: Entity?
     
     @State private var GeyserErupt: Bool = false
+    @State private var BisonAttracted: Bool = false
     
     @State private var Timeline_GeyserEntity: Entity?
+    
     
     @StateObject private var dbModel: DBModel
     
@@ -40,7 +41,7 @@ struct ImmersiveView: View {
                 
                 content.add(immersiveContentEntity)
 
-              
+                
                 if let environment = immersiveContentEntity.findEntity(named: "Environment") {
                     environmentEntity = environment
                     
@@ -62,6 +63,12 @@ struct ImmersiveView: View {
                     eruption.isEnabled = false
                     EruptionEntity = eruption
                 }
+                
+                if let bison = immersiveContentEntity.findEntity(named: "Bison") {
+                    BisonEntity = bison
+                    
+                }
+                print(BisonEntity ?? "Nobison")
                 
                 if let bluegrass = immersiveContentEntity.findEntity(named: "bluegrass") {
                     bluegrassEntity = bluegrass
@@ -106,6 +113,12 @@ struct ImmersiveView: View {
                 .onChanged { value in
                     if value.entity.name == "bluegrass" {
                         // Update position to match drag location in 3D
+                        
+                        if(!BisonAttracted){
+                            _ = BisonEntity?.applyTapForBehaviors()
+                            BisonAttracted = true
+                        }
+                        
                         bluegrassEntity?.position = value.convert(value.location3D, from: .local, to: .scene)
                     }
                 }

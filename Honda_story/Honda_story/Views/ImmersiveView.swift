@@ -12,6 +12,9 @@ import Combine
 import FirebaseDatabase
 
 struct ImmersiveView: View {
+    
+    @State private var session: SpatialTrackingSession?
+    
     @State private var environmentEntity: Entity?
     @State private var timerCancellable: Cancellable?
     @State private var bisonFoodsEntity: Entity?
@@ -40,6 +43,24 @@ struct ImmersiveView: View {
                 
                 
                 content.add(immersiveContentEntity)
+                
+                
+                let session = SpatialTrackingSession()
+                let configuration = SpatialTrackingSession.Configuration(tracking: [.hand])
+                _ = await session.run(configuration)
+                self.session = session
+               //Setup an anchor at the user's left palm.
+                let handAnchor = AnchorEntity(.hand(.left, location: .palm), trackingMode: .continuous)
+                
+                if let sphere = immersiveContentEntity.findEntity(named: "Sphere"){
+                               
+                    //Child the gauntlet scene to the handAnchor.
+                    handAnchor.addChild(sphere)
+                    
+                    // Add the handAnchor to the RealityView scene.
+                    content.add(handAnchor)
+                   
+                }
 
                 
                 if let environment = immersiveContentEntity.findEntity(named: "Environment") {

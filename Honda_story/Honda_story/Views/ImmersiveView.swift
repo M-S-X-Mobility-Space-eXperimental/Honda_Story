@@ -40,7 +40,6 @@ struct ImmersiveView: View {
     
     @StateObject private var dbModel: DBModel
     
-    
     init() {
           // Initialize the DBModel with playerID from AppStorage
           _dbModel = StateObject(wrappedValue: DBModel())

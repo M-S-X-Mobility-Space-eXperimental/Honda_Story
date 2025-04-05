@@ -26,7 +26,7 @@ struct Honda_storyApp: App {
     @State private var appModel = AppModel()
 
     var body: some Scene {
-        WindowGroup {
+        WindowGroup (id: appModel.contentWindowID) {
             ContentView()
                 .environment(appModel)
         }

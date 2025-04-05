@@ -2,12 +2,19 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 
+
+
 struct ContentView: View {
+    
+    @Environment(AppModel.self) private var appModel
+    @Environment(\.dismissWindow) private var dismissWindow
+    @Environment(\.openWindow) private var openWindow
+    
     @State private var showTitle = true
     @State private var immersiveEntered = false
     @StateObject private var dbModel = DBModel()
 
-    @Environment(\.dismissWindow) private var dismissWindow
+//    @Environment(\.dismissWindow) private var dismissWindow
 
     var body: some View {
         ZStack {
@@ -28,7 +35,7 @@ struct ContentView: View {
             }
 
             if showTitle {
-                Text("Honda in 2040")
+                Text("Welcome to YellowStone National Park")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
@@ -40,6 +47,22 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .transition(.opacity)
             }
+            
+            Text("Waiting for all players to be ready")
+            .font(.title3)
+            .foregroundStyle(.white)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background(
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(Color.black.opacity(0.6))
+            )
+        }
+        .onChange(of: showTitle) {
+            if !showTitle {
+                dismissWindow(id: "ContentWindow")
+            }
         }
     }
+    
 }

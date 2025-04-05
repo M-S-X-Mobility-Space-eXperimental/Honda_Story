@@ -1,0 +1,152 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.60.4)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["_1", "_2", "_3", "Timeline"]
+    def "_1" (
+        active = true
+        references = @../ArtAssets/CountDown/1.usdc@
+    )
+    {
+        reorder nameChildren = ["Text_001", "_materials", "env_light", "_2", "HierarchicalFade"]
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
+        }
+    }
+
+    def "_3" (
+        active = true
+        references = @../ArtAssets/CountDown/3.usdc@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
+        }
+    }
+
+    def RealityKitTimeline "Timeline"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Show"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 0.5
+                uniform token info:id = "C62B44BE-2562-4887-811F-2020DEEC25FD"
+                double startTime = 0.42311436665190016
+                rel target = </Root/_3>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Hide"
+            {
+                string actionKind = "hide"
+                int blendLayer = 300
+                double duration = 0.5
+                uniform token info:id = "9C9947C8-4785-498E-8D7E-7BA2B5717A52"
+                double startTime = 0.9231143666519002
+                rel target = </Root/_3>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Show2"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 0.5
+                uniform token info:id = "38551530-E7D6-460D-AA84-490FE32628F9"
+                double startTime = 1.4231143666519002
+                rel target = </Root/_2>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Hide2"
+            {
+                string actionKind = "hide"
+                int blendLayer = 300
+                double duration = 0.5
+                uniform token info:id = "18087D08-5D96-45C6-B5DF-67D32216ECD0"
+                double startTime = 1.9231143666519002
+                rel target = </Root/_2>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Show3"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 0.5
+                uniform token info:id = "03FF6E75-6902-42B0-B48F-98509A5BC888"
+                double startTime = 2.4231143666519004
+                rel target = </Root/_1>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Hide3"
+            {
+                string actionKind = "hide"
+                int blendLayer = 300
+                double duration = 0.5
+                uniform token info:id = "33BE1641-1F9E-4404-B281-B79A08C093C0"
+                double startTime = 2.9231143666519004
+                rel target = </Root/_1>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+    }
+
+    def "_2" (
+        active = true
+        references = @../ArtAssets/CountDown/2.usdc@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
+        }
+    }
+}
+

@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "Audios", "GeyserSandbox", "GeyserErupt", "Car", "Environment", "Init", "BisonFoods", "SKYBOX", "GeyserBisonTrans", "Geyser_End_mp3", "Bison", "BisonParent", "BisonIdle", "BisonWalk"]
+    reorder nameChildren = ["CountDownAnim", "Eruption", "Audios", "GeyserSandbox", "Car", "Environment", "BisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "Init", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "CountDownGroup"]
     float3 xformOp:translate = (0, 0, 0)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -51,7 +51,10 @@ def Xform "Root"
 
         def RealityKitComponent "RCP_BehaviorsContainer"
         {
-            rel behaviors = </Root/GeyserSandbox/OnTap>
+            rel behaviors = [
+                </Root/GeyserSandbox/OnTap>,
+                </Root/GeyserSandbox/OnAddedToScene>,
+            ]
             uniform token info:id = "RCP.BehaviorsContainer"
         }
 
@@ -140,6 +143,30 @@ def Xform "Root"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
         }
+
+        def Preliminary_Behavior "OnAddedToScene"
+        {
+            rel actions = </Root/GeyserSandbox/OnAddedToScene/Action>
+            uniform bool exclusive
+            rel triggers = </Root/GeyserSandbox/OnAddedToScene/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/GeyserSandbox>
+                token info:id = "SceneTransition"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Init>
+                rel animationLibraryKeyOverrideKey = </Root/GeyserSandbox/OnAddedToScene/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
     }
 
     def RealityKitTimeline "GeyserErupt"
@@ -192,6 +219,20 @@ def Xform "Root"
     {
         def RealityKitTrack "Track"
         {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "Geyser Intro.mp3"
+                bool controlPlayback = 1
+                double duration = 40.48979166666667
+                uniform token info:id = "0B9F85F0-52E9-4F6E-853F-4C1A077131A2"
+                double startTime = 0
+                rel target = </Root/Audios/AudioEmitter>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
         }
     }
 
@@ -504,7 +545,7 @@ def Xform "Root"
         active = true
     )
     {
-        reorder nameChildren = ["Geyser_End_mp3", "msx_geyser_sfx_v1_wav", "AudioEmitter", "Bison_Intro_mp3", "Bison_Eating_wav", "Geyser_End_mp3_1"]
+        reorder nameChildren = ["AudioEmitter", "msx_geyser_sfx_v1_wav", "Geyser_Intro_mp3", "Bison_Intro_mp3", "Bison_Eating_wav", "Geyser_End_mp3_1"]
         def RealityKitAudioFile "msx_geyser_sfx_v1_wav"
         {
             uniform asset file = @Sounds/msx geyser sfx v1.wav@
@@ -526,11 +567,12 @@ def Xform "Root"
 
                 def RealityKitDict "resources"
                 {
-                    string[] keys = ["Bison Intro.mp3", "Bison Eating.wav", "Geyser End.mp3"]
+                    string[] keys = ["Bison Intro.mp3", "Bison Eating.wav", "Geyser End.mp3", "Geyser Intro.mp3"]
                     rel values = [
                         </Root/Audios/Bison_Intro_mp3>,
                         </Root/Audios/Bison_Eating_wav>,
                         </Root/Audios/Geyser_End_mp3_1>,
+                        </Root/Audios/Geyser_Intro_mp3>,
                     ]
                 }
             }
@@ -551,6 +593,12 @@ def Xform "Root"
         def RealityKitAudioFile "Geyser_End_mp3_1"
         {
             uniform asset file = @Sounds/Geyser End.mp3@
+            uniform bool shouldLoop = 0
+        }
+
+        def RealityKitAudioFile "Geyser_Intro_mp3"
+        {
+            uniform asset file = @Sounds/Geyser Intro.mp3@
             uniform bool shouldLoop = 0
         }
     }
@@ -943,6 +991,156 @@ def Xform "Root"
                 color3f inputs:diffuseColor = (1, 1, 1)
                 float inputs:roughness = 0.75
                 token outputs:surface
+            }
+        }
+    }
+
+    def RealityKitTimeline "StartCountDown"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "/Root/CountDownGroup/CountDown1/Timeline"
+                int blendLayer = 500
+                double duration = 3.4231143666519004
+                uniform token info:id = "0DE53692-E953-4AD7-9CBA-A62CFFA91D78"
+                double loopCount = 0
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/CountDownGroup/CountDown1>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "/Root/CountDownGroup/CountDown2/Timeline"
+                int blendLayer = 500
+                double duration = 3.4231143666519004
+                uniform token info:id = "D3039627-369D-4969-9A50-AD292F4B3DD5"
+                double loopCount = 0
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/CountDownGroup/CountDown2>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+    }
+
+    def Xform "CountDownGroup" (
+        active = true
+    )
+    {
+        reorder nameChildren = ["CountDown1", "CountDown2"]
+        def "CountDown1" (
+            active = true
+            customData = {
+                float3 rotationEulerHint = (0, 1.5707963, 0)
+            }
+            references = @ArtAssets/CountDownAnim.usdz@
+        )
+        {
+            quatf xformOp:orient = (0.70710677, 0, 0.7071067, 0)
+            float3 xformOp:scale = (0.2, 0.2, 0.2)
+            float3 xformOp:translate = (-0.35182407, 0.75177, -0.15483606)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "AnimationLibrary"
+            {
+                token info:id = "RealityKit.AnimationLibrary"
+
+                def RealityKitAnimationFile "_Root_CountDownGroup_CountDown1_Timeline"
+                {
+                    uniform bool looping = 1
+                    uniform string name = "/Root/CountDownGroup/CountDown1/Timeline"
+                }
+
+                def RealityKitAnimationFile "_Root_CountDownAnim_Timeline"
+                {
+                    uniform bool looping = 1
+                    uniform string name = "/Root/CountDownAnim/Timeline"
+                }
+            }
+        }
+
+        def "CountDown2" (
+            active = true
+            customData = {
+                float3 rotationEulerHint = (0, 4.712389, 0)
+            }
+            references = @ArtAssets/CountDownAnim.usdz@
+        )
+        {
+            float2 ui:nodegraph:node:pos = (20, 20)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (0.70710677, 0, -0.7071067, 0)
+            float3 xformOp:scale = (0.2, 0.2, 0.2)
+            float3 xformOp:translate = (-0.65182, 0.75177, -0.15483606)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "AnimationLibrary"
+            {
+                token info:id = "RealityKit.AnimationLibrary"
+
+                def RealityKitAnimationFile "_Root_CountDownAnim_Timeline"
+                {
+                    uniform bool looping = 1
+                    uniform string name = "/Root/CountDownAnim/Timeline"
+                }
+
+                def RealityKitAnimationFile "_Root_CountDownGroup_CountDown1_Timeline"
+                {
+                    uniform bool looping = 1
+                    uniform string name = "/Root/CountDownGroup/CountDown1/Timeline"
+                }
+
+                def RealityKitAnimationFile "_Root_CountDownGroup_CountDown2_Timeline"
+                {
+                    uniform bool looping = 1
+                    uniform string name = "/Root/CountDownGroup/CountDown2/Timeline"
+                }
+            }
+        }
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/CountDownGroup/OnAddedToScene>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnAddedToScene"
+        {
+            rel actions = </Root/CountDownGroup/OnAddedToScene/Action>
+            uniform bool exclusive
+            rel triggers = </Root/CountDownGroup/OnAddedToScene/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/CountDownGroup>
+                token info:id = "SceneTransition"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/StartCountDown>
+                rel animationLibraryKeyOverrideKey = </Root/CountDownGroup/OnAddedToScene/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
             }
         }
     }

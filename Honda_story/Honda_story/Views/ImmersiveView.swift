@@ -21,6 +21,7 @@ struct ImmersiveView: View {
     @State private var bluegrassEntity: Entity?
     @State private var EruptionEntity: Entity?
     @State private var BisonEntity: Entity?
+    @State private var CountDownEntity: Entity?
     
     @State private var GeyserErupt: Bool = false
     @State private var BisonAttracted: Bool = false
@@ -93,6 +94,11 @@ struct ImmersiveView: View {
                 
                 if let bluegrass = immersiveContentEntity.findEntity(named: "bluegrass") {
                     bluegrassEntity = bluegrass
+                }
+                
+                if let countdown = immersiveContentEntity.findEntity(named: "CountDownGroup") {
+//                    countdown.isEnabled = false
+                    CountDownEntity = countdown
                 }
 
             }

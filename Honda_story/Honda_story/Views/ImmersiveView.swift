@@ -153,14 +153,20 @@ struct ImmersiveView: View {
             Timer.publish(every: 0.1, on: .main, in: .common)
                 .autoconnect()
                 .sink { _ in
-                    guard let cube = TestCubeEntity else { return }
-
-                    let currentPosition = cube.position
-
-                    if currentPosition != lastCubePosition {
-                        print("Cube moved to \(currentPosition)")
-                        lastCubePosition = currentPosition
+                    
+                    let state = EntityGestureState.shared
+                    
+                    if(state.isDragging){
+                        print(state.targetedEntity?.name ?? "No object name dragging")
                     }
+                    
+                    
+//                    let currentPosition = cube.position
+//
+//                    if currentPosition != lastCubePosition {
+//                        print("Cube moved to \(currentPosition)")
+//                        lastCubePosition = currentPosition
+//                    }
                 }
                 .store(in: &cancellables)
         }

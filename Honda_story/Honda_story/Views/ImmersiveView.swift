@@ -108,12 +108,9 @@ struct ImmersiveView: View {
                 GeyserSandboxEntity?.isEnabled = true
                 print(GeyserSoundTLEntity ?? "GeyserSoundTLEntity is nil")
                 
-                // This is for triggering timeline for audio
                 _ = GeyserSoundTLEntity?.applyTapForBehaviors()
                 
-                // Set the input target component of GeyserSandbox to false to avoid interacting
-                //GeyserSandboxEntity?.components[InputTargetComponent.self]?.isEnabled = false
-                
+                startMoving()
            }
         }
         
@@ -127,6 +124,7 @@ struct ImmersiveView: View {
                 CountDownEntity?.isEnabled = false
                 
                 _ = GeyserSandboxEntity?.applyTapForBehaviors()
+                _ = bisonFoodsEntity?.applyTapForBehaviors()
                 
            }
         }

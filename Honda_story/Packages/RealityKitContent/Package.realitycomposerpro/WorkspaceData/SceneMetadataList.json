@@ -126,16 +126,6 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "IntroGeyser",
-        "Track3"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
         "BisonIdle",
         "Track"
       ],
@@ -188,6 +178,16 @@
         "Root",
         "Bisons",
         "BisonParent"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserErupt",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -464,16 +464,6 @@
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
         "IntroGeyser"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "GeyserSandbox",
-        "GeyserGroup"
       ],
       {
         "isExpanded" : true,

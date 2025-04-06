@@ -10,6 +10,8 @@ import Firebase
 import FirebaseDatabase
 
 class DBModel: ObservableObject {
+    static let shared = DBModel()
+    
     private var ref: DatabaseReference = Database.database().reference()
     private var userId: String
 
@@ -19,12 +21,14 @@ class DBModel: ObservableObject {
     // Player State Variables
     @Published var AllReady: Bool = false
     @Published var AllTapped: Bool = false
-    	
     
-    init() {
+    // DB Handle
+    private var allTappedHandle: DatabaseHandle?
+
+    private init() { // Make the initializer private to enforce singleton
         self.userId = UIDevice.current.identifierForVendor?.uuidString ?? "unknown"
         print(self.userId)
-       
+        
         initializeCurrentPlayer()
         
         // This is for game state changes
@@ -36,8 +40,8 @@ class DBModel: ObservableObject {
             "tapped": true,
         ])
         
-        self.resetTapAfterDelay()
         self.ObserveAllTapped()
+        self.resetTapAfterDelay()
     }
 
     
@@ -64,7 +68,7 @@ class DBModel: ObservableObject {
     
     
     func ObserveAllTapped(){
-        ref.child("players").observe(.value, with: { [weak self] snapshot in
+        allTappedHandle = ref.child("players").observe(.value, with: { [weak self] snapshot in
             guard let self = self else { return }
 
             let players = self.parsePlayers(snapshot: snapshot)
@@ -76,6 +80,11 @@ class DBModel: ObservableObject {
                     if(self.AllTapped){
                         self.Geyser = true
                         self.ref.child("Geyser").setValue(true)
+                        
+                        if let handle = self.allTappedHandle {
+                            self.ref.child("players").removeObserver(withHandle: handle)
+                            self.allTappedHandle = nil // clean up
+                        }
                     }
                 }
                 print("All players tapped: \(allTapped)")

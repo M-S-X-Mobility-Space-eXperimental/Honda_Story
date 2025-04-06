@@ -12,7 +12,8 @@ struct ContentView: View {
     
     @State private var showTitle = true
     @State private var immersiveEntered = false
-    @StateObject private var dbModel = DBModel()
+    @StateObject var dbModel = DBModel.shared
+
 
 //    @Environment(\.dismissWindow) private var dismissWindow
 

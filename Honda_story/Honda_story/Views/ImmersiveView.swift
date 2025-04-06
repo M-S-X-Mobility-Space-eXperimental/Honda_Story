@@ -42,12 +42,7 @@ struct ImmersiveView: View {
     @State private var cancellables = Set<AnyCancellable>()
 
     
-    @StateObject private var dbModel: DBModel
-    
-    init() {
-          // Initialize the DBModel with playerID from AppStorage
-          _dbModel = StateObject(wrappedValue: DBModel())
-      }
+    @StateObject var dbModel = DBModel.shared
 
     var body: some View {
         RealityView { content in
@@ -160,13 +155,6 @@ struct ImmersiveView: View {
                         print(state.targetedEntity?.name ?? "No object name dragging")
                     }
                     
-                    
-//                    let currentPosition = cube.position
-//
-//                    if currentPosition != lastCubePosition {
-//                        print("Cube moved to \(currentPosition)")
-//                        lastCubePosition = currentPosition
-//                    }
                 }
                 .store(in: &cancellables)
         }

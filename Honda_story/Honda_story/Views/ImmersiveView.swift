@@ -112,6 +112,9 @@ struct ImmersiveView: View {
                 
                 startMoving()
            }
+            
+            //reset ready for next round
+            dbModel.playerResetReady()
         }
         
         .onChange(of: dbModel.Geyser) {
@@ -155,58 +158,6 @@ struct ImmersiveView: View {
                  }
                  
          })
-        .gesture(
-            DragGesture()
-                .targetedToAnyEntity()
-                .onChanged { value in
-                    print(value.entity.name, "is being dragged")
-                    if value.entity.parent?.name == "BisonFoods"{
-//                    if value.entity.name == "bluegrass" {
-                        // Update position to match drag location in 3D
-                        
-                        if(!BisonAttracted){
-                            _ = BisonEntity?.applyTapForBehaviors()
-                            BisonAttracted = true
-                        }
-                        
-                        let entityWorldPos = value.entity.convert(position: .zero, to: nil)
-                        let leftHandWorldPos = self.LeftHandAnchor?.convert(position: .zero, to: nil) ?? SIMD3<Float>(10000,10000,10000)
-                        let rightHandWorldPos = self.RightHandAnchor?.convert(position: .zero, to: nil) ?? SIMD3<Float>(10000,10000,10000)
-                        
-                        let leftDist = distance(leftHandWorldPos, entityWorldPos)
-                        let rightDist = distance(rightHandWorldPos, entityWorldPos)
-                        
-                        print("left Dist:",leftDist)
-                        print("right dist:",rightDist)
-                        
-                        if(leftDist < rightDist){
-                            print("Assign Left")
-                            CurrentHandAnchor = self.LeftHandAnchor
-                            
-                        }else{
-                            print("Assign Right")
-                            CurrentHandAnchor = self.RightHandAnchor
-                        }
-                        
-                        value.entity.position = SIMD3<Float>(0,0,0)
-                        self.CurrentHandAnchor?.addChild(value.entity)
-                        SceneRootContent?.add(CurrentHandAnchor!)
-                        
-                    }
-                }
-                .onEnded { value in
-                       let draggedEntity = value.entity
-                       let worldPosition = draggedEntity.position(relativeTo: bisonFoodsEntity)
-
-                       draggedEntity.removeFromParent()
-
-                       draggedEntity.position = worldPosition
-
-                       bisonFoodsEntity?.addChild(draggedEntity)
-                }
-        )
-        
-        
         .onDisappear {
                 
             timerCancellable?.cancel()

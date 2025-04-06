@@ -1,7 +1,7 @@
 import RealityKit
 import SwiftUI
 
-public final class EntityGestureState {
+public final class EntityGestureState{
     
     // MARK: - Shared Instance
     

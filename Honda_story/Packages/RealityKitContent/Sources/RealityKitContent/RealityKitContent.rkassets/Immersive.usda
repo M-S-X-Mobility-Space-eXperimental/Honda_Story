@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "Car", "Environment", "BisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "CountDownGroup", "Audios", "Intro_YellowStone"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "Car", "Environment", "BisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "banana", "StartCountDown", "CountDownGroup", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder"]
     float3 xformOp:translate = (0, 0, 0)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -101,7 +101,7 @@ def Xform "Root"
     {
         quatf xformOp:orient = (0.76604444, 0, 0.64278764, 0)
         float3 xformOp:scale = (10, 10, 10)
-        float3 xformOp:translate = (66.38554, -25.677338, -162.43826)
+        float3 xformOp:translate = (66.38554, 6.8636513, -162.43826)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
@@ -162,7 +162,7 @@ def Xform "Root"
         active = true
     )
     {
-        reorder nameChildren = ["bluegrass", "RCP_BehaviorsContainer", "OnAddedToScene", "AudioLibrary", "HierarchicalFade", "_apple", "wildflower", "PBR___Metallic_Roughness_Alpha_blend", "_bison_basket"]
+        reorder nameChildren = ["bluegrass", "RCP_BehaviorsContainer", "OnTap", "AudioLibrary", "HierarchicalFade", "_apple", "wildflower", "PBR___Metallic_Roughness_Alpha_blend", "_bison_basket", "banana"]
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0.54307926, 0, 0)
@@ -207,6 +207,13 @@ def Xform "Root"
             {
                 uniform token info:id = "RealityKit.InputTarget"
             }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
+            }
         }
 
         def "wildflower" (
@@ -247,6 +254,14 @@ def Xform "Root"
             def RealityKitComponent "InputTarget"
             {
                 uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                bool canScale = 1
+                uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
             }
         }
 
@@ -289,6 +304,13 @@ def Xform "Root"
             {
                 uniform token info:id = "RealityKit.InputTarget"
             }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
+            }
         }
 
         def "bluegrass" (
@@ -330,6 +352,13 @@ def Xform "Root"
             {
                 uniform token info:id = "RealityKit.HierarchicalFade"
             }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
+            }
         }
 
         def RealityKitComponent "AudioLibrary"
@@ -361,11 +390,6 @@ def Xform "Root"
             float3 xformOp:scale = (0.003, 0.003, 0.003)
             float3 xformOp:translate = (-0.48961073, 0.77127147, -0.16279852)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-        }
-
-        def RealityKitComponent "InputTarget"
-        {
-            uniform token info:id = "RealityKit.InputTarget"
         }
 
         def RealityKitComponent "RCP_BehaviorsContainer"
@@ -685,17 +709,17 @@ def Xform "Root"
     )
     {
         reorder nameChildren = ["BisonParent", "Bison_eat01"]
-        float3 xformOp:translate = (6.1610823, 4.7683716e-7, 0.8792894)
+        float3 xformOp:translate = (3.9551637, 4.7683716e-7, -1.1813891)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Xform "BisonParent" (
             active = true
             customData = {
-                float3 rotationEulerHint = (1.5707964, 0, 0)
+                float3 rotationEulerHint = (-1.570796, 4.712389, 0)
             }
         )
         {
-            quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
+            quatf xformOp:orient = (0.50000006, 0.4999999, -0.50000006, 0.4999999)
             float3 xformOp:scale = (0.01, 0.01, 0.01)
             float3 xformOp:translate = (0, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
@@ -749,7 +773,7 @@ def Xform "Root"
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 0
+            float opacity = 1
         }
 
         def RealityKitComponent "RCP_BehaviorsContainer"
@@ -875,8 +899,8 @@ def Xform "Root"
                 int blendLayer = 300
                 double duration = 0.0001
                 uniform token info:id = "B1F0E635-9B88-46CD-8E12-602735FF7510"
-                float3 position = (0, 0, 0.5)
-                quatf rotation = (0.70710677, 0.70710677, 0, 0)
+                float3 position = (-1.5, 0, 0)
+                quatf rotation = (0.5, 0.5, -0.5, 0.5)
                 float3 scale = (0.009999999, 0.009999999, 0.009999999)
                 double startTime = 1.9832181373429314
                 rel target = </Root/Bison/BisonParent>
@@ -1277,7 +1301,7 @@ def Xform "Root"
         active = true
     )
     {
-        reorder nameChildren = ["AudioEmitter", "msx_geyser_sfx_v1_wav", "Geyser_Intro_mp3", "Bison_Intro_mp3", "Bison_Eating_wav", "Geyser_End_mp3_1", "Yellowstone_Intro_mp3"]
+        reorder nameChildren = ["banana", "AudioEmitter", "msx_geyser_sfx_v1_wav", "Geyser_Intro_mp3", "Bison_Intro_mp3", "Bison_Eating_wav", "Geyser_End_mp3_1", "Yellowstone_Intro_mp3"]
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0, 0, 0)
@@ -1352,6 +1376,7 @@ def Xform "Root"
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
+        reorder nameChildren = ["DefaultMaterial", "RealityKitContent_GestureComponent", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnCollision", "banana"]
         rel material:binding = </Root/Cube/DefaultMaterial>
         double size = 0.2
         quatf xformOp:orient = (1, 0, 0, 0)
@@ -1376,58 +1401,31 @@ def Xform "Root"
         {
             uniform token info:id = "RealityKitContent.GestureComponent"
         }
+    }
 
-        def RealityKitComponent "Collider"
+    def Xform "Transform" (
+        active = true
+    )
+    {
+    }
+
+    def RealityKitTimeline "Intro_YellowStone"
+    {
+        def RealityKitTrack "Track"
         {
-            uint group = 1
-            uniform token info:id = "RealityKit.Collider"
-            uint mask = 4294967295
-            token type = "Default"
-
-            def RealityKitStruct "Shape"
+            def RealityKitAction "Play_Audio"
             {
-                float3 extent = (0.2, 0.2, 0.2)
-                token shapeType = "Box"
+                string actionKind = "audio"
+                string audioResourceName = "Yellowstone Intro.mp3"
+                bool controlPlayback = 1
+                double duration = 34.08979166666666
+                uniform token info:id = "FB0B82A9-6CFF-4A06-A273-2C78A3907184"
+                double startTime = 0
+                rel target = </Root/Audios/AudioEmitter>
 
-                def RealityKitStruct "pose"
+                def RealityKitStruct "handoffType"
                 {
                 }
-            }
-        }
-
-        def RealityKitComponent "InputTarget"
-        {
-            uniform token info:id = "RealityKit.InputTarget"
-        }
-
-        def RealityKitComponent "RCP_BehaviorsContainer"
-        {
-            rel behaviors = </Root/Cube/OnCollision>
-            uniform token info:id = "RCP.BehaviorsContainer"
-        }
-
-        def Preliminary_Behavior "OnCollision"
-        {
-            rel actions = </Root/Cube/OnCollision/Action>
-            uniform bool exclusive
-            rel triggers = </Root/Cube/OnCollision/Trigger>
-
-            def Preliminary_Trigger "Trigger"
-            {
-                rel affectedObjects = </Root/Cube>
-                rel colliders = </Root/Cylinder>
-                token info:id = "Collide"
-            }
-
-            def Preliminary_Action "Action"
-            {
-                rel affectedObjects = </Root>
-                rel animationLibraryKey = </Root/GeyserErupt>
-                rel animationLibraryKeyOverrideKey = </Root/Cube/OnCollision/Trigger>
-                token info:id = "PlayTimeline"
-                int loops = 0
-                int performCount = 1
-                token type = "serial"
             }
         }
     }
@@ -1489,33 +1487,6 @@ def Xform "Root"
 
             def RealityKitStruct "material"
             {
-            }
-        }
-    }
-
-    def Xform "Transform" (
-        active = true
-    )
-    {
-    }
-
-    def RealityKitTimeline "Intro_YellowStone"
-    {
-        def RealityKitTrack "Track"
-        {
-            def RealityKitAction "Play_Audio"
-            {
-                string actionKind = "audio"
-                string audioResourceName = "Yellowstone Intro.mp3"
-                bool controlPlayback = 1
-                double duration = 34.08979166666666
-                uniform token info:id = "FB0B82A9-6CFF-4A06-A273-2C78A3907184"
-                double startTime = 0
-                rel target = </Root/Audios/AudioEmitter>
-
-                def RealityKitStruct "handoffType"
-                {
-                }
             }
         }
     }

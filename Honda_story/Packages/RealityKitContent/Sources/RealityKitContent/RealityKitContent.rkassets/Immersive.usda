@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "Car", "Environment", "BisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "Init", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "CountDownGroup", "Audios"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "Car", "Environment", "BisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "CountDownGroup", "Audios", "Intro_YellowStone"]
     float3 xformOp:translate = (0, 0, 0)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -48,6 +48,36 @@ def Xform "Root"
         float3 xformOp:scale = (0.01, 0.01, 0.01)
         float3 xformOp:translate = (0.03371191, 0.0669359, -2.7222652)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/Car/OnAddedToScene>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnAddedToScene"
+        {
+            rel actions = </Root/Car/OnAddedToScene/Action>
+            uniform bool exclusive
+            rel triggers = </Root/Car/OnAddedToScene/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/Car>
+                token info:id = "SceneTransition"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Intro_YellowStone>
+                rel animationLibraryKeyOverrideKey = </Root/Car/OnAddedToScene/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
     }
 
     def "Environment" (
@@ -63,8 +93,9 @@ def Xform "Root"
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
-    def RealityKitTimeline "Init"
+    def RealityKitTimeline "IntroGeyser"
     {
+        reorder nameChildren = ["Track", "Track2", "Track3"]
         def RealityKitTrack "Track"
         {
             def RealityKitAction "Play_Audio"
@@ -72,13 +103,64 @@ def Xform "Root"
                 string actionKind = "audio"
                 string audioResourceName = "Geyser Intro.mp3"
                 bool controlPlayback = 1
-                double duration = 40.48979166666667
+                double duration = 41.33448572844313
                 uniform token info:id = "0B9F85F0-52E9-4F6E-853F-4C1A077131A2"
                 double startTime = 0
                 rel target = </Root/Audios/AudioEmitter>
 
                 def RealityKitStruct "handoffType"
                 {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Show"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 1
+                uniform token info:id = "3E9DA4AD-9A31-4235-A037-18B988504E6B"
+                double startTime = 0
+                rel target = </Root/GeyserSandbox>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Show2"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 1
+                uniform token info:id = "1D606F8F-E672-4771-A0EB-6A74F549D071"
+                double startTime = 40.350206585405715
+                rel target = </Root/CountDownGroup>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track3"
+        {
+            def RealityKitAction "Replace_Behaviors"
+            {
+                string actionKind = "replaceBehaviors"
+                double duration = 0
+                uniform token info:id = "2F2FC5F0-16DE-40AC-903C-D11C7C8FC89F"
+                double startTime = 40.35718783345949
+                rel target = </Root/GeyserSandbox>
+
+                def RealityKitTrigger "Replacement" (
+                    active = true
+                )
+                {
+                    rel animationLibraryKeyOverrideKey = </Root/GeyserSandbox/OnTap/Trigger>
+                    rel selectedTimeline = </Root/GeyserErupt>
                 }
             }
         }
@@ -255,36 +337,6 @@ def Xform "Root"
             def RealityKitComponent "HierarchicalFade"
             {
                 uniform token info:id = "RealityKit.HierarchicalFade"
-            }
-        }
-
-        def RealityKitComponent "RCP_BehaviorsContainer"
-        {
-            rel behaviors = </Root/BisonFoods/OnAddedToScene>
-            uniform token info:id = "RCP.BehaviorsContainer"
-        }
-
-        def Preliminary_Behavior "OnAddedToScene"
-        {
-            rel actions = </Root/BisonFoods/OnAddedToScene/Action>
-            uniform bool exclusive
-            rel triggers = </Root/BisonFoods/OnAddedToScene/Trigger>
-
-            def Preliminary_Trigger "Trigger"
-            {
-                rel affectedObjects = </Root/BisonFoods>
-                token info:id = "SceneTransition"
-            }
-
-            def Preliminary_Action "Action"
-            {
-                rel affectedObjects = </Root>
-                rel animationLibraryKey = </Root/GeyserBisonTrans>
-                rel animationLibraryKeyOverrideKey = </Root/BisonFoods/OnAddedToScene/Trigger>
-                token info:id = "PlayTimeline"
-                int loops = 0
-                int performCount = 1
-                token type = "serial"
             }
         }
 
@@ -1012,14 +1064,19 @@ def Xform "Root"
                 token type = "serial"
             }
         }
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
+        }
     }
 
     def "GeyserSandbox" (
-        active = true
         references = @Sandbox.usda@
     )
     {
-        reorder nameChildren = ["Eruption", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary"]
+        reorder nameChildren = ["GeyserSoundTL", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary", "HierarchicalFade"]
         float3 xformOp:scale = (0.12, 0.12, 0.12)
         float3 xformOp:translate = (0.010402441, 0.6091858, -0.14215899)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
@@ -1052,10 +1109,7 @@ def Xform "Root"
 
         def RealityKitComponent "RCP_BehaviorsContainer"
         {
-            rel behaviors = [
-                </Root/GeyserSandbox/OnTap>,
-                </Root/GeyserSandbox/OnAddedToScene>,
-            ]
+            rel behaviors = </Root/GeyserSandbox/OnTap>
             uniform token info:id = "RCP.BehaviorsContainer"
         }
 
@@ -1073,8 +1127,8 @@ def Xform "Root"
 
             def Preliminary_Action "Action"
             {
-                rel affectedObjects = </Root>
-                rel animationLibraryKey = </Root/GeyserErupt>
+                rel affectedObjects = None
+                rel animationLibraryKey = None
                 rel animationLibraryKeyOverrideKey = </Root/GeyserSandbox/OnTap/Trigger>
                 token info:id = "PlayTimeline"
                 int loops = 0
@@ -1143,29 +1197,51 @@ def Xform "Root"
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
         }
 
-        def Preliminary_Behavior "OnAddedToScene"
+        def Xform "GeyserSoundTL" (
+            active = true
+        )
         {
-            rel actions = </Root/GeyserSandbox/OnAddedToScene/Action>
-            uniform bool exclusive
-            rel triggers = </Root/GeyserSandbox/OnAddedToScene/Trigger>
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (8.333335, 8.333335, 8.333335)
+            float3 xformOp:translate = (-0.08668702, -5.076549, 1.1846584)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-            def Preliminary_Trigger "Trigger"
+            def RealityKitComponent "InputTarget"
             {
-                rel affectedObjects = </Root/GeyserSandbox>
-                token info:id = "SceneTransition"
+                uniform token info:id = "RealityKit.InputTarget"
             }
 
-            def Preliminary_Action "Action"
+            def RealityKitComponent "RCP_BehaviorsContainer"
             {
-                rel affectedObjects = </Root>
-                rel animationLibraryKey = </Root/Init>
-                rel animationLibraryKeyOverrideKey = </Root/GeyserSandbox/OnAddedToScene/Trigger>
-                token info:id = "PlayTimeline"
-                int loops = 0
-                int performCount = 1
-                token type = "serial"
+                rel behaviors = </Root/GeyserSandbox/GeyserSoundTL/OnTap>
+                uniform token info:id = "RCP.BehaviorsContainer"
+            }
+
+            def Preliminary_Behavior "OnTap"
+            {
+                rel actions = </Root/GeyserSandbox/GeyserSoundTL/OnTap/Action>
+                uniform bool exclusive
+                rel triggers = </Root/GeyserSandbox/GeyserSoundTL/OnTap/Trigger>
+
+                def Preliminary_Trigger "Trigger"
+                {
+                    rel affectedObjects = </Root/GeyserSandbox/GeyserSoundTL>
+                    token info:id = "TapGesture"
+                }
+
+                def Preliminary_Action "Action"
+                {
+                    rel affectedObjects = </Root>
+                    rel animationLibraryKey = </Root/IntroGeyser>
+                    rel animationLibraryKeyOverrideKey = </Root/GeyserSandbox/GeyserSoundTL/OnTap/Trigger>
+                    token info:id = "PlayTimeline"
+                    int loops = 0
+                    int performCount = 1
+                    token type = "serial"
+                }
             }
         }
     }
@@ -1174,7 +1250,7 @@ def Xform "Root"
         active = true
     )
     {
-        reorder nameChildren = ["AudioEmitter", "msx_geyser_sfx_v1_wav", "Geyser_Intro_mp3", "Bison_Intro_mp3", "Bison_Eating_wav", "Geyser_End_mp3_1"]
+        reorder nameChildren = ["AudioEmitter", "msx_geyser_sfx_v1_wav", "Geyser_Intro_mp3", "Bison_Intro_mp3", "Bison_Eating_wav", "Geyser_End_mp3_1", "Yellowstone_Intro_mp3"]
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0, 0, 0)
@@ -1201,12 +1277,13 @@ def Xform "Root"
 
                 def RealityKitDict "resources"
                 {
-                    string[] keys = ["Bison Intro.mp3", "Bison Eating.wav", "Geyser End.mp3", "Geyser Intro.mp3"]
+                    string[] keys = ["Bison Intro.mp3", "Bison Eating.wav", "Geyser End.mp3", "Geyser Intro.mp3", "Yellowstone Intro.mp3"]
                     rel values = [
                         </Root/Audios/Bison_Intro_mp3>,
                         </Root/Audios/Bison_Eating_wav>,
                         </Root/Audios/Geyser_End_mp3_1>,
                         </Root/Audios/Geyser_Intro_mp3>,
+                        </Root/Audios/Yellowstone_Intro_mp3>,
                     ]
                 }
             }
@@ -1235,10 +1312,16 @@ def Xform "Root"
             uniform asset file = @Sounds/Geyser Intro.mp3@
             uniform bool shouldLoop = 0
         }
+
+        def RealityKitAudioFile "Yellowstone_Intro_mp3"
+        {
+            uniform asset file = @Sounds/Yellowstone Intro.mp3@
+            uniform bool shouldLoop = 0
+        }
     }
 
     def Cube "Cube" (
-        active = true
+        active = false
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
@@ -1323,7 +1406,7 @@ def Xform "Root"
     }
 
     def Cylinder "Cylinder" (
-        active = true
+        active = false
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
@@ -1379,6 +1462,33 @@ def Xform "Root"
 
             def RealityKitStruct "material"
             {
+            }
+        }
+    }
+
+    def Xform "Transform" (
+        active = true
+    )
+    {
+    }
+
+    def RealityKitTimeline "Intro_YellowStone"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "Yellowstone Intro.mp3"
+                bool controlPlayback = 1
+                double duration = 34.08979166666666
+                uniform token info:id = "FB0B82A9-6CFF-4A06-A273-2C78A3907184"
+                double startTime = 0
+                rel target = </Root/Audios/AudioEmitter>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
             }
         }
     }

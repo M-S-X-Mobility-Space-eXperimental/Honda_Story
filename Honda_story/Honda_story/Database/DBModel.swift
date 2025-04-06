@@ -16,7 +16,9 @@ class DBModel: ObservableObject {
     private var userId: String
 
     // Game State Variables
-    @Published var Geyser: Bool = false
+    @Published var Geyser: Bool = false // for eruption
+    @Published var startGeyserExp = false
+    private var geyserStarted = false // <-- Add this to prevent multiple triggers
     
     // Player State Variables
     @Published var AllReady: Bool = false
@@ -103,8 +105,23 @@ class DBModel: ObservableObject {
             DispatchQueue.main.async {
                 self.AllReady = allReady
                 print("All players ready: \(allReady)")
+                if allReady && !self.geyserStarted {
+                    self.geyserStarted = true // prevent re-trigger
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 40) {
+                        self.startGeyserExp = true
+                        
+                        print("35 seconds passed for all palyer ready. Geyser exp started.")
+                    }
+                }
             }
         })
+    }
+    
+    func playerResetReady(){
+        //reset the ready variable for next round
+        self.ref.child("players/\(self.userId)").updateChildValues([
+            "ready": false,
+        ])
     }
 
     
@@ -145,6 +162,18 @@ class DBModel: ObservableObject {
                 print("Player \(self.userId) initialized with \(objectCount) objects.")
             }
         }
+    }
+    
+    func setPlayerReady(){
+        ref.child("players/\(userId)").updateChildValues([
+            "ready": true,
+        ])
+        
+        let timestamp = Int(Date().timeIntervalSince1970)
+        
+        ref.updateChildValues([
+            "ReadyTime": timestamp
+        ])
     }
     
     func parsePlayers(snapshot: DataSnapshot) -> [String: Player] {

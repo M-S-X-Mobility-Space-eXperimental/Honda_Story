@@ -22,6 +22,7 @@ struct ImmersiveView: View {
     @State private var EruptionEntity: Entity?
     @State private var BisonEntity: Entity?
     @State private var CountDownEntity: Entity?
+    @State private var TestCubeEntity: Entity?
     
 //    @State private var RootEntity: Entity?
     
@@ -37,6 +38,9 @@ struct ImmersiveView: View {
     
     @State private var SceneRootContent: RealityViewContent?
     
+    @State private var lastCubePosition: SIMD3<Float>?
+    @State private var cancellables = Set<AnyCancellable>()
+
     
     @StateObject private var dbModel: DBModel
     
@@ -111,7 +115,6 @@ struct ImmersiveView: View {
                     BisonEntity = bison
                     
                 }
-                print(BisonEntity ?? "Nobison")
                 
                 if let bluegrass = immersiveContentEntity.findEntity(named: "bluegrass") {
                     bluegrassEntity = bluegrass
@@ -121,9 +124,15 @@ struct ImmersiveView: View {
 //                    countdown.isEnabled = false
                     CountDownEntity = countdown
                 }
+                if let cube = immersiveContentEntity.findEntity(named: "Cube") {
+//                    countdown.isEnabled = false
+                    TestCubeEntity = cube
+                    lastCubePosition = cube.transform.translation
+                }
 
             }
         }
+        .installGestures()
         .task{
             dbModel.observeGeyser()
         }
@@ -139,6 +148,23 @@ struct ImmersiveView: View {
                 
            }
         }
+
+        .task {
+            Timer.publish(every: 0.1, on: .main, in: .common)
+                .autoconnect()
+                .sink { _ in
+                    guard let cube = TestCubeEntity else { return }
+
+                    let currentPosition = cube.position
+
+                    if currentPosition != lastCubePosition {
+                        print("Cube moved to \(currentPosition)")
+                        lastCubePosition = currentPosition
+                    }
+                }
+                .store(in: &cancellables)
+        }
+
         
         .gesture(TapGesture().targetedToAnyEntity()
              .onEnded { value in
@@ -161,6 +187,7 @@ struct ImmersiveView: View {
             DragGesture()
                 .targetedToAnyEntity()
                 .onChanged { value in
+                    print(value.entity.name, "is being dragged")
                     if value.entity.parent?.name == "BisonFoods"{
 //                    if value.entity.name == "bluegrass" {
                         // Update position to match drag location in 3D

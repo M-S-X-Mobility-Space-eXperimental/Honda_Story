@@ -42,6 +42,7 @@ struct ImmersiveView: View {
     @State private var LeftHandAnchor: AnchorEntity?
     @State private var RightHandAnchor: AnchorEntity?
     @State private var CurrentHandAnchor: AnchorEntity?
+    @State private var SphereEntity: Entity?
     
     @State private var lastCubePosition: SIMD3<Float>?
     @State private var cancellables = Set<AnyCancellable>()
@@ -57,15 +58,6 @@ struct ImmersiveView: View {
             // Add the initial RealityKit content
             
             if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
-                
-//                let entitiesToRemove = ["BisonFoods", "Eruption", "CountDownGroup", "GeyserSandbox"]
-                
-//                for name in entitiesToRemove {
-//                    if let child = immersiveContentEntity.findEntity(named: name) {
-//                        self.deferredEntities[name] = child
-//                        child.removeFromParent()
-//                    }
-//                }
                 
                 
                 content.add(immersiveContentEntity)
@@ -86,17 +78,22 @@ struct ImmersiveView: View {
 
                 assignEntity(named: "GeyserSoundTL", to: &GeyserSoundTLEntity)
                 assignEntity(named: "Environment", to: &environmentEntity)
-                assignEntity(named: "BisonFoods", to: &bisonFoodsEntity, disable: true)
+                assignEntity(named: "BisonFoods", to: &bisonFoodsEntity, disable: false)
                 assignEntity(named: "Eruption", to: &EruptionEntity, disable: true)
                 assignEntity(named: "Bison", to: &BisonEntity)
                 assignEntity(named: "bluegrass", to: &bluegrassEntity)
-//                assignEntity(named: "CountDownGroup", to: &CountDownEntity, disable: true )
                 assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: true)
+                
+//                assignEntity(named: "Sphere", to: &SphereEntity)
+//                
+//                LeftHandAnchor?.addChild(SphereEntity!)
+//                content.add(LeftHandAnchor!)
+                
+                
                 
 
             }
         }
-        .installGestures()
         .task{
 //            dbModel.observeGeyser()
             
@@ -131,24 +128,8 @@ struct ImmersiveView: View {
                 
            }
         }
-
-        .task {
-            Timer.publish(every: 0.1, on: .main, in: .common)
-                .autoconnect()
-                .sink { _ in
-                    
-                    let state = EntityGestureState.shared
-                    
-                    if(state.isDragging){
-                        print(state.targetedEntity?.name ?? "No object name dragging")
-                    }
-                    
-                }
-                .store(in: &cancellables)
-        }
-
         
-        .gesture(TapGesture().targetedToAnyEntity()
+        .simultaneousGesture(TapGesture().targetedToAnyEntity()
              .onEnded { value in
                  
                  let tappedEntity = value.entity
@@ -158,6 +139,60 @@ struct ImmersiveView: View {
                  }
                  
          })
+        .gesture(
+            DragGesture()
+                .targetedToAnyEntity()
+                .onChanged { value in
+                    // Only interact with children of BisonFoods
+                    guard value.entity.parent?.name == "BisonFoods" else { return }
+                    
+                    // check if the object have collision component
+                    
+                    guard value.entity.components[CollisionComponent.self] != nil else { return }
+                    
+                    guard value.entity.name != "_bison_basket" else { return }
+                    
+                    // Trigger Bison behavior once
+                    if !BisonAttracted {
+                        _ = BisonEntity?.applyTapForBehaviors()
+                        BisonAttracted = true
+                    }
+                    
+                    // Convert entity and hand positions to world space
+                    let entityWorldPos = value.entity.convert(position: .zero, to: nil)
+                    let leftHandPos = LeftHandAnchor?.convert(position: .zero, to: nil) ?? SIMD3<Float>(repeating: .greatestFiniteMagnitude)
+                    let rightHandPos = RightHandAnchor?.convert(position: .zero, to: nil) ?? SIMD3<Float>(repeating: .greatestFiniteMagnitude)
+                    
+                    // Compare distances to decide which hand to attach to
+                    let leftDist = distance(leftHandPos, entityWorldPos)
+                    let rightDist = distance(rightHandPos, entityWorldPos)
+                    
+                    CurrentHandAnchor = leftDist < rightDist ? LeftHandAnchor : RightHandAnchor
+                    print("Assign \(leftDist < rightDist ? "Left" : "Right") Hand")
+                    
+                    let worldScale = value.entity.scale(relativeTo: nil)
+
+                    // Attach entity to the chosen hand anchor
+                    value.entity.removeFromParent()
+                    value.entity.position = .zero
+                    value.entity.setScale(worldScale, relativeTo: nil)
+                    CurrentHandAnchor?.addChild(value.entity)
+
+                    // Ensure anchor is added to the scene
+                    if let anchor = CurrentHandAnchor {
+                        SceneRootContent?.add(anchor)
+                    }
+                }
+                .onEnded { value in
+                    // Detach entity from hand and return it to BisonFoods in its original relative position
+                    let draggedEntity = value.entity
+                    let localPosition = draggedEntity.position(relativeTo: bisonFoodsEntity)
+
+                    draggedEntity.removeFromParent()
+                    draggedEntity.position = localPosition
+                    bisonFoodsEntity?.addChild(draggedEntity)
+                }
+        )
         .onDisappear {
                 
             timerCancellable?.cancel()

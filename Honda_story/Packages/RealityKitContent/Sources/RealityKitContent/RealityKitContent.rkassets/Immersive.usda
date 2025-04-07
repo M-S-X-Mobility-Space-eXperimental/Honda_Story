@@ -484,12 +484,14 @@ def Xform "Root"
         reorder nameChildren = ["smoke", "smoke_1", "AudioLibrary", "HierarchicalFade"]
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1.0000002, 1.0000002, 1.0000002)
-        float3 xformOp:translate = (-0.020460412, 0.5508565, -0.10463826)
+        float3 xformOp:translate = (0.0464889, 0.6164453, -0.097720265)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "smoke_1"
         {
-            float3 xformOp:translate = (0, -0.031540066, 0)
+            quatf xformOp:orient = (0.99999994, 0, 0, 0)
+            float3 xformOp:scale = (0.07895726, 0.07895726, 0.07895726)
+            float3 xformOp:translate = (1.8626451e-9, -0.031540036, -7.450581e-9)
 
             over "VFXEmitter"
             {
@@ -499,18 +501,31 @@ def Xform "Root"
 
                     over "mainEmitter"
                     {
+                        float birthRate = 200
                         float dampingFactor = 15
+                        float particleSize = 0.1
                         float radialGravityStrength = -0.1
+                        float sizeMultiplierAtEndOfLifespan = 13
+                        float4 startColorA = (0.5343751, 0.72773063, 0.7319911, 0.19882016)
+                        float4 startColorB = (1, 1, 1, 0.11891475)
+                        bool useStartColorRange = 1
                         float3 vortexDirection = (0.1, -1, 0)
                     }
 
                     over "spawnedEmitter"
                     {
                         float3 acceleration = (0, -0.1, 0)
+                        float birthRate = 100
                         float dampingFactor = 0.1
+                        float4 endColorA = (0.18195641, 0.26261774, 0.24874541, 0.15154654)
                         float particleAngle = 0.017453292
                         float particleMass = 1
+                        float particleSize = 0.05
                         float3 radialGravityCenter = (0, 0.1, 0)
+                        float4 startColorA = (0.35071167, 0.42040566, 0.40221477, 0.04737989)
+                        bool useEndColor = 1
+                        bool useEndColorRange = 0
+                        bool useStartColorRange = 0
                         float3 vortexDirection = (0.02, -0.02, 0.02)
                     }
                 }
@@ -534,12 +549,13 @@ def Xform "Root"
                     over "mainEmitter"
                     {
                         float3 acceleration = (0, -0.2, 0)
+                        float birthRate = 100
                         float dampingFactor = 15
                         float4 endColorA = (0.59082115, 0.7648289, 0.66320205, 0.3903327)
                         float4 endColorB = (1, 1, 1, 1)
                         float noiseScale = 0.5
                         float particleMass = 1.3
-                        float particleSize = 0.03
+                        float particleSize = 0.02
                         float3 radialGravityCenter = (0, 0, 0)
                         float sizeMultiplierAtEndOfLifespan = 7
                         bool useEndColor = 1

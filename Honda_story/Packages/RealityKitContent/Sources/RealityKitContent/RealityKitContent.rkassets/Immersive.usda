@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "Car", "Environment", "BisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "banana", "StartCountDown", "CountDownGroup", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "Car", "Environment", "OldBisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "CountDownGroup", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder", "BisonFoods", "BisonTransitTL"]
     float3 xformOp:translate = (0, 0, 0)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -101,7 +101,7 @@ def Xform "Root"
     {
         quatf xformOp:orient = (0.76604444, 0, 0.64278764, 0)
         float3 xformOp:scale = (10, 10, 10)
-        float3 xformOp:translate = (66.38554, 6.8636513, -162.43826)
+        float3 xformOp:translate = (66.38554, 4.9042854, -162.43826)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
@@ -158,17 +158,17 @@ def Xform "Root"
         }
     }
 
-    def Xform "BisonFoods" (
-        active = true
+    def Xform "OldBisonFoods" (
+        active = false
     )
     {
-        reorder nameChildren = ["BisonTransitTL", "bluegrass", "RCP_BehaviorsContainer", "OnTap", "AudioLibrary", "HierarchicalFade", "_apple", "wildflower", "PBR___Metallic_Roughness_Alpha_blend", "_bison_basket"]
+        reorder nameChildren = ["BisonTransitTL", "BlueGrass", "RCP_BehaviorsContainer", "OnTap", "AudioLibrary", "HierarchicalFade", "Apple", "WildFlower", "MushRoom", "_bison_basket"]
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0.54307926, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
-        def "_apple" (
+        def "Apple" (
             active = true
             references = @BisonFoods/ apple.usdz@
         )
@@ -211,12 +211,12 @@ def Xform "Root"
             def RealityKitCustomComponent "RealityKitContent_GestureComponent"
             {
                 uniform token info:id = "RealityKitContent.GestureComponent"
-                bool pivotOnDrag = 0
-                bool preserveOrientationOnPivotDrag = 0
+                bool pivotOnDrag = 1
+                bool preserveOrientationOnPivotDrag = 1
             }
         }
 
-        def "wildflower" (
+        def "WildFlower" (
             active = true
             references = @BisonFoods/wildflower.usdz@
         )
@@ -260,12 +260,12 @@ def Xform "Root"
             {
                 bool canScale = 1
                 uniform token info:id = "RealityKitContent.GestureComponent"
-                bool pivotOnDrag = 0
-                bool preserveOrientationOnPivotDrag = 0
+                bool pivotOnDrag = 1
+                bool preserveOrientationOnPivotDrag = 1
             }
         }
 
-        def "PBR___Metallic_Roughness_Alpha_blend" (
+        def "MushRoom" (
             active = true
             references = @BisonFoods/PBR - Metallic Roughness Alpha-blend.usdz@
         )
@@ -308,12 +308,12 @@ def Xform "Root"
             def RealityKitCustomComponent "RealityKitContent_GestureComponent"
             {
                 uniform token info:id = "RealityKitContent.GestureComponent"
-                bool pivotOnDrag = 0
-                bool preserveOrientationOnPivotDrag = 0
+                bool pivotOnDrag = 1
+                bool preserveOrientationOnPivotDrag = 1
             }
         }
 
-        def "bluegrass" (
+        def "BlueGrass" (
             active = true
             references = @BisonFoods/bluegrass.usdz@
         )
@@ -356,15 +356,15 @@ def Xform "Root"
             def RealityKitCustomComponent "RealityKitContent_GestureComponent"
             {
                 uniform token info:id = "RealityKitContent.GestureComponent"
-                bool pivotOnDrag = 0
-                bool preserveOrientationOnPivotDrag = 0
+                bool pivotOnDrag = 1
+                bool preserveOrientationOnPivotDrag = 1
             }
         }
 
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 0
+            float opacity = 1
         }
 
         def "_bison_basket" (
@@ -376,8 +376,8 @@ def Xform "Root"
         )
         {
             quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (0.003, 0.003, 0.003)
-            float3 xformOp:translate = (-0.48961073, 0.77127147, -0.16279852)
+            float3 xformOp:scale = (0.004, 0.004, 0.004)
+            float3 xformOp:translate = (-0.48961073, 0.732359, -0.16279852)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
         }
 
@@ -1486,6 +1486,296 @@ def Xform "Root"
 
             def RealityKitStruct "material"
             {
+            }
+        }
+    }
+
+    def "BisonFoods" (
+        active = true
+        references = @BisonFoods/bison assets.usda@
+    )
+    {
+        reorder nameChildren = ["banana", "_bison_basket", "flower", "_apple", "PBR___Metallic_Roughness_Alpha_blend", "banana_1", "wildflower", "bluegrass", "HierarchicalFade", "BisonTransitTL"]
+        float3 xformOp:scale = (0.4, 0.4, 0.4)
+        float3 xformOp:translate = (0, 0.76564443, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
+        }
+
+        over "banana"
+        {
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.43227524, 1.5899107, 1.9999999)
+                    token shapeType = "Box"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (-1.4901161e-8, -2.9802322e-8, -5.9604645e-8)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+            }
+        }
+
+        over "flower"
+        {
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.9203682, 1.3412473, 0.9698925)
+                    float height = 1.3412473
+                    float radius = 0.48494625
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (-4.0756273, -0.660967, -11.840317)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+            }
+        }
+
+        over "_apple"
+        {
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (6.575633, 8.043767, 6.575635)
+                    float radius = 4.0218835
+                    token shapeType = "Sphere"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (-3.5762787e-7, 1.0932437, -5.9604645e-7)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+            }
+        }
+
+        over "PBR___Metallic_Roughness_Alpha_blend"
+        {
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (196.76712, 200, 196.7605)
+                    float height = 200
+                    float radius = 98.38356
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (0.0000038146973, 0, 0.0000038146973)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+            }
+        }
+
+        over "banana_1"
+        {
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.43227524, 1.5899107, 1.9999999)
+                    token shapeType = "Box"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (-1.4901161e-8, -2.9802322e-8, -5.9604645e-8)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+            }
+        }
+
+        over "wildflower"
+        {
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (324.88168, 178.63387, 327.91165)
+                    float radius = 163.95583
+                    token shapeType = "Sphere"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (2.8071136, 60.59014, 0.014160156)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+            }
+        }
+
+        over "bluegrass"
+        {
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (1.4477186, 1.5373735, 1.3437186)
+                    float radius = 0.7686868
+                    token shapeType = "Sphere"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (-0.59720755, 0.4779856, 0.3228675)
+                    }
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+            }
+        }
+
+        def Xform "BisonTransitTL" (
+            active = true
+        )
+        {
+            float2 ui:nodegraph:node:pos = (20, 20)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (0.99999994, 0, 0, 0)
+            float3 xformOp:scale = (2.5000002, 2.5000002, 2.5000002)
+            float3 xformOp:translate = (0, -1.9141113, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "RCP_BehaviorsContainer"
+            {
+                rel behaviors = </Root/BisonFoods/BisonTransitTL/OnTap>
+                uniform token info:id = "RCP.BehaviorsContainer"
+            }
+
+            def Preliminary_Behavior "OnTap"
+            {
+                rel actions = </Root/BisonFoods/BisonTransitTL/OnTap/Action>
+                uniform bool exclusive
+                rel triggers = </Root/BisonFoods/BisonTransitTL/OnTap/Trigger>
+
+                def Preliminary_Trigger "Trigger"
+                {
+                    rel affectedObjects = </Root/BisonFoods/BisonTransitTL>
+                    token info:id = "TapGesture"
+                }
+
+                def Preliminary_Action "Action"
+                {
+                    rel affectedObjects = </Root>
+                    rel animationLibraryKey = </Root/GeyserBisonTrans>
+                    rel animationLibraryKeyOverrideKey = </Root/BisonFoods/BisonTransitTL/OnTap/Trigger>
+                    token info:id = "PlayTimeline"
+                    int loops = 0
+                    int performCount = 1
+                    token type = "serial"
+                }
             }
         }
     }

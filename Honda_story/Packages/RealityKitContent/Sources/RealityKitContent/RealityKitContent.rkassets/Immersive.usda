@@ -322,7 +322,7 @@ def Xform "Root"
 
     def "YellowStone" (
         active = true
-        prepend references = @YellowStone.usdz@
+        references = @YellowStone.usdz@
     )
     {
         quatf xformOp:orient = (1, 0, 0, 0)
@@ -3648,7 +3648,7 @@ def Xform "Root"
 
     def "carTex" (
         active = true
-        prepend references = @carTex.usdz@
+        references = @carTex.usdz@
     )
     {
         quatf xformOp:orient = (0.7071069, -0.70710665, 0, 0)
@@ -3671,11 +3671,247 @@ def Xform "Root"
         }
     }
 
-    def "Bison_walk03" (
+    def Xform "Transform" (
         active = true
-        prepend references = @Bison_walk03.usdz@
+        customData = {
+            float3 rotationEulerHint = (3.1415927, 0, 0)
+        }
     )
     {
+        quatf xformOp:orient = (-4.371139e-8, 1, 0, 0)
+        float3 xformOp:translate = (-100, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def "Bison_walk03" (
+            active = true
+            references = @Bison_walk03.usdz@
+        )
+        {
+            quatf xformOp:orient = (0.70710677, -0.7071067, -5.0129303e-15, -5.0129303e-15)
+            quatf xformOp:orient.timeSamples = {
+                0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+            }
+            float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+            float3 xformOp:scale.timeSamples = {
+                0: (1, 1, 1),
+            }
+            float3 xformOp:translate = (0, 0, 0)
+            float3 xformOp:translate.timeSamples = {
+                0: (0, 0, 0),
+            }
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "mtl"
+            {
+                over "AmericanBison_M_APFur_LOD0SG1"
+                {
+                    token inputs:frame:stPrimvarName = "st" (
+                        customData = {
+                            dictionary realitykit = {
+                                bool hide = 1
+                            }
+                        }
+                    )
+                    token outputs:mtlx:surface
+                    token outputs:realitykit:vertex
+
+                    over "AmericanBison_M_APFur_Material"
+                    {
+                        float inputs:opacityThreshold = 0.9
+                        prepend float inputs:opacityThreshold.connect = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_APFur_LOD0SG1/opacityThreshold.outputs:r>
+                    }
+
+                    def Shader "opacityThreshold"
+                    {
+                        uniform token info:id = "UsdUVTexture"
+                        asset inputs:file = @BisonTextures/AmericanBison_APFur 1.png@
+                        float2 inputs:st.connect = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_APFur_LOD0SG1/opacityThreshold/TexCoordReader.outputs:result>
+                        float outputs:r
+
+                        def Shader "TexCoordReader"
+                        {
+                            uniform token info:id = "UsdPrimvarReader_float2"
+                            token inputs:varname.connect = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_APFur_LOD0SG1.inputs:frame:stPrimvarName>
+                            float2 outputs:result
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    def Xform "Transform_1" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (1.5707964, -6.820134e-8, 0)
+        }
+    )
+    {
+        rel material:binding = </Root/Transform_2/Bison_eat01/mtl/AmericanBison_M_APFur_LOD0SG1> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        quatf xformOp:orient = (0.70710677, 0.70710677, -2.4112811e-8, 2.4112811e-8)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (80, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def "Bison_eat02" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            references = @Bison_eat02.usdz@
+        )
+        {
+            quatf xformOp:orient = (0.70710677, -0.7071067, -5.0129303e-15, -5.0129303e-15)
+            quatf xformOp:orient.timeSamples = {
+                0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+            }
+            float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+            float3 xformOp:scale.timeSamples = {
+                0: (1, 1, 1),
+            }
+            float3 xformOp:translate = (0, 0, 0)
+            float3 xformOp:translate.timeSamples = {
+                0: (0, 0, 0),
+            }
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "AmericanBison_M_APFur_LOD0" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_APFur_LOD0SG1> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "AmericanBison_M_APFur_LOD1" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_APFur_LOD0SG1> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "AmericanBison_M_APFur_LOD2" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_APFur_LOD0SG1> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "AmericanBison_M_APFur_LOD3" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_APFur_LOD0SG1> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "AmericanBison_M_APFur_LOD4" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_APFur_LOD0SG1> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "AmericanBison_M_LOD0" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_LOD0SG1> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "AmericanBison_M_LOD1" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_LOD0SG1> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "AmericanBison_M_LOD2" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_LOD0SG1> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "AmericanBison_M_LOD3" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_LOD0SG1> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "AmericanBison_M_LOD4" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Transform/Bison_walk03/mtl/AmericanBison_M_LOD0SG1> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+        }
+    }
+
+    def Xform "Transform_2" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (1.5707964, 0, 0)
+        }
+    )
+    {
+        quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def "Bison_eat01" (
+            active = true
+            references = @Bison_eat01.usdz@
+        )
+        {
+            quatf xformOp:orient = (0.70710677, -0.7071067, -5.0129303e-15, -5.0129303e-15)
+            quatf xformOp:orient.timeSamples = {
+                0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+            }
+            float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+            float3 xformOp:scale.timeSamples = {
+                0: (1, 1, 1),
+            }
+            float3 xformOp:translate = (0, 0, 0)
+            float3 xformOp:translate.timeSamples = {
+                0: (0, 0, 0),
+            }
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "mtl"
+            {
+                over "AmericanBison_M_APFur_LOD0SG1"
+                {
+                    token outputs:mtlx:surface
+                    token outputs:realitykit:vertex
+                }
+
+                over "AmericanBison_M_LOD0SG1"
+                {
+                    token outputs:mtlx:surface
+                    token outputs:realitykit:vertex
+                }
+            }
+        }
     }
 }
 

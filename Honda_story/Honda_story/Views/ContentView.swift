@@ -95,7 +95,7 @@ struct ContentView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 displayedDescription.append(letter)
             }
-            delay += 0.015
+            delay += 0.0075
         
         }
     }

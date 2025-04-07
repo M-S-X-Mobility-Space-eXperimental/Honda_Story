@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseDatabase
+import RealityFoundation
 
 class DBModel: ObservableObject {
     static let shared = DBModel()
@@ -147,19 +148,6 @@ class DBModel: ObservableObject {
         return players.values.allSatisfy { $0.tapped }
     }
     
-//    func createDefaultObjectList(count: Int) -> [[String: Any]] {
-//        return (0..<count).map { _ in
-//            return [
-//                "controllerId": userId,
-//                "position": [
-//                    "x": 0.0,
-//                    "y": 0.0,
-//                    "z": 0.0
-//                ]
-//            ]
-//        }
-//    }
-    
     func initalizeDB_BisonFoods(_ objectDict: [String: Any]) {
         ref.child("/BisonFoods").setValue(objectDict) { error, _ in
             if let error = error {
@@ -220,4 +208,48 @@ class DBModel: ObservableObject {
 
         return players
     }
+    
+    func updateBisonFoodProperty(forName name: String, withTransform transform: Transform) {
+        let userId = self.getUserID()
+
+        let gameObj: [String: Any] = [
+            "controllerId": userId,
+            "position": [
+                "x": transform.translation.x,
+                "y": transform.translation.y,
+                "z": transform.translation.z
+            ],
+            "rotation": [
+                "x": transform.rotation.vector.x,
+                "y": transform.rotation.vector.y,
+                "z": transform.rotation.vector.z,
+                "w": transform.rotation.vector.w
+            ],
+            "scale": [
+                "x": transform.scale.x,
+                "y": transform.scale.y,
+                "z": transform.scale.z
+            ]
+        ]
+
+        ref.child("BisonFoods/\(name)").setValue(gameObj) { error, _ in
+            if let error = error {
+                print("🔥 Failed to update BisonFood '\(name)': \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func releaseBisonFoodControl(forName name: String) {
+        let releaseData: [String: Any] = [
+            "controllerId": "N/A"
+        ]
+
+        ref.child("BisonFoods/\(name)").updateChildValues(releaseData) { error, _ in
+            if let error = error {
+                print("❌ Failed to release control of '\(name)': \(error.localizedDescription)")
+            }
+        }
+    }
+
+
 }

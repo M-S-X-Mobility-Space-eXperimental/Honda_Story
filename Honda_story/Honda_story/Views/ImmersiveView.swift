@@ -162,20 +162,26 @@ struct ImmersiveView: View {
         }
     }
     
-    func trackGestureStates(){
+    func trackGestureStates() {
         Timer.publish(every: 0.1, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
-                
                 let state = EntityGestureState.shared
-                
-                if(state.isDragging){
-                    print(state.targetedEntity?.name ?? "No object name dragging")
+
+                guard state.isDragging || state.isScaling || state.isRotating,
+                      let entity = state.targetedEntity else {
+                    return
                 }
-                
+
+                let name = entity.name
+                guard !name.isEmpty else { return }
+
+                let transform = entity.transform
+                DBModel.shared.updateBisonFoodProperty(forName: name, withTransform: transform)
             }
             .store(in: &cancellables)
     }
+
     
     func initBisonFoodObjectList() {
         guard let bisonFoods = bisonFoodsEntity else {
@@ -183,7 +189,6 @@ struct ImmersiveView: View {
             return
         }
 
-        let userId = dbModel.getUserID()
         var objectDict: [String: Any] = [:]
 
         for child in bisonFoods.children {

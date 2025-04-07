@@ -59,16 +59,6 @@ struct ImmersiveView: View {
             
             if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
                 
-//                let entitiesToRemove = ["BisonFoods", "Eruption", "CountDownGroup", "GeyserSandbox"]
-                
-//                for name in entitiesToRemove {
-//                    if let child = immersiveContentEntity.findEntity(named: name) {
-//                        self.deferredEntities[name] = child
-//                        child.removeFromParent()
-//                    }
-//                }
-                
-                
                 content.add(immersiveContentEntity)
                 
                 self.immersiveContentEntity = immersiveContentEntity
@@ -91,7 +81,6 @@ struct ImmersiveView: View {
                 assignEntity(named: "Eruption", to: &EruptionEntity, disable: true)
                 assignEntity(named: "Bison", to: &BisonEntity)
                 assignEntity(named: "bluegrass", to: &bluegrassEntity)
-//                assignEntity(named: "CountDownGroup", to: &CountDownEntity, disable: true )
                 assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: true)
                 assignEntity(named: "BisonTransitTL", to: &bisonTransitTLEntity)
 
@@ -99,10 +88,9 @@ struct ImmersiveView: View {
         }
         .installGestures()
         .task{
-//            dbModel.observeGeyser()
-            
             // First stage observe all ready
             dbModel.observeAllRealdy()
+            trackGestureStates()
         }
         .onChange(of: dbModel.startGeyserExp) {
             if dbModel.startGeyserExp{
@@ -133,23 +121,8 @@ struct ImmersiveView: View {
            }
         }
 
-        .task {
-            Timer.publish(every: 0.1, on: .main, in: .common)
-                .autoconnect()
-                .sink { _ in
-                    
-                    let state = EntityGestureState.shared
-                    
-                    if(state.isDragging){
-                        print(state.targetedEntity?.name ?? "No object name dragging")
-                    }
-                    
-                }
-                .store(in: &cancellables)
-        }
-
         
-        .gesture(TapGesture().targetedToAnyEntity()
+        .simultaneousGesture(TapGesture().targetedToAnyEntity()
              .onEnded { value in
                  
                  let tappedEntity = value.entity
@@ -181,6 +154,21 @@ struct ImmersiveView: View {
                 entity.isEnabled = false
             }
         }
+    }
+    
+    func trackGestureStates(){
+        Timer.publish(every: 0.1, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                
+                let state = EntityGestureState.shared
+                
+                if(state.isDragging){
+                    print(state.targetedEntity?.name ?? "No object name dragging")
+                }
+                
+            }
+            .store(in: &cancellables)
     }
 
     

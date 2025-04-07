@@ -107,10 +107,20 @@ class DBModel: ObservableObject {
                 print("All players ready: \(allReady)")
                 if allReady && !self.geyserStarted {
                     self.geyserStarted = true // prevent re-trigger
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 40) {
-                        self.startGeyserExp = true
-                        
-                        print("35 seconds passed for all palyer ready. Geyser exp started.")
+                    self.ref.child("ReadyTime").observeSingleEvent(of: .value) { snapshot in
+                        guard let readyTimestamp = snapshot.value as? TimeInterval else {
+                            print("Failed to get ReadyTime from database")
+                            return
+                        }
+
+                        let currentTime = Date().timeIntervalSince1970
+                        let timeElapsed = currentTime - readyTimestamp
+                        let delay = max(0, 37 - timeElapsed)
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                            self.startGeyserExp = true
+                            print("Geyser experiment started after delay of \(delay) seconds")
+                        }
                     }
                 }
             }

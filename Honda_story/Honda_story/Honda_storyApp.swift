@@ -7,6 +7,8 @@
 
 import SwiftUI
 import FirebaseCore
+import RealityKitContent
+
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
@@ -24,9 +26,13 @@ struct Honda_storyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     @State private var appModel = AppModel()
+    
+    init() {
+        RealityKitContent.GestureComponent.registerComponent()
+    }
 
     var body: some Scene {
-        WindowGroup {
+        WindowGroup (id: appModel.contentWindowID) {
             ContentView()
                 .environment(appModel)
         }

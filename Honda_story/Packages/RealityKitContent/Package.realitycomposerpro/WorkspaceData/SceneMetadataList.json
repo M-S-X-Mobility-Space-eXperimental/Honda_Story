@@ -1,4 +1,35 @@
 {
+  "002B1BDB-819B-4E64-A87B-B75E2F5B3CC2" : {
+    "objectMetadataList" : [
+      [
+        "002B1BDB-819B-4E64-A87B-B75E2F5B3CC2",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "002B1BDB-819B-4E64-A87B-B75E2F5B3CC2",
+        "Root",
+        "Timeline"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "002B1BDB-819B-4E64-A87B-B75E2F5B3CC2",
+        "Root",
+        "Timeline",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "0A9B4653-B11E-4D6A-850E-C6FCB621626C" : {
     "objectMetadataList" : [
       [
@@ -16,19 +47,8 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "HondaCar"
-      ],
-      {
-        "disallowsFraming" : false,
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "AIBison",
-        "Armature",
-        "char1"
+        "Bison_Correct",
+        "Track3"
       ],
       {
         "isExpanded" : true,
@@ -37,7 +57,7 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "GeyserSandbox"
+        "Bison_Wrong"
       ],
       {
         "isExpanded" : true,
@@ -46,7 +66,19 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "GeyserErupt",
+        "lakeandwatershader",
+        "uvtesting",
+        "Materials",
+        "standardSurface1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserIntro",
         "Track"
       ],
       {
@@ -56,8 +88,196 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "AIBison",
-        "_materials"
+        "Bison_Correct"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserPlaceholder",
+        "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "BisonWalk",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserIntro",
+        "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "OldBisonFoods"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "BisonIdle"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserBisonTrans",
+        "Track_3"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "StartCountDown",
+        "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "YellowStoneIntro"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserBisonTrans",
+        "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "BisonWalk",
+        "Track3"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserIntro"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "EndGeyser",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Bison_Correst",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "smoke"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "BisonIdle",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Bisons",
+        "BisonParent"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserBisonTrans",
+        "Track_1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "lakeandwatershader",
+        "water_fallingshadertesting",
+        "waterfallingtest",
+        "Materials",
+        "standardSurface1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Bison_Wrong",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -76,18 +296,8 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "smoke_1"
-      ],
-      {
-        "disallowsFraming" : false,
-        "isExpanded" : false,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "GeyserSandbox",
-        "Cube"
+        "Init",
+        "Track"
       ],
       {
         "isExpanded" : true,
@@ -104,7 +314,106 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "smoke"
+        "BisonWalk"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Bison_Correct",
+        "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserBisonTrans",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "AIBison",
+        "Armature"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "YellowStoneIntro",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "AIBison",
+        "Armature",
+        "char1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "smoke_1"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Bison_Eating",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "IntroGeyser"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Bison_Correct",
+        "Track4"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "HondaCar"
       ],
       {
         "disallowsFraming" : false,
@@ -124,8 +433,8 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "AIBison",
-        "Armature"
+        "BisonWalk",
+        "Track4"
       ],
       {
         "isExpanded" : true,
@@ -134,8 +443,85 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "GeyserPlaceholder",
+        "GeyserBisonTrans"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "AIBison",
+        "_materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Timeline",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Bison_Correct",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "StartCountDown",
+        "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "IntroGeyser",
         "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserBisonTrans",
+        "Track3"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserErupt"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "StartCountDown"
       ],
       {
         "isExpanded" : true,
@@ -154,7 +540,8 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "GeyserErupt"
+        "GeyserSandbox",
+        "Cube"
       ],
       {
         "isExpanded" : true,
@@ -178,6 +565,18 @@
     "objectMetadataList" : [
       [
         "65F6F990-A780-4474-B78B-572E0E4E273D",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "69D5EC21-9986-4FB9-A305-F3E790A27330" : {
+    "objectMetadataList" : [
+      [
+        "69D5EC21-9986-4FB9-A305-F3E790A27330",
         "Root"
       ],
       {

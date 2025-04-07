@@ -101,7 +101,7 @@ def Xform "Root"
     {
         quatf xformOp:orient = (0.76604444, 0, 0.64278764, 0)
         float3 xformOp:scale = (10, 10, 10)
-        float3 xformOp:translate = (66.38554, 4.9042854, -162.43826)
+        float3 xformOp:translate = (66.38554, 4.023205, -162.43826)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 
@@ -1535,6 +1535,8 @@ def Xform "Root"
             def RealityKitCustomComponent "RealityKitContent_GestureComponent"
             {
                 uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
             }
         }
 
@@ -1569,6 +1571,8 @@ def Xform "Root"
             def RealityKitCustomComponent "RealityKitContent_GestureComponent"
             {
                 uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
             }
         }
 
@@ -1602,6 +1606,8 @@ def Xform "Root"
             def RealityKitCustomComponent "RealityKitContent_GestureComponent"
             {
                 uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
             }
         }
 
@@ -1636,6 +1642,8 @@ def Xform "Root"
             def RealityKitCustomComponent "RealityKitContent_GestureComponent"
             {
                 uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
             }
         }
 
@@ -1668,6 +1676,8 @@ def Xform "Root"
             def RealityKitCustomComponent "RealityKitContent_GestureComponent"
             {
                 uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
             }
         }
 
@@ -1701,6 +1711,8 @@ def Xform "Root"
             def RealityKitCustomComponent "RealityKitContent_GestureComponent"
             {
                 uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
             }
         }
 
@@ -1734,6 +1746,8 @@ def Xform "Root"
             def RealityKitCustomComponent "RealityKitContent_GestureComponent"
             {
                 uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
             }
         }
 

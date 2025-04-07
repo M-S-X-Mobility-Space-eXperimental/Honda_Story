@@ -19,7 +19,7 @@ struct ImmersiveView: View {
     @State private var SceneRootContent: RealityViewContent?
     
     @State private var environmentEntity: Entity?
-    @State private var timerCancellable: Cancellable?
+    @State private var MovingCancellable: Cancellable?
     @State private var bisonFoodsEntity: Entity?
     @State private var bisonTransitTLEntity: Entity?
     @State private var bluegrassEntity: Entity?
@@ -83,7 +83,8 @@ struct ImmersiveView: View {
                 assignEntity(named: "bluegrass", to: &bluegrassEntity)
                 assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: true)
                 assignEntity(named: "BisonTransitTL", to: &bisonTransitTLEntity)
-
+                
+                initBisonFoodObjectList()
             }
         }
         .installGestures()
@@ -134,17 +135,22 @@ struct ImmersiveView: View {
          })
         .onDisappear {
                 
-            timerCancellable?.cancel()
+            MovingCancellable?.cancel()
         }
     }
     
     func startMoving(){
         // Start a timer to move the object 1cm per second
-        timerCancellable = Timer.publish(every: 0.01, on: .main, in: .common)
+        MovingCancellable = Timer.publish(every: 0.01, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 self.environmentEntity?.position += SIMD3<Float>(x: 0, y: 0, z: 0.01)
             }
+    }
+    
+    func stopMoving() {
+        MovingCancellable?.cancel()
+        MovingCancellable = nil
     }
     
     func assignEntity(named name: String, to binding: inout Entity?, disable: Bool = false) {
@@ -170,6 +176,44 @@ struct ImmersiveView: View {
             }
             .store(in: &cancellables)
     }
+    
+    func initBisonFoodObjectList() {
+        guard let bisonFoods = bisonFoodsEntity else {
+            print("bisonFoodsEntity not initialized.")
+            return
+        }
+
+        let userId = dbModel.getUserID()
+        var objectDict: [String: Any] = [:]
+
+        for child in bisonFoods.children {
+            let name = child.name
+            guard !name.isEmpty else {
+                print("⚠️ Skipping unnamed entity.")
+                continue
+            }
+
+            let pos = child.position(relativeTo: nil)
+            let rotQuat = child.orientation(relativeTo: nil).vector
+            let scale = child.scale(relativeTo: nil)
+
+            let gameObj = GameObj(
+                controllerId: "N/A",
+                position: Vector3(x: pos.x, y: pos.y, z: pos.z),
+                rotation: Vector4(x: rotQuat.x, y: rotQuat.y, z: rotQuat.z, w: rotQuat.w),
+                scale: Vector3(x: scale.x, y: scale.y, z: scale.z)
+            )
+
+            // Store as dictionary for Firebase
+            if let encoded = try? JSONEncoder().encode(gameObj),
+               let jsonObj = try? JSONSerialization.jsonObject(with: encoded) as? [String: Any] {
+                objectDict[name] = jsonObj
+            }
+        }
+        
+        dbModel.initalizeDB_BisonFoods(objectDict)
+    }
+
 
     
 }

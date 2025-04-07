@@ -37,6 +37,10 @@ class DBModel: ObservableObject {
         ref.child("Geyser").setValue(false)
     }
     
+    func getUserID() -> String{
+        return self.userId
+    }
+    
     func tapGeyser() {
         ref.child("players/\(userId)").updateChildValues([
             "tapped": true,
@@ -143,26 +147,38 @@ class DBModel: ObservableObject {
         return players.values.allSatisfy { $0.tapped }
     }
     
-    func createDefaultObjectList(count: Int) -> [[String: Any]] {
-        return (0..<count).map { _ in
-            return [
-                "controllerId": userId,
-                "position": [
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                ]
-            ]
+//    func createDefaultObjectList(count: Int) -> [[String: Any]] {
+//        return (0..<count).map { _ in
+//            return [
+//                "controllerId": userId,
+//                "position": [
+//                    "x": 0.0,
+//                    "y": 0.0,
+//                    "z": 0.0
+//                ]
+//            ]
+//        }
+//    }
+    
+    func initalizeDB_BisonFoods(_ objectDict: [String: Any]) {
+        ref.child("/BisonFoods").setValue(objectDict) { error, _ in
+            if let error = error {
+                print("🔥 Upload failed: \(error.localizedDescription)")
+            } else {
+                print("✅ Upload succeeded.")
+            }
         }
     }
+
+
     
     func initializeCurrentPlayer(objectCount: Int = 2) {
-        let objectList = createDefaultObjectList(count: objectCount)
+//        let objectList = createDefaultObjectList(count: objectCount)
 
         let initialData: [String: Any] = [
             "ready": false,
             "tapped": false,
-            "objectList": objectList
+//            "objectList": objectList
         ]
 
         ref.child("players/\(self.userId)").setValue(initialData) { error, _ in

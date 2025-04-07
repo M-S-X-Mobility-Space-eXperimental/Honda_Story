@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import RealityKitContent
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -26,6 +27,9 @@ struct Honda_storyApp: App {
 
     @State private var appModel = AppModel()
     
+    init() {
+        RealityKitContent.GestureComponent.registerComponent()
+    }
 
     var body: some Scene {
         WindowGroup (id: appModel.contentWindowID) {

@@ -14,7 +14,7 @@ import FirebaseDatabase
 struct ImmersiveView: View {
     
     @State private var session: SpatialTrackingSession?
-        
+    
     @State private var immersiveContentEntity:Entity?
     @State private var SceneRootContent: RealityViewContent?
     
@@ -43,7 +43,6 @@ struct ImmersiveView: View {
     @State private var LeftHandAnchor: AnchorEntity?
     @State private var RightHandAnchor: AnchorEntity?
     @State private var CurrentHandAnchor: AnchorEntity?
-    @State private var SphereEntity: Entity?
     
     @State private var lastCubePosition: SIMD3<Float>?
     @State private var cancellables = Set<AnyCancellable>()
@@ -54,42 +53,55 @@ struct ImmersiveView: View {
     
     @StateObject var dbModel = DBModel.shared
 
-
     var body: some View {
         RealityView { content in
             // Add the initial RealityKit content
+            
             if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
-                            
-                            
-            content.add(immersiveContentEntity)
-            
-            self.immersiveContentEntity = immersiveContentEntity
-            self.SceneRootContent = content
-            
-            
-            // Hand Tracking Setup
-            let session = SpatialTrackingSession()
-            let configuration = SpatialTrackingSession.Configuration(tracking: [.hand, .world])
-            _ = await session.run(configuration)
-            self.session = session
-           //Setup an anchor at the user's left palm.
-            self.LeftHandAnchor = AnchorEntity(.hand(.left, location: .indexFingerTip), trackingMode: .continuous)
-            self.RightHandAnchor = AnchorEntity(.hand(.right, location: .indexFingerTip), trackingMode: .continuous)
+                
+//                let entitiesToRemove = ["BisonFoods", "Eruption", "CountDownGroup", "GeyserSandbox"]
+                
+//                for name in entitiesToRemove {
+//                    if let child = immersiveContentEntity.findEntity(named: name) {
+//                        self.deferredEntities[name] = child
+//                        child.removeFromParent()
+//                    }
+//                }
+                
+                
+                content.add(immersiveContentEntity)
+                
+                self.immersiveContentEntity = immersiveContentEntity
+                self.SceneRootContent = content
+                
+                
+                // Hand Tracking Setup
+                let session = SpatialTrackingSession()
+                let configuration = SpatialTrackingSession.Configuration(tracking: [.hand, .world])
+                _ = await session.run(configuration)
+                self.session = session
+               //Setup an anchor at the user's left palm.
+                self.LeftHandAnchor = AnchorEntity(.hand(.left, location: .indexFingerTip), trackingMode: .continuous)
+                self.RightHandAnchor = AnchorEntity(.hand(.right, location: .indexFingerTip), trackingMode: .continuous)
 
 
-            assignEntity(named: "GeyserSoundTL", to: &GeyserSoundTLEntity)
-            assignEntity(named: "Environment", to: &environmentEntity)
-            assignEntity(named: "BisonTransitTL", to: &bisonTransitTLEntity)
-            assignEntity(named: "BisonFoods", to: &bisonFoodsEntity, disable: false)
-            assignEntity(named: "Eruption", to: &EruptionEntity, disable: true)
-            assignEntity(named: "Bison", to: &BisonEntity)
-            assignEntity(named: "bluegrass", to: &bluegrassEntity)
-            assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: true)
-                            
+                assignEntity(named: "GeyserSoundTL", to: &GeyserSoundTLEntity)
+                assignEntity(named: "Environment", to: &environmentEntity)
+                assignEntity(named: "BisonFoods", to: &bisonFoodsEntity, disable: true)
+                assignEntity(named: "Eruption", to: &EruptionEntity, disable: true)
+                assignEntity(named: "Bison", to: &BisonEntity)
+                assignEntity(named: "bluegrass", to: &bluegrassEntity)
+//                assignEntity(named: "CountDownGroup", to: &CountDownEntity, disable: true )
+                assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: true)
+                assignEntity(named: "BisonTransitTL", to: &bisonTransitTLEntity)
+
             }
         }
+        .installGestures()
         .task{
-            dbModel.observeGeyser()
+//            dbModel.observeGeyser()
+            
+            // First stage observe all ready
             dbModel.observeAllRealdy()
         }
         .onChange(of: dbModel.startGeyserExp) {
@@ -105,6 +117,7 @@ struct ImmersiveView: View {
             //reset ready for next round
             dbModel.playerResetReady()
         }
+        
         .onChange(of: dbModel.Geyser) {
             if dbModel.Geyser {
                 print("Enabling Eruption")
@@ -119,6 +132,22 @@ struct ImmersiveView: View {
                 
            }
         }
+
+        .task {
+            Timer.publish(every: 0.1, on: .main, in: .common)
+                .autoconnect()
+                .sink { _ in
+                    
+                    let state = EntityGestureState.shared
+                    
+                    if(state.isDragging){
+                        print(state.targetedEntity?.name ?? "No object name dragging")
+                    }
+                    
+                }
+                .store(in: &cancellables)
+        }
+
         
         .gesture(TapGesture().targetedToAnyEntity()
              .onEnded { value in
@@ -127,67 +156,9 @@ struct ImmersiveView: View {
                  
                  if tappedEntity.name == "GeyserSandbox" {
                      dbModel.tapGeyser()
-                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                         if GeyserErupt {
-                             // apply to behavior
-                             _ = tappedEntity.applyTapForBehaviors()
-                         }
-                     }
-                     
                  }
                  
          })
-        .gesture(
-            DragGesture()
-                .targetedToAnyEntity()
-                .onChanged { value in
-                    if value.entity.parent?.name == "BisonFoods"{
-//                    if value.entity.name == "bluegrass" {
-                        // Update position to match drag location in 3D
-                        
-                        if(!BisonAttracted){
-                            _ = BisonEntity?.applyTapForBehaviors()
-                            BisonAttracted = true
-                        }
-                        
-                        let entityWorldPos = value.entity.convert(position: .zero, to: nil)
-                        let leftHandWorldPos = self.LeftHandAnchor?.convert(position: .zero, to: nil) ?? SIMD3<Float>(10000,10000,10000)
-                        let rightHandWorldPos = self.RightHandAnchor?.convert(position: .zero, to: nil) ?? SIMD3<Float>(10000,10000,10000)
-                        
-                        let leftDist = distance(leftHandWorldPos, entityWorldPos)
-                        let rightDist = distance(rightHandWorldPos, entityWorldPos)
-                        
-                        print("left Dist:",leftDist)
-                        print("right dist:",rightDist)
-                        
-                        if(leftDist < rightDist){
-                            print("Assign Left")
-                            CurrentHandAnchor = self.LeftHandAnchor
-                            
-                        }else{
-                            print("Assign Right")
-                            CurrentHandAnchor = self.RightHandAnchor
-                        }
-                        
-                        value.entity.position = SIMD3<Float>(0,0,0)
-                        self.CurrentHandAnchor?.addChild(value.entity)
-                        SceneRootContent?.add(CurrentHandAnchor!)
-                        
-                    }
-                }
-                .onEnded { value in
-                       let draggedEntity = value.entity
-                       let worldPosition = draggedEntity.position(relativeTo: bisonFoodsEntity)
-
-                       draggedEntity.removeFromParent()
-
-                       draggedEntity.position = worldPosition
-
-                       bisonFoodsEntity?.addChild(draggedEntity)
-                }
-        )
-        
-        
         .onDisappear {
                 
             timerCancellable?.cancel()
@@ -211,6 +182,7 @@ struct ImmersiveView: View {
             }
         }
     }
+
     
 }
 

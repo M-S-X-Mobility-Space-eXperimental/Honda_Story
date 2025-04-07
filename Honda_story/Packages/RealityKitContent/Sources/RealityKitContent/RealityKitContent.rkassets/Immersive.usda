@@ -24,7 +24,7 @@ def Xform "Root"
                 string audioResourceName = "msx geyser sfx v1.wav"
                 bool controlPlayback = 1
                 double duration = 20.439504058367262
-                double gain = -32.515554298642535
+                double gain = -11.25424208144797
                 uniform token info:id = "4460F7F5-0807-4692-9C2E-47FC5B7D0CAB"
                 double startTime = 0
                 rel target = </Root/GeyserSandbox>

@@ -250,6 +250,46 @@ class DBModel: ObservableObject {
             }
         }
     }
+    
+    func observeBisonFoodChildUpdates(onUpdate: @escaping (_ name: String, _ transform: Transform) -> Void) {
+        let userId = self.getUserID()
+
+        ref.child("BisonFoods").observe(.childChanged) { snapshot in
+            let name = snapshot.key
+
+            guard let data = snapshot.value as? [String: Any],
+                  let controllerId = data["controllerId"] as? String,
+                  controllerId != userId else {
+                return
+            }
+
+            guard let pos = data["position"] as? [String: Any],
+                  let rot = data["rotation"] as? [String: Any],
+                  let scale = data["scale"] as? [String: Any],
+                  let px = (pos["x"] as? NSNumber)?.floatValue,
+                  let py = (pos["y"] as? NSNumber)?.floatValue,
+                  let pz = (pos["z"] as? NSNumber)?.floatValue,
+                  let rx = (rot["x"] as? NSNumber)?.floatValue,
+                  let ry = (rot["y"] as? NSNumber)?.floatValue,
+                  let rz = (rot["z"] as? NSNumber)?.floatValue,
+                  let rw = (rot["w"] as? NSNumber)?.floatValue,
+                  let sx = (scale["x"] as? NSNumber)?.floatValue,
+                  let sy = (scale["y"] as? NSNumber)?.floatValue,
+                  let sz = (scale["z"] as? NSNumber)?.floatValue
+            else {
+                print("⚠️ Incomplete transform data for \(name)")
+                return
+            }
+
+            let transform = Transform(
+                scale: SIMD3<Float>(sx, sy, sz),
+                rotation: simd_quatf(ix: rx, iy: ry, iz: rz, r: rw),
+                translation: SIMD3<Float>(px, py, pz)
+            )
+
+            onUpdate(name, transform)
+        }
+    }
 
 
 }

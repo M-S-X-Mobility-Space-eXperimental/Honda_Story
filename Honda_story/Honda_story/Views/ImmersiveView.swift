@@ -47,7 +47,7 @@ struct ImmersiveView: View {
     @State private var lastCubePosition: SIMD3<Float>?
     @State private var cancellables = Set<AnyCancellable>()
     
-    @State private var deferredEntities: [String: Entity] = [:]
+    @State private var currentControllingObj: String?
 
 
     
@@ -92,6 +92,17 @@ struct ImmersiveView: View {
             // First stage observe all ready
             dbModel.observeAllRealdy()
             trackGestureStates()
+            
+            // prevent initialization
+            if(dbModel.AllTapped){
+                dbModel.observeBisonFoodChildUpdates { name, transform in
+                    if let entity = self.immersiveContentEntity?.findEntity(named: name) {
+                        entity.transform = transform
+                        print("🟡 Synced remote update to \(name)")
+                    }
+                }
+            }
+            
         }
         .onChange(of: dbModel.startGeyserExp) {
             if dbModel.startGeyserExp{
@@ -170,11 +181,18 @@ struct ImmersiveView: View {
 
                 guard state.isDragging || state.isScaling || state.isRotating,
                       let entity = state.targetedEntity else {
+                    
+                    if (currentControllingObj != nil){
+                        dbModel.releaseBisonFoodControl(forName: currentControllingObj!)
+                    }
+                    
                     return
                 }
 
                 let name = entity.name
                 guard !name.isEmpty else { return }
+                
+                currentControllingObj = name
 
                 let transform = entity.transform
                 DBModel.shared.updateBisonFoodProperty(forName: name, withTransform: transform)

@@ -1,5 +1,5 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "BehaviorsPluginID",
   "openSceneRelativePaths" : [
     "Immersive.usda",
     "TestPlaceScenes\/Test.usda",
@@ -18,6 +18,28 @@
   },
   "sceneCameraHistory" : {
     "1D572CEB-057A-41C3-B575-04C37501A3C0" : [
+      {
+        "date" : 765690321.558168,
+        "title" : "Untitled",
+        "transform" : [
+          -0.038849227,
+          -3.8395974e-08,
+          -0.9992449,
+          0,
+          -0.09126811,
+          0.99582,
+          0.0035483337,
+          0,
+          0.9950682,
+          0.09133714,
+          -0.03868688,
+          0,
+          127.71677,
+          11.292746,
+          -154.87433,
+          1
+        ]
+      },
       {
         "date" : 765690289.919201,
         "title" : "Untitled",
@@ -213,28 +235,6 @@
           0.11978912,
           1.3014362,
           0.33233055,
-          1
-        ]
-      },
-      {
-        "date" : 765689320.492968,
-        "title" : "Untitled",
-        "transform" : [
-          0.9631658,
-          -1.6513837e-08,
-          0.2689085,
-          0,
-          0.19390726,
-          0.6928411,
-          -0.6945295,
-          0,
-          -0.1863108,
-          0.7210904,
-          0.6673208,
-          0,
-          -0.39861566,
-          1.5168049,
-          0.6750221,
           1
         ]
       }

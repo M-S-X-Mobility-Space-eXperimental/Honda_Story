@@ -23,6 +23,10 @@ struct ImmersiveView: View {
     @State private var bisonFoodsEntity: Entity?
     @State private var bisonTransitTLEntity: Entity?
     @State private var bluegrassEntity: Entity?
+    
+    @State private var bisonWrongEntity: Entity?
+    @State private var bisonCorrectEntity: Entity?
+
    
     @State private var EruptionEntity: Entity?
     @State private var GeyserSandboxEntity: Entity?
@@ -37,6 +41,9 @@ struct ImmersiveView: View {
     
     @State private var GeyserErupt: Bool = false
     @State private var BisonAttracted: Bool = false
+    @State private var BisonRightPlaying: Bool = false
+    @State private var BisonWrongPlaying: Bool = false
+    
     
     @State private var Timeline_GeyserEntity: Entity?
     
@@ -83,6 +90,8 @@ struct ImmersiveView: View {
                 assignEntity(named: "bluegrass", to: &bluegrassEntity)
                 assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: true)
                 assignEntity(named: "BisonTransitTL", to: &bisonTransitTLEntity)
+                assignEntity(named: "Bison_End", to: &bisonCorrectEntity)
+                assignEntity(named: "Bison_Wrong", to: &bisonWrongEntity)
                 
                 initBisonFoodObjectList()
             }
@@ -92,14 +101,14 @@ struct ImmersiveView: View {
             // First stage observe all ready
             dbModel.observeAllRealdy()
             trackGestureStates()
-            
-            // prevent initialization
-            if(dbModel.FinishBisonFoodInit){
-                dbModel.observeBisonFoodChildUpdates { name, transform in
-                    if let entity = self.immersiveContentEntity?.findEntity(named: name) {
-                        entity.transform = transform
-                        print("🟡 Synced remote update to \(name)")
-                    }
+        }
+        .onChange(of: dbModel.FinishBisonFoodInit){
+            dbModel.observeBisonFoodChildUpdates { name, transform in
+                if let entity = self.immersiveContentEntity?.findEntity(named: name) {
+                    entity.transform = transform
+                    print("🟡 Synced remote update to \(name)")
+                    bisonFeedBackSequence(name: name)
+                    
                 }
             }
             
@@ -129,6 +138,11 @@ struct ImmersiveView: View {
                 
                 _ = GeyserSandboxEntity?.applyTapForBehaviors()
                 _ = bisonTransitTLEntity?.applyTapForBehaviors()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 55) {
+                    stopMoving()
+                    print("🛑 Stopped movement for BisonExp.")
+                }
                 
            }
         }
@@ -192,6 +206,8 @@ struct ImmersiveView: View {
                 let name = entity.name
                 guard !name.isEmpty else { return }
                 
+                bisonFeedBackSequence(name: name)
+                
                 currentControllingObj = name
 
                 let transform = entity.transform
@@ -199,7 +215,33 @@ struct ImmersiveView: View {
             }
             .store(in: &cancellables)
     }
-
+    
+    func bisonFeedBackSequence(name: String){
+        let correct: Bool
+        if(name == "bluegrass"){
+            correct = true
+        }else{
+            correct = false
+        }
+        
+        if(correct){
+            if(!BisonRightPlaying){
+                BisonRightPlaying = true
+                _ = BisonEntity?.applyTapForBehaviors()
+                _ = bisonCorrectEntity?.applyTapForBehaviors()
+            }
+        }else{
+            if(!BisonWrongPlaying){
+                BisonWrongPlaying = true
+                _ = bisonWrongEntity?.applyTapForBehaviors()
+                
+                // reset BisonWrong playing
+                DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
+                    BisonWrongPlaying = false
+                }
+            }
+        }
+    }
     
     func initBisonFoodObjectList() {
         guard let bisonFoods = bisonFoodsEntity else {

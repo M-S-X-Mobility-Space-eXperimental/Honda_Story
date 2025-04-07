@@ -9,13 +9,13 @@ reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "Car", "Environment", "OldBisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "CountDownGroup", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder", "BisonFoods", "BisonTransitTL"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "Car", "Environment", "OldBisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "CountDownGroup", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder", "BisonFoods", "BisonTransitTL", "Bison_Correct", "Bison_Wrong"]
     float3 xformOp:translate = (0, 0, 0)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitTimeline "GeyserErupt"
     {
-        reorder nameChildren = ["Track2", "Track"]
+        reorder nameChildren = ["Track2", "Track", "Track3"]
         def RealityKitTrack "Track2"
         {
             def RealityKitAction "Play_Audio"
@@ -708,7 +708,7 @@ def Xform "Root"
     )
     {
         reorder nameChildren = ["BisonParent", "Bison_eat01"]
-        float3 xformOp:translate = (3.9551637, 4.7683716e-7, -1.1813891)
+        float3 xformOp:translate = (4.219613, 4.7683716e-7, -1.1813891)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Xform "BisonParent" (
@@ -772,7 +772,7 @@ def Xform "Root"
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 1
+            float opacity = 0
         }
 
         def RealityKitComponent "RCP_BehaviorsContainer"
@@ -1300,7 +1300,7 @@ def Xform "Root"
         active = true
     )
     {
-        reorder nameChildren = ["banana", "AudioEmitter", "msx_geyser_sfx_v1_wav", "Geyser_Intro_mp3", "Bison_Intro_mp3", "Bison_Eating_wav", "Geyser_End_mp3_1", "Yellowstone_Intro_mp3"]
+        reorder nameChildren = ["AudioEmitter", "msx_geyser_sfx_v1_wav", "Geyser_Intro_mp3", "Bison_Intro_mp3", "Bison_Eating_wav", "Geyser_End_mp3_1", "Yellowstone_Intro_mp3", "BisonFeedBacks"]
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0, 0, 0)
@@ -1367,6 +1367,172 @@ def Xform "Root"
         {
             uniform asset file = @Sounds/Yellowstone Intro.mp3@
             uniform bool shouldLoop = 0
+        }
+
+        def Xform "BisonFeedBacks" (
+            active = true
+        )
+        {
+            reorder nameChildren = ["Bison_Eating", "Bison_Wrong", "Bison_End", "Bison_Eating_wav", "Feed_Bison_Wrong_mp3", "Bison_End_mp3"]
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Xform "Bison_Eating" (
+                active = true
+            )
+            {
+                quatf xformOp:orient = (1, 0, 0, 0)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "AudioLibrary"
+                {
+                    uniform token info:id = "RealityKit.AudioLibrary"
+
+                    def RealityKitDict "resources"
+                    {
+                        string[] keys = ["Bison Eating.wav"]
+                        rel values = </Root/Audios/BisonFeedBacks/Bison_Eating_wav>
+                    }
+                }
+            }
+
+            def Xform "Bison_Wrong" (
+                active = true
+            )
+            {
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+                quatf xformOp:orient = (1, 0, 0, 0)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "AudioLibrary"
+                {
+                    uniform token info:id = "RealityKit.AudioLibrary"
+
+                    def RealityKitDict "resources"
+                    {
+                        string[] keys = ["Feed Bison Wrong.mp3"]
+                        rel values = </Root/Audios/BisonFeedBacks/Feed_Bison_Wrong_mp3>
+                    }
+                }
+
+                def RealityKitComponent "RCP_BehaviorsContainer"
+                {
+                    rel behaviors = </Root/Audios/BisonFeedBacks/Bison_Wrong/OnTap>
+                    uniform token info:id = "RCP.BehaviorsContainer"
+                }
+
+                def Preliminary_Behavior "OnTap"
+                {
+                    rel actions = </Root/Audios/BisonFeedBacks/Bison_Wrong/OnTap/Action>
+                    uniform bool exclusive
+                    rel triggers = </Root/Audios/BisonFeedBacks/Bison_Wrong/OnTap/Trigger>
+
+                    def Preliminary_Trigger "Trigger"
+                    {
+                        rel affectedObjects = </Root/Audios/BisonFeedBacks/Bison_Wrong>
+                        token info:id = "TapGesture"
+                    }
+
+                    def Preliminary_Action "Action"
+                    {
+                        rel affectedObjects = </Root>
+                        rel animationLibraryKey = </Root/Bison_Wrong>
+                        rel animationLibraryKeyOverrideKey = </Root/Audios/BisonFeedBacks/Bison_Wrong/OnTap/Trigger>
+                        token info:id = "PlayTimeline"
+                        int loops = 0
+                        int performCount = 1
+                        token type = "serial"
+                    }
+                }
+
+                def RealityKitComponent "InputTarget"
+                {
+                    uniform token info:id = "RealityKit.InputTarget"
+                }
+            }
+
+            def Xform "Bison_End" (
+                active = true
+            )
+            {
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+                quatf xformOp:orient = (1, 0, 0, 0)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "AudioLibrary"
+                {
+                    uniform token info:id = "RealityKit.AudioLibrary"
+
+                    def RealityKitDict "resources"
+                    {
+                        string[] keys = ["Bison End.mp3"]
+                        rel values = </Root/Audios/BisonFeedBacks/Bison_End_mp3>
+                    }
+                }
+
+                def RealityKitComponent "RCP_BehaviorsContainer"
+                {
+                    rel behaviors = </Root/Audios/BisonFeedBacks/Bison_End/OnTap>
+                    uniform token info:id = "RCP.BehaviorsContainer"
+                }
+
+                def Preliminary_Behavior "OnTap"
+                {
+                    rel actions = </Root/Audios/BisonFeedBacks/Bison_End/OnTap/Action>
+                    uniform bool exclusive
+                    rel triggers = </Root/Audios/BisonFeedBacks/Bison_End/OnTap/Trigger>
+
+                    def Preliminary_Trigger "Trigger"
+                    {
+                        rel affectedObjects = </Root/Audios/BisonFeedBacks/Bison_End>
+                        token info:id = "TapGesture"
+                    }
+
+                    def Preliminary_Action "Action"
+                    {
+                        rel affectedObjects = </Root>
+                        rel animationLibraryKey = </Root/Bison_Correct>
+                        rel animationLibraryKeyOverrideKey = </Root/Audios/BisonFeedBacks/Bison_End/OnTap/Trigger>
+                        token info:id = "PlayTimeline"
+                        int loops = 0
+                        int performCount = 1
+                        token type = "serial"
+                    }
+                }
+
+                def RealityKitComponent "InputTarget"
+                {
+                    uniform token info:id = "RealityKit.InputTarget"
+                }
+            }
+
+            def RealityKitAudioFile "Bison_Eating_wav"
+            {
+                uniform asset file = @Sounds/Bison Eating.wav@
+                uniform bool shouldLoop = 1
+            }
+
+            def RealityKitAudioFile "Feed_Bison_Wrong_mp3"
+            {
+                uniform asset file = @Sounds/Feed Bison Wrong.mp3@
+                uniform bool shouldLoop = 0
+            }
+
+            def RealityKitAudioFile "Bison_End_mp3"
+            {
+                uniform asset file = @Sounds/Bison End.mp3@
+                uniform bool shouldLoop = 0
+            }
         }
     }
 
@@ -1789,6 +1955,69 @@ def Xform "Root"
                     int loops = 0
                     int performCount = 1
                     token type = "serial"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Bison_Correct"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "Bison Eating.wav"
+                bool controlPlayback = 1
+                double duration = 7.441854166666666
+                double gain = -12.747454751131222
+                uniform token info:id = "49292A1F-04B1-4A52-ADC1-597A7A675979"
+                double loopCount = 5
+                double startTime = 0
+                rel target = </Root/Audios/BisonFeedBacks/Bison_Eating>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "Bison End.mp3"
+                bool controlPlayback = 1
+                double duration = 50.886520833333336
+                uniform token info:id = "791750C8-3333-4796-8759-A1929E1F8670"
+                double startTime = 0
+                rel target = </Root/Audios/BisonFeedBacks/Bison_End>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Bison_Wrong"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "Feed Bison Wrong.mp3"
+                bool controlPlayback = 1
+                double duration = 11.284895833333334
+                uniform token info:id = "6DE4A4EA-094B-4607-9F69-3289D0AFD2AF"
+                double startTime = 0
+                rel target = </Root/Audios/BisonFeedBacks/Bison_Wrong>
+
+                def RealityKitStruct "handoffType"
+                {
                 }
             }
         }

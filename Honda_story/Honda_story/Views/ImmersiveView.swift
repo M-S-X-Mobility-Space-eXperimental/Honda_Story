@@ -14,14 +14,23 @@ import FirebaseDatabase
 struct ImmersiveView: View {
     
     @State private var session: SpatialTrackingSession?
+        
+    @State private var immersiveContentEntity:Entity?
+    @State private var SceneRootContent: RealityViewContent?
     
     @State private var environmentEntity: Entity?
     @State private var timerCancellable: Cancellable?
     @State private var bisonFoodsEntity: Entity?
     @State private var bluegrassEntity: Entity?
+   
     @State private var EruptionEntity: Entity?
+    @State private var GeyserSandboxEntity: Entity?
+    @State private var GeyserSoundTLEntity: Entity?
+    
+    @State private var timelineGeyser:Entity?
     @State private var BisonEntity: Entity?
     @State private var CountDownEntity: Entity?
+    @State private var TestCubeEntity: Entity?
     
 //    @State private var RootEntity: Entity?
     
@@ -33,97 +42,67 @@ struct ImmersiveView: View {
     @State private var LeftHandAnchor: AnchorEntity?
     @State private var RightHandAnchor: AnchorEntity?
     @State private var CurrentHandAnchor: AnchorEntity?
+    @State private var SphereEntity: Entity?
     
+    @State private var lastCubePosition: SIMD3<Float>?
+    @State private var cancellables = Set<AnyCancellable>()
     
-    @State private var SceneRootContent: RealityViewContent?
+    @State private var deferredEntities: [String: Entity] = [:]
+
+
     
-    
-    @StateObject private var dbModel: DBModel = DBModel.shared
-    
+    @StateObject var dbModel = DBModel.shared
+
 
     var body: some View {
         RealityView { content in
             // Add the initial RealityKit content
             if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
-                
-                
-                content.add(immersiveContentEntity)
-                
-                SceneRootContent = content
-                
-                let session = SpatialTrackingSession()
-                let configuration = SpatialTrackingSession.Configuration(tracking: [.hand, .world])
-                _ = await session.run(configuration)
-                self.session = session
-               //Setup an anchor at the user's left palm.
-                self.LeftHandAnchor = AnchorEntity(.hand(.left, location: .indexFingerTip), trackingMode: .continuous)
-                self.RightHandAnchor = AnchorEntity(.hand(.right, location: .indexFingerTip), trackingMode: .continuous)
-//                let worldAnchor = AnchorEntity(.world(transform: float4x4(0)), trackingMode: .continuous)
-//                
-//                if let root = immersiveContentEntity.findEntity(named: "Root"){
-//                               
-//                    //Child the gauntlet scene to the handAnchor.
-//                    worldAnchor.addChild(root)
-//                    
-//                    // Add the handAnchor to the RealityView scene.
-//                    content.add(worldAnchor)
-//                   
-//                }
-                
-//                if let sphere = immersiveContentEntity.findEntity(named: "Sphere"){
-//                               
-//                    //Child the gauntlet scene to the handAnchor.
-//                    handAnchor.addChild(sphere)
-//                    
-//                    // Add the handAnchor to the RealityView scene.
-//                    content.add(handAnchor)
-//                   
-//                }
+                            
+                            
+            content.add(immersiveContentEntity)
+            
+            self.immersiveContentEntity = immersiveContentEntity
+            self.SceneRootContent = content
+            
+            
+            // Hand Tracking Setup
+            let session = SpatialTrackingSession()
+            let configuration = SpatialTrackingSession.Configuration(tracking: [.hand, .world])
+            _ = await session.run(configuration)
+            self.session = session
+           //Setup an anchor at the user's left palm.
+            self.LeftHandAnchor = AnchorEntity(.hand(.left, location: .indexFingerTip), trackingMode: .continuous)
+            self.RightHandAnchor = AnchorEntity(.hand(.right, location: .indexFingerTip), trackingMode: .continuous)
 
-                
-                if let environment = immersiveContentEntity.findEntity(named: "Environment") {
-                    environmentEntity = environment
-                    
-                    // Start a timer to move the object 1cm per second
-                    timerCancellable = Timer.publish(every: 0.01, on: .main, in: .common)
-                        .autoconnect()
-                        .sink { _ in
-                            environment.position += SIMD3<Float>(x: 0, y: 0, z: 0.01)
-                        }
-                }
-                
-                // Find "BisonFoods" and deactivate it initially
-                if let bisonfood = immersiveContentEntity.findEntity(named: "BisonFoods"){
-                    bisonFoodsEntity = bisonfood
-                    bisonfood.isEnabled = false
-                    
-                }
-                if let eruption = immersiveContentEntity.findEntity(named: "Eruption"){
-                    eruption.isEnabled = false
-                    EruptionEntity = eruption
-                }
-                
-                if let bison = immersiveContentEntity.findEntity(named: "Bison") {
-                    BisonEntity = bison
-                    
-                }
-                print(BisonEntity ?? "Nobison")
-                
-                if let bluegrass = immersiveContentEntity.findEntity(named: "bluegrass") {
-                    bluegrassEntity = bluegrass
-                }
-                
-                if let countdown = immersiveContentEntity.findEntity(named: "CountDownGroup") {
-//                    countdown.isEnabled = false
-                    CountDownEntity = countdown
-                }
 
+            assignEntity(named: "GeyserSoundTL", to: &GeyserSoundTLEntity)
+            assignEntity(named: "Environment", to: &environmentEntity)
+            assignEntity(named: "BisonFoods", to: &bisonFoodsEntity, disable: false)
+            assignEntity(named: "Eruption", to: &EruptionEntity, disable: true)
+            assignEntity(named: "Bison", to: &BisonEntity)
+            assignEntity(named: "bluegrass", to: &bluegrassEntity)
+            assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: true)
+                            
             }
         }
         .task{
             dbModel.observeGeyser()
+            dbModel.observeAllRealdy()
         }
-        
+        .onChange(of: dbModel.startGeyserExp) {
+            if dbModel.startGeyserExp{
+                GeyserSandboxEntity?.isEnabled = true
+                print(GeyserSoundTLEntity ?? "GeyserSoundTLEntity is nil")
+                
+                _ = GeyserSoundTLEntity?.applyTapForBehaviors()
+                
+                startMoving()
+           }
+            
+            //reset ready for next round
+            dbModel.playerResetReady()
+        }
         .onChange(of: dbModel.Geyser) {
             if dbModel.Geyser {
                 print("Enabling Eruption")
@@ -132,6 +111,9 @@ struct ImmersiveView: View {
                 GeyserErupt = true
                 
                 CountDownEntity?.isEnabled = false
+                
+                _ = GeyserSandboxEntity?.applyTapForBehaviors()
+                _ = bisonFoodsEntity?.applyTapForBehaviors()
                 
            }
         }
@@ -207,6 +189,24 @@ struct ImmersiveView: View {
         .onDisappear {
                 
             timerCancellable?.cancel()
+        }
+    }
+    
+    func startMoving(){
+        // Start a timer to move the object 1cm per second
+        timerCancellable = Timer.publish(every: 0.01, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                self.environmentEntity?.position += SIMD3<Float>(x: 0, y: 0, z: 0.01)
+            }
+    }
+    
+    func assignEntity(named name: String, to binding: inout Entity?, disable: Bool = false) {
+        if let entity = self.immersiveContentEntity?.findEntity(named: name) {
+            binding = entity
+            if disable {
+                entity.isEnabled = false
+            }
         }
     }
     

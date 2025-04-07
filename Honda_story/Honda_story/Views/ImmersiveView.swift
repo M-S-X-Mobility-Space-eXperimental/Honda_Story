@@ -21,6 +21,7 @@ struct ImmersiveView: View {
     @State private var environmentEntity: Entity?
     @State private var timerCancellable: Cancellable?
     @State private var bisonFoodsEntity: Entity?
+    @State private var bisonTransitTLEntity: Entity?
     @State private var bluegrassEntity: Entity?
    
     @State private var EruptionEntity: Entity?
@@ -78,6 +79,7 @@ struct ImmersiveView: View {
 
             assignEntity(named: "GeyserSoundTL", to: &GeyserSoundTLEntity)
             assignEntity(named: "Environment", to: &environmentEntity)
+            assignEntity(named: "BisonTransitTL", to: &bisonTransitTLEntity)
             assignEntity(named: "BisonFoods", to: &bisonFoodsEntity, disable: false)
             assignEntity(named: "Eruption", to: &EruptionEntity, disable: true)
             assignEntity(named: "Bison", to: &BisonEntity)
@@ -113,7 +115,7 @@ struct ImmersiveView: View {
                 CountDownEntity?.isEnabled = false
                 
                 _ = GeyserSandboxEntity?.applyTapForBehaviors()
-                _ = bisonFoodsEntity?.applyTapForBehaviors()
+                _ = bisonTransitTLEntity?.applyTapForBehaviors()
                 
            }
         }

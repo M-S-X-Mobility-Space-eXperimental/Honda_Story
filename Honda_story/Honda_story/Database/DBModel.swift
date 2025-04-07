@@ -24,6 +24,7 @@ class DBModel: ObservableObject {
     // Player State Variables
     @Published var AllReady: Bool = false
     @Published var AllTapped: Bool = false
+    @Published var FinishBisonFoodInit: Bool = false
     
     // DB Handle
     private var allTappedHandle: DatabaseHandle?
@@ -154,6 +155,7 @@ class DBModel: ObservableObject {
                 print("🔥 Upload failed: \(error.localizedDescription)")
             } else {
                 print("✅ Upload succeeded.")
+                self.FinishBisonFoodInit = true
             }
         }
     }

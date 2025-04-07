@@ -94,7 +94,7 @@ struct ImmersiveView: View {
             trackGestureStates()
             
             // prevent initialization
-            if(dbModel.AllTapped){
+            if(dbModel.FinishBisonFoodInit){
                 dbModel.observeBisonFoodChildUpdates { name, transform in
                     if let entity = self.immersiveContentEntity?.findEntity(named: name) {
                         entity.transform = transform

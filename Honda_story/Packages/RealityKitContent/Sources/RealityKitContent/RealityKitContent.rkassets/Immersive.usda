@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "Car", "Environment", "OldBisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "CountDownGroup", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "Old_Car", "Old_Environment", "OldBisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "CountDownGroup", "Bison_Grunt_wav", "Car", "Env", "Environment", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
     float3 xformOp:translate = (0, 0, 0)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -48,8 +48,8 @@ def Xform "Root"
         }
     }
 
-    def "Car" (
-        active = true
+    def "Old_Car" (
+        active = false
         customData = {
             float3 rotationEulerHint = (1.5707965, 4.712389, 0)
         }
@@ -63,19 +63,19 @@ def Xform "Root"
 
         def RealityKitComponent "RCP_BehaviorsContainer"
         {
-            rel behaviors = </Root/Car/OnAddedToScene>
+            rel behaviors = </Root/Old_Car/OnAddedToScene>
             uniform token info:id = "RCP.BehaviorsContainer"
         }
 
         def Preliminary_Behavior "OnAddedToScene"
         {
-            rel actions = </Root/Car/OnAddedToScene/Action>
+            rel actions = </Root/Old_Car/OnAddedToScene/Action>
             uniform bool exclusive
-            rel triggers = </Root/Car/OnAddedToScene/Trigger>
+            rel triggers = </Root/Old_Car/OnAddedToScene/Trigger>
 
             def Preliminary_Trigger "Trigger"
             {
-                rel affectedObjects = </Root/Car>
+                rel affectedObjects = </Root/Old_Car>
                 token info:id = "SceneTransition"
             }
 
@@ -83,7 +83,7 @@ def Xform "Root"
             {
                 rel affectedObjects = </Root>
                 rel animationLibraryKey = </Root/Intro_YellowStone>
-                rel animationLibraryKeyOverrideKey = </Root/Car/OnAddedToScene/Trigger>
+                rel animationLibraryKeyOverrideKey = </Root/Old_Car/OnAddedToScene/Trigger>
                 token info:id = "PlayTimeline"
                 int loops = 0
                 int performCount = 1
@@ -92,7 +92,8 @@ def Xform "Root"
         }
     }
 
-    def "Environment" (
+    def "Old_Environment" (
+        active = false
         customData = {
             float3 rotationEulerHint = (0, 1.3962636, 0)
         }
@@ -103,6 +104,10 @@ def Xform "Root"
         float3 xformOp:scale = (10, 10, 10)
         float3 xformOp:translate = (66.38554, 4.023205, -162.43826)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def "YellowStone"
+        {
+        }
     }
 
     def RealityKitTimeline "IntroGeyser"
@@ -1145,7 +1150,7 @@ def Xform "Root"
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 1
+            float opacity = 0
         }
 
         def Xform "GeyserSoundTL" (
@@ -1315,8 +1320,8 @@ def Xform "Root"
 
                     def RealityKitDict "resources"
                     {
-                        string[] keys = ["Feed Bison Wrong.mp3"]
-                        rel values = </Root/Audios/BisonFeedBacks/Feed_Bison_Wrong_mp3>
+                        string[] keys = ["Bison Grunt.wav"]
+                        rel values = </Root/Bison_Grunt_wav>
                     }
                 }
 
@@ -1572,6 +1577,8 @@ def Xform "Root"
 
         over "banana"
         {
+            float3 xformOp:scale = (0.4, 0.4, 0.4)
+
             def RealityKitComponent "Collider"
             {
                 uint group = 1
@@ -1711,8 +1718,15 @@ def Xform "Root"
             }
         }
 
-        over "banana_1"
+        over "banana_1" (
+            customData = {
+                float3 rotationEulerHint = (-0.0006905367, -0.38520712, 4.0826736e-10)
+            }
+        )
         {
+            quatf xformOp:orient = (0.98150915, -0.00033888398, -0.19141494, -0.00006608931)
+            float3 xformOp:scale = (0.3012585, 0.30125856, 0.3012585)
+
             def RealityKitComponent "Collider"
             {
                 uint group = 1
@@ -1747,6 +1761,8 @@ def Xform "Root"
 
         over "wildflower"
         {
+            float3 xformOp:scale = (0.0029999996, 0.0029999998, 0.0029999996)
+
             def RealityKitComponent "Collider"
             {
                 uint group = 1
@@ -1950,9 +1966,9 @@ def Xform "Root"
             def RealityKitAction "Play_Audio"
             {
                 string actionKind = "audio"
-                string audioResourceName = "Feed Bison Wrong.mp3"
+                string audioResourceName = "Bison Grunt.wav"
                 bool controlPlayback = 1
-                double duration = 11.284895833333334
+                double duration = 1.4706458333333334
                 uniform token info:id = "6DE4A4EA-094B-4607-9F69-3289D0AFD2AF"
                 double startTime = 0
                 rel target = </Root/Audios/BisonFeedBacks/Bison_Wrong>
@@ -2537,6 +2553,140 @@ def Xform "Root"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
             float opacity = 0
+        }
+    }
+
+    def RealityKitAudioFile "Bison_Grunt_wav"
+    {
+        uniform asset file = @Sounds/Bison Grunt.wav@
+        uniform bool shouldLoop = 0
+    }
+
+    def "Car" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (0, -1.5707963, 0)
+        }
+        references = @ArtAssets/car_New/car.usda@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, 0, -0.7071067, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, -2.7232904)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "CarDoor"
+        {
+            float3 xformOp:translate = (0.033654213, 0.019344807, 5.935066)
+        }
+
+        over "carseats"
+        {
+            float3 xformOp:translate = (2.1929798, -0.04047823, 0.036938965)
+        }
+
+        over "carseats_1"
+        {
+            float3 xformOp:translate = (3.1138346, -0.058086097, -0.16268125)
+        }
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/Car/OnAddedToScene>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnAddedToScene"
+        {
+            rel actions = </Root/Car/OnAddedToScene/Action>
+            uniform bool exclusive
+            rel triggers = </Root/Car/OnAddedToScene/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/Car>
+                token info:id = "SceneTransition"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Intro_YellowStone>
+                rel animationLibraryKeyOverrideKey = </Root/Car/OnAddedToScene/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+    }
+
+    def Xform "Environment" (
+        active = true
+    )
+    {
+        def "Env" (
+            active = true
+            references = @ArtAssets/terrain_New/Env.usda@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (20, 20, 20)
+            float3 xformOp:translate = (-2.5326157, -1.1048737, -455.9428)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "Group"
+            {
+                float3 xformOp:translate = (0.56336683, -1.7881393e-7, -41.564022)
+
+                over "terrain"
+                {
+                    float3 xformOp:translate = (-8.940697e-8, 0.0024998635, 60.880383)
+                }
+
+                over "road_3"
+                {
+                    float3 xformOp:translate = (-0.55398613, 0.06274387, 56.922256)
+                }
+
+                over "road_1"
+                {
+                    float3 xformOp:translate = (-0.5539061, 0.045543663, 58.434647)
+                }
+            }
+
+            over "Group_4"
+            {
+                over "grass_vegitation_mix_1"
+                {
+                    float3 xformOp:scale = (0.00065, 0.00065, 0.00065)
+                    float3 xformOp:translate = (0.45911452, 0.03524369, 21.1142)
+                }
+
+                over "Group_1"
+                {
+                    over "grass_vegitation_mix_3"
+                    {
+                        float3 xformOp:scale = (0.001, 0.001, 0.001)
+                        float3 xformOp:translate = (0.5665312, 0.10591617, 19.595646)
+                    }
+                }
+
+                over "Group_2"
+                {
+                    over "grass_vegitation_mix_3"
+                    {
+                        float3 xformOp:scale = (0.0006, 0.0006, 0.0006)
+                        float3 xformOp:translate = (0.8507197, 0.03089811, 19.989796)
+                    }
+                }
+
+                over "grass_vegitation_mix_2"
+                {
+                    float3 xformOp:scale = (0.0011, 0.0011, 0.0011)
+                    float3 xformOp:translate = (0.844644, 0.039673485, 18.889698)
+                }
+            }
         }
     }
 }

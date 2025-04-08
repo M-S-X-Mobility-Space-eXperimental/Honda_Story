@@ -18,6 +18,8 @@ struct ImmersiveView: View {
     @State private var immersiveContentEntity:Entity?
     @State private var SceneRootContent: RealityViewContent?
     
+    @State private var AudioEmitterEntity: Entity?
+    
     @State private var environmentEntity: Entity?
     @State private var MovingCancellable: Cancellable?
     @State private var bisonFoodsEntity: Entity?
@@ -93,9 +95,11 @@ struct ImmersiveView: View {
                 assignEntity(named: "Bison_End", to: &bisonCorrectEntity)
                 assignEntity(named: "Bison_Wrong", to: &bisonWrongEntity)
                 
+                assignEntity(named: "AudioEmitter", to: &AudioEmitterEntity)
                 
-                let hoverComponent = HoverEffectComponent()
-                GeyserSandboxEntity?.components.set(hoverComponent)
+                
+//                let hoverComponent = HoverEffectComponent()
+//                GeyserSandboxEntity?.components.set(hoverComponent)
                 
                 initBisonFoodObjectList()
             }
@@ -240,7 +244,7 @@ struct ImmersiveView: View {
                 _ = bisonWrongEntity?.applyTapForBehaviors()
                 
                 // reset BisonWrong playing
-                DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     BisonWrongPlaying = false
                 }
             }

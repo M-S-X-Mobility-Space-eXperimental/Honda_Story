@@ -10,7 +10,7 @@ reorder rootPrims = ["Root", "BisonFoods"]
 def Xform "Root"
 {
     reorder nameChildren = ["Eruption", "GeyserSandbox", "Old_Car", "Old_Environment", "OldBisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "CountDownGroup", "Bison_Grunt_wav", "Car", "Env", "Environment", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
-    float3 xformOp:translate = (0, 0, 0)
+    float3 xformOp:translate = (-0.2, 0, -0.7)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitTimeline "GeyserErupt"
@@ -832,6 +832,60 @@ def Xform "Root"
                         uniform string name = "Bison_rej01"
                     }
                 }
+
+                over "mtl"
+                {
+                    over "AmericanBison_M_APFur_LOD0SG1"
+                    {
+                        token inputs:frame:stPrimvarName = "st" (
+                            customData = {
+                                dictionary realitykit = {
+                                    bool hide = 1
+                                }
+                            }
+                        )
+                        token outputs:mtlx:surface
+                        token outputs:realitykit:vertex
+
+                        def Shader "opacity"
+                        {
+                            uniform token info:id = "UsdUVTexture"
+                            asset inputs:file = @ArtAssets/Bisons/opacity.png@
+                            float2 inputs:st.connect = </Root/Bison/BisonParent/Bison_Model/mtl/AmericanBison_M_APFur_LOD0SG1/opacity/TexCoordReader.outputs:result>
+                            float outputs:r
+
+                            def Shader "TexCoordReader"
+                            {
+                                uniform token info:id = "UsdPrimvarReader_float2"
+                                token inputs:varname.connect = </Root/Bison/BisonParent/Bison_Model/mtl/AmericanBison_M_APFur_LOD0SG1.inputs:frame:stPrimvarName>
+                                float2 outputs:result
+                            }
+                        }
+
+                        over "AmericanBison_M_APFur_Material"
+                        {
+                            float inputs:opacity = 1
+                            float inputs:opacity.connect = </Root/Bison/BisonParent/Bison_Model/mtl/AmericanBison_M_APFur_LOD0SG1/opacity.outputs:r>
+                            float inputs:opacityThreshold = 0.1
+                            float inputs:opacityThreshold.connect = None
+                        }
+
+                        def Shader "opacityThreshold"
+                        {
+                            uniform token info:id = "UsdUVTexture"
+                            asset inputs:file = @ArtAssets/Bisons/opacity.png@
+                            float2 inputs:st.connect = </Root/Bison/BisonParent/Bison_Model/mtl/AmericanBison_M_APFur_LOD0SG1/opacityThreshold/TexCoordReader.outputs:result>
+                            float outputs:r
+
+                            def Shader "TexCoordReader"
+                            {
+                                uniform token info:id = "UsdPrimvarReader_float2"
+                                token inputs:varname.connect = </Root/Bison/BisonParent/Bison_Model/mtl/AmericanBison_M_APFur_LOD0SG1.inputs:frame:stPrimvarName>
+                                float2 outputs:result
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -1195,7 +1249,7 @@ def Xform "Root"
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 0
+            float opacity = 1
         }
 
         def Xform "GeyserSoundTL" (
@@ -2637,7 +2691,7 @@ def Xform "Root"
     {
         quatf xformOp:orient = (0.70710677, 0, -0.7071067, 0)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0, -2.7232904)
+        float3 xformOp:translate = (0, 0, -2.8250268)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "CarDoor"

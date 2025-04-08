@@ -90,7 +90,7 @@ struct ImmersiveView: View {
                 assignEntity(named: "Eruption", to: &EruptionEntity, disable: true)
                 assignEntity(named: "Bison", to: &BisonEntity, hide:true)
                 assignEntity(named: "bluegrass", to: &bluegrassEntity)
-                assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: true)
+                assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: false)
                 assignEntity(named: "BisonTransitTL", to: &bisonTransitTLEntity)
                 assignEntity(named: "Bison_End", to: &bisonCorrectEntity)
                 assignEntity(named: "Bison_Wrong", to: &bisonWrongEntity)

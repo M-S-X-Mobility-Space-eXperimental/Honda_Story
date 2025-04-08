@@ -93,6 +93,10 @@ struct ImmersiveView: View {
                 assignEntity(named: "Bison_End", to: &bisonCorrectEntity)
                 assignEntity(named: "Bison_Wrong", to: &bisonWrongEntity)
                 
+                
+                let hoverComponent = HoverEffectComponent()
+                GeyserSandboxEntity?.components.set(hoverComponent)
+                
                 initBisonFoodObjectList()
             }
         }

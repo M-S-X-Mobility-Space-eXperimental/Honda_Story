@@ -503,7 +503,7 @@ def Xform "Root"
                     {
                         float birthRate = 200
                         float dampingFactor = 15
-                        float particleSize = 0.1
+                        float particleSize = 0.05
                         float radialGravityStrength = -0.1
                         float sizeMultiplierAtEndOfLifespan = 13
                         float4 startColorA = (0.5343751, 0.72773063, 0.7319911, 0.19882016)
@@ -1145,7 +1145,7 @@ def Xform "Root"
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 0
+            float opacity = 1
         }
 
         def Xform "GeyserSoundTL" (

@@ -86,9 +86,9 @@ struct ImmersiveView: View {
 
                 assignEntity(named: "GeyserSoundTL", to: &GeyserSoundTLEntity)
                 assignEntity(named: "Environment", to: &environmentEntity)
-                assignEntity(named: "BisonFoods", to: &bisonFoodsEntity, disable: true)
+                assignEntity(named: "BisonFoods", to: &bisonFoodsEntity, disable: true, hide: true )
                 assignEntity(named: "Eruption", to: &EruptionEntity, disable: true)
-                assignEntity(named: "Bison", to: &BisonEntity)
+                assignEntity(named: "Bison", to: &BisonEntity, hide:true)
                 assignEntity(named: "bluegrass", to: &bluegrassEntity)
                 assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: true)
                 assignEntity(named: "BisonTransitTL", to: &bisonTransitTLEntity)
@@ -186,11 +186,15 @@ struct ImmersiveView: View {
         MovingCancellable = nil
     }
     
-    func assignEntity(named name: String, to binding: inout Entity?, disable: Bool = false) {
+    func assignEntity(named name: String, to binding: inout Entity?, disable: Bool = false, hide: Bool = false) {
         if let entity = self.immersiveContentEntity?.findEntity(named: name) {
             binding = entity
             if disable {
                 entity.isEnabled = false
+            }
+            
+            if hide{
+                entity.components[OpacityComponent.self]?.opacity = 0
             }
         }
     }

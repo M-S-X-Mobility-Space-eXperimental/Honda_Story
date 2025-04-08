@@ -77,6 +77,15 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
+        "Car"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
         "Bison_Correct"
       ],
       {
@@ -96,6 +105,15 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Bison"
       ],
       {
         "isExpanded" : true,
@@ -440,6 +458,16 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
+        "Bison",
+        "BisonParent"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
         "Init",
         "Track"
       ],
@@ -580,6 +608,16 @@
         "Root",
         "BisonWalk",
         "Track"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GeyserBisonTrans",
+        "Track5"
       ],
       {
         "isExpanded" : true,

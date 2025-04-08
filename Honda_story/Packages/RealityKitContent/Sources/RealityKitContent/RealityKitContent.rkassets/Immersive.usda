@@ -591,7 +591,7 @@ def Xform "Root"
 
     def RealityKitTimeline "GeyserBisonTrans"
     {
-        reorder nameChildren = ["Track", "Track2", "Track_3", "Track_1", "Track3", "Track4"]
+        reorder nameChildren = ["Track", "Track2", "Track_3", "Track_1", "Track3", "Track4", "Track5"]
         def RealityKitTrack "Track"
         {
             def RealityKitAction "Play_Audio"
@@ -725,6 +725,26 @@ def Xform "Root"
 
         def RealityKitTrack "Track4"
         {
+            reorder nameChildren = ["Transform_By", "Transform_By2"]
+            def RealityKitAction "Transform_By2"
+            {
+                string actionKind = "moveBy"
+                int blendLayer = 300
+                double duration = 1
+                uniform token info:id = "C5020C26-6A6D-44CA-A7D7-5C59E6F02BEC"
+                float3 position = (0.9950919, -2.3841858e-7, -30.01886)
+                quatf rotation = (1, 0, 0, 0)
+                double startTime = 56.640602739477046
+                rel target = </Root/Car/CarDoor>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track5"
+        {
             def RealityKitAction "Transform_By"
             {
                 string actionKind = "moveBy"
@@ -732,7 +752,7 @@ def Xform "Root"
                 double duration = 3
                 uniform token info:id = "544CD60C-7C2F-4111-A07B-B60C7AF1671E"
                 float3 position = (271.50238, 9.999932, -0.004638672)
-                double startTime = 56.67179127866218
+                double startTime = 57.61113298514428
                 rel target = </Root/Car/CarDoor>
 
                 def RealityKitStruct "timingFunction"
@@ -818,7 +838,7 @@ def Xform "Root"
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 0
+            float opacity = 1
         }
 
         def RealityKitComponent "RCP_BehaviorsContainer"

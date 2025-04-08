@@ -37,7 +37,7 @@ struct ContentView: View {
             }
 
             if showTitle {
-                Text("Welcome to the YellowStone National Park")
+                Text("Welcome to Yellowstone National Park")
                     .font(.system(size: 70, weight: .bold))
                     .fontWeight(.bold)
                     .foregroundStyle(.white)

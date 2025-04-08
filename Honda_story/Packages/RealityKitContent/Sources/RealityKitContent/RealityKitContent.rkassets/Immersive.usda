@@ -3674,11 +3674,11 @@ def Xform "Root"
     def Xform "Transform" (
         active = true
         customData = {
-            float3 rotationEulerHint = (3.1415927, 0, 0)
+            float3 rotationEulerHint = (1.5707964, 0, 0)
         }
     )
     {
-        quatf xformOp:orient = (-4.371139e-8, 1, 0, 0)
+        quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
         float3 xformOp:translate = (-100, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -3909,6 +3909,229 @@ def Xform "Root"
                 {
                     token outputs:mtlx:surface
                     token outputs:realitykit:vertex
+                }
+            }
+        }
+    }
+
+    def Xform "Transform_3" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (1.5707964, 0, 0)
+        }
+    )
+    {
+        quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
+        float3 xformOp:translate = (-239.73433, 0.000005841255, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def "Bison_idle01" (
+            active = true
+            references = @Bison_idle01.usdz@
+        )
+        {
+            quatf xformOp:orient = (0.70710677, -0.7071067, -5.0129303e-15, -5.0129303e-15)
+            quatf xformOp:orient.timeSamples = {
+                0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+            }
+            float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+            float3 xformOp:scale.timeSamples = {
+                0: (1, 1, 1),
+            }
+            float3 xformOp:translate = (0, 0, 0)
+            float3 xformOp:translate.timeSamples = {
+                0: (0, 0, 0),
+            }
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "mtl"
+            {
+                over "AmericanBison_M_APFur_LOD0SG1"
+                {
+                    token inputs:frame:stPrimvarName = "st" (
+                        customData = {
+                            dictionary realitykit = {
+                                bool hide = 1
+                            }
+                        }
+                    )
+                    token outputs:mtlx:surface
+                    token outputs:realitykit:vertex
+
+                    over "AmericanBison_M_APFur_Material1"
+                    {
+                        color3f inputs:diffuseColor.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_APFur_LOD0SG1/diffuseColor.outputs:rgb>
+                    }
+
+                    def Shader "diffuseColor"
+                    {
+                        uniform token info:id = "UsdUVTexture"
+                        asset inputs:file = @BisonTextures/AmericanBison_APFur.png@
+                        float2 inputs:st.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_APFur_LOD0SG1/diffuseColor/TexCoordReader.outputs:result>
+                        color3f outputs:rgb
+
+                        def Shader "TexCoordReader"
+                        {
+                            uniform token info:id = "UsdPrimvarReader_float2"
+                            token inputs:varname.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_APFur_LOD0SG1.inputs:frame:stPrimvarName>
+                            float2 outputs:result
+                        }
+                    }
+                }
+
+                over "AmericanBison_M_LOD0SG1"
+                {
+                    token inputs:frame:stPrimvarName = "st" (
+                        customData = {
+                            dictionary realitykit = {
+                                bool hide = 1
+                            }
+                        }
+                    )
+                    token outputs:mtlx:surface
+                    token outputs:realitykit:vertex
+
+                    over "AmericanBison_M_Material1"
+                    {
+                        color3f inputs:diffuseColor.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_LOD0SG1/diffuseColor.outputs:rgb>
+                        normal3f inputs:normal.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_LOD0SG1/normal.outputs:rgb>
+                        float inputs:roughness.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_LOD0SG1/roughness.outputs:r>
+                    }
+
+                    def Shader "diffuseColor"
+                    {
+                        uniform token info:id = "UsdUVTexture"
+                        asset inputs:file = @BisonTextures/AmericanBison_BaseColor.png@
+                        float2 inputs:st.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_LOD0SG1/diffuseColor/TexCoordReader.outputs:result>
+                        color3f outputs:rgb
+
+                        def Shader "TexCoordReader"
+                        {
+                            uniform token info:id = "UsdPrimvarReader_float2"
+                            token inputs:varname.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_LOD0SG1.inputs:frame:stPrimvarName>
+                            float2 outputs:result
+                        }
+                    }
+
+                    def Shader "roughness"
+                    {
+                        uniform token info:id = "UsdUVTexture"
+                        asset inputs:file = @BisonTextures/AmericanBison_Roughness.png@
+                        float2 inputs:st.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_LOD0SG1/roughness/TexCoordReader.outputs:result>
+                        float outputs:r
+
+                        def Shader "TexCoordReader"
+                        {
+                            uniform token info:id = "UsdPrimvarReader_float2"
+                            token inputs:varname.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_LOD0SG1.inputs:frame:stPrimvarName>
+                            float2 outputs:result
+                        }
+                    }
+
+                    def Shader "normal"
+                    {
+                        uniform token info:id = "UsdUVTexture"
+                        asset inputs:file = @BisonTextures/AmericanBison_Normal.png@
+                        float2 inputs:st.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_LOD0SG1/normal/TexCoordReader.outputs:result>
+                        normal3f outputs:rgb
+
+                        def Shader "TexCoordReader"
+                        {
+                            uniform token info:id = "UsdPrimvarReader_float2"
+                            token inputs:varname.connect = </Root/Transform_3/Bison_idle01/mtl/AmericanBison_M_LOD0SG1.inputs:frame:stPrimvarName>
+                            float2 outputs:result
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    def "carDoor" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        prepend references = @carDoor.usd@
+    )
+    {
+        rel material:binding = </Root/carDoor/material/Opaque_210_210_255_> (
+            bindMaterialAs = "strongerThanDescendants"
+        )
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        float3 xformOp:translate = (-421.96802, 0, 204.82689)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "material"
+        {
+            over "Opaque_210_210_255_"
+            {
+                token inputs:frame:stPrimvarName = "st" (
+                    customData = {
+                        dictionary realitykit = {
+                            bool hide = 1
+                        }
+                    }
+                )
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/carDoor/material/Opaque_210_210_255_/UsdPreviewSurface.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+                def Shader "UsdPreviewSurface"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (0.18, 0.18, 0.18)
+                    color3f inputs:diffuseColor.connect = </Root/carDoor/material/Opaque_210_210_255_/diffuseColor.outputs:rgb>
+                    normal3f inputs:normal = (0, 0, 1)
+                    normal3f inputs:normal.connect = </Root/carDoor/material/Opaque_210_210_255_/normal.outputs:rgb>
+                    float inputs:roughness = 0.5
+                    float inputs:roughness.connect = </Root/carDoor/material/Opaque_210_210_255_/roughness.outputs:r>
+                    token outputs:surface
+                }
+
+                def Shader "diffuseColor"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @carDoorTex/carDoor_Opaque(210,210,255)_BaseColor.png@
+                    float2 inputs:st.connect = </Root/carDoor/material/Opaque_210_210_255_/diffuseColor/TexCoordReader.outputs:result>
+                    color3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/carDoor/material/Opaque_210_210_255_.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "normal"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @carDoorTex/carDoor_Opaque(210,210,255)_Normal.png@
+                    float2 inputs:st.connect = </Root/carDoor/material/Opaque_210_210_255_/normal/TexCoordReader.outputs:result>
+                    normal3f outputs:rgb
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/carDoor/material/Opaque_210_210_255_.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
+                }
+
+                def Shader "roughness"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file = @carDoorTex/carDoor_Opaque(210,210,255)_Height.png@
+                    float2 inputs:st.connect = </Root/carDoor/material/Opaque_210_210_255_/roughness/TexCoordReader.outputs:result>
+                    float outputs:r
+
+                    def Shader "TexCoordReader"
+                    {
+                        uniform token info:id = "UsdPrimvarReader_float2"
+                        token inputs:varname.connect = </Root/carDoor/material/Opaque_210_210_255_.inputs:frame:stPrimvarName>
+                        float2 outputs:result
+                    }
                 }
             }
         }

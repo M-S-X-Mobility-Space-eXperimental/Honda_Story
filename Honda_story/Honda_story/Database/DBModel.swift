@@ -25,6 +25,7 @@ class DBModel: ObservableObject {
     @Published var AllReady: Bool = false
     @Published var AllTapped: Bool = false
     @Published var FinishBisonFoodInit: Bool = false
+    @Published var facing_forward: Bool = true
     
     // DB Handle
     private var allTappedHandle: DatabaseHandle?

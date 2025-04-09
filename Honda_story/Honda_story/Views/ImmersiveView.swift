@@ -16,7 +16,7 @@ struct ImmersiveView: View {
     @State private var session: SpatialTrackingSession?
     
     @State private var immersiveContentEntity:Entity?
-    @State private var SceneRootContent: RealityViewContent?
+//    @State private var SceneRootContent: RealityViewContent?
     
     @State private var AudioEmitterEntity: Entity?
     
@@ -39,7 +39,7 @@ struct ImmersiveView: View {
     @State private var CountDownEntity: Entity?
     @State private var TestCubeEntity: Entity?
     
-//    @State private var RootEntity: Entity?
+    @State private var RootEntity: Entity?
     
     @State private var GeyserErupt: Bool = false
     @State private var BisonAttracted: Bool = false
@@ -71,7 +71,7 @@ struct ImmersiveView: View {
                 content.add(immersiveContentEntity)
                 
                 self.immersiveContentEntity = immersiveContentEntity
-                self.SceneRootContent = content
+//                self.SceneRootContent = content
                 
                 
                 // Hand Tracking Setup
@@ -96,6 +96,12 @@ struct ImmersiveView: View {
                 assignEntity(named: "Bison_Wrong", to: &bisonWrongEntity)
                 
                 assignEntity(named: "AudioEmitter", to: &AudioEmitterEntity)
+                assignEntity(named: "Root", to: &RootEntity)
+                
+                if(!dbModel.facing_forward){
+                    RootEntity?.position = SIMD3<Float>(0.2, 0, -1.3)
+                    RootEntity?.transform.rotation = simd_quatf(angle: .pi, axis: SIMD3<Float>(0, 1, 0))
+                }
                 
                 
 //                let hoverComponent = HoverEffectComponent()

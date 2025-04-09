@@ -9,6 +9,7 @@ struct ContentView: View {
     @Environment(\.openWindow) private var openWindow
 
     @State private var showTitle = true
+    @State private var direction_selected: Bool = false
     @State private var immersiveEntered = false
     @StateObject var dbModel = DBModel.shared
 
@@ -27,12 +28,26 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .bottomOrnament) {
-                    if !immersiveEntered {
-                        ToggleImmersiveSpaceButton(
-                            immersiveEntered: $immersiveEntered,
-                            showTitle: $showTitle
-                        )
+                    if (direction_selected){
+                        if !immersiveEntered {
+                            ToggleImmersiveSpaceButton(
+                                immersiveEntered: $immersiveEntered,
+                                showTitle: $showTitle
+                            )
+                        }
+                    } else{
+                        Button("Face Forward") {
+                            dbModel.facing_forward = true
+                            direction_selected = true
+                        }
+
+                        Button("Face Backward") {
+                            dbModel.facing_forward = false
+                            direction_selected = true
+                        }
                     }
+                    
+
                 }
             }
 

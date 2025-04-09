@@ -124,11 +124,15 @@ struct ImmersiveView: View {
         }
         .onChange(of: dbModel.FinishBisonFoodInit){
             dbModel.observeBisonFoodChildUpdates { name, transform in
-                if let entity = self.immersiveContentEntity?.findEntity(named: name) {
-                    entity.transform = transform
-                    print("🟡 Synced remote update to \(name)")
-                    bisonFeedBackSequence(name: name, entity: entity)
-                    
+                
+                // Add this condition to prevent hearing bison in the beginning
+                if dbModel.Geyser{
+                    if let entity = self.immersiveContentEntity?.findEntity(named: name) {
+                        entity.transform = transform
+                        print("🟡 Synced remote update to \(name)")
+                        bisonFeedBackSequence(name: name, entity: entity)
+                        
+                    }
                 }
             }
             

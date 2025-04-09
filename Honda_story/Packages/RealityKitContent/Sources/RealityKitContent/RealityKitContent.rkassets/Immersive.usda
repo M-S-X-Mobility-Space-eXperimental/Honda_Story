@@ -514,7 +514,7 @@ def Xform "Root"
                         float4 startColorA = (0.5343751, 0.72773063, 0.7319911, 0.19882016)
                         float4 startColorB = (1, 1, 1, 0.11891475)
                         bool useStartColorRange = 1
-                        float3 vortexDirection = (0.1, -1, 0)
+                        float3 vortexDirection = (0.1, 0, 0)
                     }
 
                     over "spawnedEmitter"
@@ -531,7 +531,8 @@ def Xform "Root"
                         bool useEndColor = 1
                         bool useEndColorRange = 0
                         bool useStartColorRange = 0
-                        float3 vortexDirection = (0.02, -0.02, 0.02)
+                        float3 vortexDirection = (0.02, -0.03, 0.02)
+                        float vortexStrength = 0.15
                     }
                 }
             }
@@ -1130,8 +1131,8 @@ def Xform "Root"
     )
     {
         reorder nameChildren = ["GeyserSoundTL", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary", "HierarchicalFade"]
-        float3 xformOp:scale = (0.12, 0.12, 0.12)
-        float3 xformOp:translate = (0.010402441, 0.6091858, -0.14215899)
+        float3 xformOp:scale = (0.08, 0.08, 0.08)
+        float3 xformOp:translate = (0.010402441, 0.6091858, -0.11982477)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def RealityKitComponent "Collider"
@@ -1665,14 +1666,14 @@ def Xform "Root"
     )
     {
         reorder nameChildren = ["banana", "_bison_basket", "flower", "_apple", "PBR___Metallic_Roughness_Alpha_blend", "banana_1", "wildflower", "bluegrass", "HierarchicalFade", "BisonTransitTL", "Eating_Reference"]
-        float3 xformOp:scale = (0.3, 0.3, 0.3)
-        float3 xformOp:translate = (0, 0.76564443, -0.05910617)
+        float3 xformOp:scale = (0.25, 0.25, 0.25)
+        float3 xformOp:translate = (0, 0.76564443, -0.03840244)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 1
+            float opacity = 0
         }
 
         over "banana"
@@ -2771,7 +2772,7 @@ def Xform "Root"
 
         over "carseats_1"
         {
-            float3 xformOp:translate = (3.1138346, -0.058086097, -0.16268125)
+            float3 xformOp:translate = (3.2683933, -0.058086097, -0.16268125)
         }
 
         def RealityKitComponent "RCP_BehaviorsContainer"
@@ -3031,6 +3032,58 @@ def Xform "Root"
                 {
                     float3 xformOp:translate = (0.8576856, -0.016266428, 18.889692)
                 }
+            }
+        }
+    }
+
+    def Cube "Cube_1" (
+        active = false
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/Cube_1/DefaultMaterial>
+        double size = 0.2
+        float3 xformOp:translate = (0, 0.32763, -0.41349)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            prepend token outputs:surface.connect = </Root/Cube_1/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+
+    def Cube "Cube_2" (
+        active = false
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/Cube_2/DefaultMaterial>
+        double size = 0.2
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0.32763004, 0.22150868)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/Cube_2/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
             }
         }
     }

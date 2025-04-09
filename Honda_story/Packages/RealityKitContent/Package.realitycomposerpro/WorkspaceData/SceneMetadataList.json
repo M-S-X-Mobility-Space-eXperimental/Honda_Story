@@ -47,15 +47,6 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "Car"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
         "IntroGeyser",
         "Track2"
       ],
@@ -260,6 +251,17 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
+        "Environment",
+        "Env",
+        "Group_4"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
         "GeyserPlaceholder",
         "Track"
       ],
@@ -272,6 +274,17 @@
         "Root",
         "GeyserIntro",
         "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Environment",
+        "Env",
+        "Group"
       ],
       {
         "isExpanded" : true,
@@ -436,8 +449,28 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
+        "Environment",
+        "Env",
+        "Group_5"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
         "BisonWalk",
         "Track3"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Bison"
       ],
       {
         "isExpanded" : true,
@@ -529,6 +562,16 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
+        "Bison",
+        "BisonParent"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
         "IntroGeyser"
       ],
       {
@@ -560,6 +603,16 @@
         "Root",
         "GeyserBisonTrans",
         "Track_1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Environment",
+        "Env"
       ],
       {
         "isExpanded" : true,

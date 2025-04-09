@@ -16,7 +16,7 @@ struct ImmersiveView: View {
     @State private var session: SpatialTrackingSession?
     
     @State private var immersiveContentEntity:Entity?
-//    @State private var SceneRootContent: RealityViewContent?
+    @State private var SceneRootContent: RealityViewContent?
     
     @State private var AudioEmitterEntity: Entity?
     
@@ -28,6 +28,7 @@ struct ImmersiveView: View {
     
     @State private var bisonWrongEntity: Entity?
     @State private var bisonCorrectEntity: Entity?
+    @State private var eatingRefEntity: Entity?
 
    
     @State private var EruptionEntity: Entity?
@@ -55,6 +56,8 @@ struct ImmersiveView: View {
     
     @State private var lastCubePosition: SIMD3<Float>?
     @State private var cancellables = Set<AnyCancellable>()
+    @State private var subscriptions: [EventSubscription] = []
+
     
     @State private var currentControllingObj: String?
 
@@ -71,7 +74,7 @@ struct ImmersiveView: View {
                 content.add(immersiveContentEntity)
                 
                 self.immersiveContentEntity = immersiveContentEntity
-//                self.SceneRootContent = content
+                self.SceneRootContent = content
                 
                 
                 // Hand Tracking Setup
@@ -87,13 +90,16 @@ struct ImmersiveView: View {
                 assignEntity(named: "GeyserSoundTL", to: &GeyserSoundTLEntity)
                 assignEntity(named: "Environment", to: &environmentEntity)
                 assignEntity(named: "BisonFoods", to: &bisonFoodsEntity, disable: true, hide: true )
+//                assignEntity(named: "BisonFoods", to: &bisonFoodsEntity, disable: false, hide: false )
                 assignEntity(named: "Eruption", to: &EruptionEntity, disable: true)
                 assignEntity(named: "Bison", to: &BisonEntity, hide:true)
+//                assignEntity(named: "Bison", to: &BisonEntity, hide:false)
                 assignEntity(named: "bluegrass", to: &bluegrassEntity)
-                assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: false)
+                assignEntity(named: "GeyserSandbox", to: &GeyserSandboxEntity, disable: false, hide: true)
                 assignEntity(named: "BisonTransitTL", to: &bisonTransitTLEntity)
                 assignEntity(named: "Bison_End", to: &bisonCorrectEntity)
                 assignEntity(named: "Bison_Wrong", to: &bisonWrongEntity)
+                assignEntity(named: "Eating_Reference", to: &eatingRefEntity)
                 
                 assignEntity(named: "AudioEmitter", to: &AudioEmitterEntity)
                 assignEntity(named: "Root", to: &RootEntity)
@@ -121,7 +127,7 @@ struct ImmersiveView: View {
                 if let entity = self.immersiveContentEntity?.findEntity(named: name) {
                     entity.transform = transform
                     print("🟡 Synced remote update to \(name)")
-                    bisonFeedBackSequence(name: name)
+                    bisonFeedBackSequence(name: name, entity: entity)
                     
                 }
             }
@@ -205,12 +211,38 @@ struct ImmersiveView: View {
         }
     }
     
+    func fadeOutOpacity(for entity: Entity, duration: TimeInterval = 1.0, step: TimeInterval = 0.05) {
+        guard let opacityComponent = entity.components[OpacityComponent.self] else {
+            print("Entity has no OpacityComponent")
+            return
+        }
+
+        var currentOpacity = opacityComponent.opacity
+        let steps = Int(duration / step)
+        let decrement = currentOpacity / Float(steps)
+
+        Timer.scheduledTimer(withTimeInterval: step, repeats: true) { timer in
+            currentOpacity -= decrement
+            currentOpacity = max(0, currentOpacity)
+
+            entity.components.set(OpacityComponent(opacity: currentOpacity))
+
+            if currentOpacity <= 0 {
+                entity.isEnabled = false
+                timer.invalidate()
+            }
+        }
+    }
+
+    
+    
+    
     func trackGestureStates() {
         Timer.publish(every: 0.1, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 let state = EntityGestureState.shared
-
+                
                 guard state.isDragging || state.isScaling || state.isRotating,
                       let entity = state.targetedEntity else {
                     
@@ -220,11 +252,21 @@ struct ImmersiveView: View {
                     
                     return
                 }
-
+                
                 let name = entity.name
                 guard !name.isEmpty else { return }
+                if entity.parent?.name != "BisonFoods" {return}
                 
-                bisonFeedBackSequence(name: name)
+                
+                
+               
+                bisonFeedBackSequence(name: name, entity:entity)
+
+                
+                // enable gravity after moving
+//                entity.components[PhysicsBodyComponent.self]?.mode = .dynamic
+                
+                
                 
                 currentControllingObj = name
 
@@ -234,7 +276,19 @@ struct ImmersiveView: View {
             .store(in: &cancellables)
     }
     
-    func bisonFeedBackSequence(name: String){
+    
+    func bisonFeedBackSequence(name: String, entity: Entity?){
+        
+        
+        let distance_To_bison = distance(entity?.position(relativeTo: nil) ?? SIMD3<Float>.zero, (eatingRefEntity?.position(relativeTo: nil))! )
+        
+        if distance_To_bison > 1 {
+            // Not trigger effects
+            return
+        }
+        
+        fadeOutOpacity(for: entity!)
+        
         let correct: Bool
         if(name == "bluegrass"){
             correct = true
@@ -254,7 +308,7 @@ struct ImmersiveView: View {
                 _ = bisonWrongEntity?.applyTapForBehaviors()
                 
                 // reset BisonWrong playing
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     BisonWrongPlaying = false
                 }
             }

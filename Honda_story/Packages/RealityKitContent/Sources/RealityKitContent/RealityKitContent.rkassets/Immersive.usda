@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "Old_Car", "Old_Environment", "OldBisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "CountDownGroup", "Bison_Grunt_wav", "Car", "Env", "Environment", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "Old_Car", "Old_Environment", "OldBisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "CountDownGroup", "Bison_Grunt_wav", "Car", "Environment", "Cube_1", "Cube_2", "flower_parent", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
     float3 xformOp:translate = (-0.2, 0, -0.7)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -768,7 +768,7 @@ def Xform "Root"
     )
     {
         reorder nameChildren = ["BisonParent", "Bison_eat01"]
-        float3 xformOp:translate = (4.219613, 4.7683716e-7, -1.1813891)
+        float3 xformOp:translate = (4.219613, 4.7683716e-7, -0.90783435)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Xform "BisonParent" (
@@ -1713,7 +1713,7 @@ def Xform "Root"
         references = @BisonFoods/bison assets.usda@
     )
     {
-        reorder nameChildren = ["banana", "_bison_basket", "flower", "_apple", "PBR___Metallic_Roughness_Alpha_blend", "banana_1", "wildflower", "bluegrass", "HierarchicalFade", "BisonTransitTL", "Eating_Reference"]
+        reorder nameChildren = ["banana", "_bison_basket", "flower", "_apple", "PBR___Metallic_Roughness_Alpha_blend", "banana_1", "wildflower", "bluegrass", "HierarchicalFade", "BisonTransitTL", "Eating_Reference", "flower_parent", "flower_parent_1"]
         float3 xformOp:scale = (0.25, 0.25, 0.25)
         float3 xformOp:translate = (0, 0.76564443, -0.03840244)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
@@ -1721,7 +1721,7 @@ def Xform "Root"
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 0
+            float opacity = 1
         }
 
         over "banana"
@@ -1803,6 +1803,15 @@ def Xform "Root"
             def RealityKitComponent "HierarchicalFade"
             {
                 uniform token info:id = "RealityKit.HierarchicalFade"
+            }
+
+            over "Materials" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Environment/Env/Group_4/grass_vegitation_mix_1/Materials/_300954650> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
             }
         }
 
@@ -3029,6 +3038,7 @@ def Xform "Root"
         active = true
     )
     {
+        reorder nameChildren = ["RoadNEW", "Env"]
         def "Env" (
             active = true
             references = @ArtAssets/terrain_New/Env.usda@
@@ -3036,11 +3046,12 @@ def Xform "Root"
         {
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (20, 20, 20)
-            float3 xformOp:translate = (-2.5326157, -1.1048737, -455.9428)
+            float3 xformOp:translate = (-2.5326157, -2.0130157, -470.38934)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             over "Group"
             {
+                reorder nameChildren = ["RoadNEW", "terrain", "road", "road_1", "road_2", "road_3", "road_4"]
                 float3 xformOp:translate = (0.56336683, -1.7881393e-7, -41.564022)
 
                 over "terrain"
@@ -3048,14 +3059,36 @@ def Xform "Root"
                     float3 xformOp:translate = (-8.940697e-8, 0.0024998635, 60.880383)
                 }
 
-                over "road_3"
+                over "road_3" (
+                    active = false
+                )
                 {
                     float3 xformOp:translate = (-0.55398613, 0.06274387, 56.922256)
                 }
 
-                over "road_1"
+                over "road_1" (
+                    active = false
+                )
                 {
                     float3 xformOp:translate = (-0.5539061, 0.045543663, 58.434647)
+                }
+
+                over "road" (
+                    active = false
+                )
+                {
+                }
+
+                over "road_2" (
+                    active = false
+                )
+                {
+                }
+
+                over "road_4" (
+                    active = false
+                )
+                {
                 }
             }
 
@@ -3072,7 +3105,19 @@ def Xform "Root"
                     over "grass_vegitation_mix_3"
                     {
                         float3 xformOp:scale = (0.001, 0.001, 0.001)
-                        float3 xformOp:translate = (0.5665312, 0.10591617, 19.595646)
+                        float3 xformOp:translate = (0.5665312, 0.03170471, 19.595646)
+                    }
+
+                    over "grass_vegitation_mix"
+                    {
+                        over "Materials"
+                        {
+                            over "_300954650"
+                            {
+                                token outputs:mtlx:surface
+                                token outputs:realitykit:vertex
+                            }
+                        }
                     }
                 }
 
@@ -3099,6 +3144,17 @@ def Xform "Root"
                     float3 xformOp:translate = (0.8576856, -0.016266428, 18.889692)
                 }
             }
+        }
+
+        def "RoadNEW" (
+            active = true
+            references = @ArtAssets/RoadNEW.usdz@
+        )
+        {
+            quatf xformOp:orient = (0.99999994, 0, 0, 0)
+            float3 xformOp:scale = (0.08, 0.08, 0.08)
+            float3 xformOp:translate = (-3.1202624, -0.65906847, -125.18899)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
         }
     }
 

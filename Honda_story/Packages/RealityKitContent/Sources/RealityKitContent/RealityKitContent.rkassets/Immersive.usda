@@ -888,6 +888,54 @@ def Xform "Root"
                         }
                     }
                 }
+
+                over "AmericanBison_M_APFur_LOD1" (
+                    active = false
+                )
+                {
+                }
+
+                over "AmericanBison_M_APFur_LOD2" (
+                    active = false
+                )
+                {
+                }
+
+                over "AmericanBison_M_APFur_LOD3" (
+                    active = false
+                )
+                {
+                }
+
+                over "AmericanBison_M_APFur_LOD4" (
+                    active = false
+                )
+                {
+                }
+
+                over "AmericanBison_M_LOD1" (
+                    active = false
+                )
+                {
+                }
+
+                over "AmericanBison_M_LOD2" (
+                    active = false
+                )
+                {
+                }
+
+                over "AmericanBison_M_LOD3" (
+                    active = false
+                )
+                {
+                }
+
+                over "AmericanBison_M_LOD4" (
+                    active = false
+                )
+                {
+                }
             }
         }
 
@@ -2846,6 +2894,12 @@ def Xform "Root"
                 {
                     bool gravityEnabled = 0
                     uniform token info:id = "RealityKit.RigidBody"
+                    bool lockRotationX = 1
+                    bool lockRotationY = 1
+                    bool lockRotationZ = 1
+                    bool lockTranslationX = 1
+                    bool lockTranslationY = 1
+                    bool lockTranslationZ = 1
                     token motionType = "Dynamic"
 
                     def RealityKitStruct "massFrame"
@@ -2894,6 +2948,12 @@ def Xform "Root"
                 {
                     bool gravityEnabled = 0
                     uniform token info:id = "RealityKit.RigidBody"
+                    bool lockRotationX = 1
+                    bool lockRotationY = 1
+                    bool lockRotationZ = 1
+                    bool lockTranslationX = 1
+                    bool lockTranslationY = 1
+                    bool lockTranslationZ = 1
                     token motionType = "Dynamic"
 
                     def RealityKitStruct "massFrame"
@@ -2942,6 +3002,12 @@ def Xform "Root"
                 {
                     bool gravityEnabled = 0
                     uniform token info:id = "RealityKit.RigidBody"
+                    bool lockRotationX = 1
+                    bool lockRotationY = 1
+                    bool lockRotationZ = 1
+                    bool lockTranslationX = 1
+                    bool lockTranslationY = 1
+                    bool lockTranslationZ = 1
                     token motionType = "Dynamic"
 
                     def RealityKitStruct "massFrame"

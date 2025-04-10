@@ -768,7 +768,7 @@ def Xform "Root"
     )
     {
         reorder nameChildren = ["BisonParent", "Bison_eat01"]
-        float3 xformOp:translate = (4.219613, 4.7683716e-7, -0.90783435)
+        float3 xformOp:translate = (4.4403133, 4.7683716e-7, -0.5849317)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Xform "BisonParent" (
@@ -1713,7 +1713,7 @@ def Xform "Root"
         references = @BisonFoods/bison assets.usda@
     )
     {
-        reorder nameChildren = ["banana", "_bison_basket", "flower", "_apple", "PBR___Metallic_Roughness_Alpha_blend", "banana_1", "wildflower", "bluegrass", "HierarchicalFade", "BisonTransitTL", "Eating_Reference", "flower_parent", "flower_parent_1"]
+        reorder nameChildren = ["flower_blender", "banana", "_bison_basket", "flower", "_apple", "PBR___Metallic_Roughness_Alpha_blend", "banana_1", "wildflower", "bluegrass", "HierarchicalFade", "BisonTransitTL", "Eating_Reference"]
         float3 xformOp:scale = (0.25, 0.25, 0.25)
         float3 xformOp:translate = (0, 0.76564443, -0.03840244)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
@@ -1765,7 +1765,9 @@ def Xform "Root"
             }
         }
 
-        over "flower"
+        over "flower" (
+            active = false
+        )
         {
             def RealityKitComponent "Collider"
             {
@@ -1817,6 +1819,8 @@ def Xform "Root"
 
         over "_apple"
         {
+            float3 xformOp:translate = (0.060822964, -0.54986286, -0.6494925)
+
             def RealityKitComponent "Collider"
             {
                 uint group = 1
@@ -1828,7 +1832,7 @@ def Xform "Root"
                 {
                     float3 extent = (6.575633, 8.043767, 6.575635)
                     float radius = 4.0218835
-                    token shapeType = "Box"
+                    token shapeType = "Sphere"
 
                     def RealityKitStruct "pose"
                     {
@@ -1869,7 +1873,7 @@ def Xform "Root"
                     float3 extent = (196.76712, 200, 196.7605)
                     float height = 200
                     float radius = 98.38356
-                    token shapeType = "Box"
+                    token shapeType = "Capsule"
 
                     def RealityKitStruct "pose"
                     {
@@ -1956,8 +1960,9 @@ def Xform "Root"
                 def RealityKitStruct "Shape"
                 {
                     float3 extent = (324.88168, 178.63387, 327.91165)
+                    float height = 178.63387
                     float radius = 163.95583
-                    token shapeType = "Box"
+                    token shapeType = "Capsule"
 
                     def RealityKitStruct "pose"
                     {
@@ -1997,7 +2002,7 @@ def Xform "Root"
                 {
                     float3 extent = (1.4477186, 1.5373735, 1.3437186)
                     float radius = 0.7686868
-                    token shapeType = "Box"
+                    token shapeType = "Sphere"
 
                     def RealityKitStruct "pose"
                     {
@@ -2072,7 +2077,7 @@ def Xform "Root"
         {
             quatf xformOp:orient = (1, 5.329072e-15, 1.7763565e-15, -2.6645357e-15)
             float3 xformOp:scale = (3.333333, 3.333333, 3.333333)
-            float3 xformOp:translate = (8.736667, -0.21800566, -3.1940773)
+            float3 xformOp:translate = (8.736667, -0.21800566, -2.4078577)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"
@@ -2091,6 +2096,62 @@ def Xform "Root"
                     {
                     }
                 }
+            }
+        }
+
+        def "flower_blender" (
+            active = true
+            customData = {
+                float3 rotationEulerHint = (-1.5707959, 0, 0)
+            }
+            prepend references = @BisonFoods/flower_blender.usdc@
+        )
+        {
+            quatf xformOp:orient = (0.7071069, -0.7071066, 0, 0)
+            float3 xformOp:scale = (0.99999994, 1, 1)
+            float3 xformOp:translate = (0.6655488, -0.008262157, -0.52188444)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "RootNode"
+            {
+                over "pCylinder51" (
+                    active = false
+                )
+                {
+                }
+            }
+
+            def RealityKitComponent "InputTarget"
+            {
+                uniform token info:id = "RealityKit.InputTarget"
+            }
+
+            def RealityKitComponent "Collider"
+            {
+                uint group = 1
+                uniform token info:id = "RealityKit.Collider"
+                uint mask = 4294967295
+                token type = "Default"
+
+                def RealityKitStruct "Shape"
+                {
+                    float3 extent = (0.9203682, 0.9698925, 1.3412473)
+                    float height = 0.9698925
+                    float radius = 0.67062366
+                    token shapeType = "Capsule"
+
+                    def RealityKitStruct "pose"
+                    {
+                        float3 position = (-0.051196575, -0.06041622, 0.024541587)
+                    }
+                }
+            }
+
+            def RealityKitCustomComponent "RealityKitContent_GestureComponent"
+            {
+                uniform token info:id = "RealityKitContent.GestureComponent"
+                bool pivotOnDrag = 0
+                bool preserveOrientationOnPivotDrag = 0
             }
         }
     }
@@ -2231,7 +2292,7 @@ def Xform "Root"
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (0.4, 0.4, 0.4)
         matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1) )
-        float3 xformOp:translate = (1.4476712, 0.07504487, -0.95925707)
+        float3 xformOp:translate = (1.4476712, 0.07504487, -0.52421695)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Scope "Materials"
@@ -2661,7 +2722,7 @@ def Xform "Root"
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 0
+            float opacity = 1
         }
     }
 

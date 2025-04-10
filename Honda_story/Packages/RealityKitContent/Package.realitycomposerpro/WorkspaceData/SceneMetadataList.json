@@ -309,8 +309,27 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
+        "BisonFoods",
+        "flower_parent"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
         "EsmeTestingScene",
         "Cube"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Environment"
       ],
       {
         "isExpanded" : true,
@@ -524,15 +543,6 @@
         "Root",
         "BisonWalk",
         "Track3"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "BisonFoods"
       ],
       {
         "isExpanded" : true,

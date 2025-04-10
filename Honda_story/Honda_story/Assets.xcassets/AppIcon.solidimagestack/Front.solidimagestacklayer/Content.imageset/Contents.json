@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "What512.png",
       "idiom" : "vision",
       "scale" : "2x"
     }

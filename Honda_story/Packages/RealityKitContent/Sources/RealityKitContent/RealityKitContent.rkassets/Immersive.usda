@@ -3679,7 +3679,7 @@ def Xform "Root"
     )
     {
         quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
-        float3 xformOp:translate = (-100, 0, 0)
+        float3 xformOp:translate = (-100, 0.000014781952, -676.3271)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def "Bison_walk03" (
@@ -3753,7 +3753,7 @@ def Xform "Root"
         )
         quatf xformOp:orient = (0.70710677, 0.70710677, -2.4112811e-8, 2.4112811e-8)
         float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (80, 0, 0)
+        float3 xformOp:translate = (80.000336, 0.0000013113022, -5.4108887)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def "Bison_eat02" (
@@ -3876,6 +3876,7 @@ def Xform "Root"
     )
     {
         quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
+        float3 xformOp:translate = (0, 0.000008165836, -712.7779)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def "Bison_eat01" (
@@ -3922,7 +3923,7 @@ def Xform "Root"
     )
     {
         quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
-        float3 xformOp:translate = (-239.73433, 0.000005841255, 0)
+        float3 xformOp:translate = (-239.73433, 0.0000140070915, -712.7779)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def "Bison_idle01" (
@@ -4050,7 +4051,7 @@ def Xform "Root"
     def "carDoor" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
-        prepend references = @carDoor.usd@
+        references = @carDoor.usd@
     )
     {
         rel material:binding = </Root/carDoor/material/Opaque_210_210_255_> (
@@ -4135,6 +4136,18 @@ def Xform "Root"
                 }
             }
         }
+    }
+
+    def Xform "Transform_4" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (1.5707964, 0, 0)
+        }
+    )
+    {
+        quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
+        float3 xformOp:translate = (-92.050514, -5.105173, -0.0000021244343)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
 

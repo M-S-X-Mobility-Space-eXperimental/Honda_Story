@@ -4148,6 +4148,88 @@ def Xform "Root"
         quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
         float3 xformOp:translate = (-92.050514, -5.105173, -0.0000021244343)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def "Bison_IdleWalkComb01" (
+            active = true
+            references = @Bison_IdleWalkComb01.usdz@
+        )
+        {
+            quatf xformOp:orient = (1.26880515e-8, 1, 7.089354e-15, 8.65604e-23)
+            quatf xformOp:orient.timeSamples = {
+                0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+            }
+            float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+            float3 xformOp:scale.timeSamples = {
+                0: (1, 1, 1),
+            }
+            float3 xformOp:translate = (92.05051, 0.0000020596597, -5.1051726)
+            float3 xformOp:translate.timeSamples = {
+                0: (0, 0, 0),
+            }
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Transform_5" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (1.5707964, 0, 0)
+        }
+    )
+    {
+        quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def "Bison_WalkEatComb01" (
+            active = true
+            references = @Bison_WalkEatComb01.usdz@
+        )
+        {
+            quatf xformOp:orient = (0.70710677, -0.7071067, -5.0129303e-15, -5.0129303e-15)
+            quatf xformOp:orient.timeSamples = {
+                0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+            }
+            float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+            float3 xformOp:scale.timeSamples = {
+                0: (1, 1, 1),
+            }
+            float3 xformOp:translate = (0, 0, 0)
+            float3 xformOp:translate.timeSamples = {
+                0: (0, 0, 0),
+            }
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Transform_6" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (1.5707964, 0, 0)
+        }
+    )
+    {
+        quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def "Bison_WalkEatComb02" (
+            active = true
+            references = @Bison_WalkEatComb02.usdz@
+        )
+        {
+            quatf xformOp:orient = (0.70710677, -0.7071067, -5.0129303e-15, -5.0129303e-15)
+            quatf xformOp:orient.timeSamples = {
+                0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+            }
+            float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+            float3 xformOp:scale.timeSamples = {
+                0: (1, 1, 1),
+            }
+            float3 xformOp:translate = (0, 0, 0)
+            float3 xformOp:translate.timeSamples = {
+                0: (0, 0, 0),
+            }
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
     }
 }
 

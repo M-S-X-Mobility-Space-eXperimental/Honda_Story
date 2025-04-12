@@ -145,6 +145,8 @@ struct ImmersiveView: View {
                 _ = GeyserSoundTLEntity?.applyTapForBehaviors()
                 
                 startMoving()
+                
+                dbModel.ObserveAllTapped()
            }
             
             //reset ready for next round

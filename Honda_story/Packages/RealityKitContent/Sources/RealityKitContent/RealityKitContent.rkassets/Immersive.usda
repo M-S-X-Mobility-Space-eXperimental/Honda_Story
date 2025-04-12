@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "BisonFoods"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "Old_Car", "Old_Environment", "OldBisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "CountDownGroup", "Bison_Grunt_wav", "Car", "Environment", "Cube_1", "Cube_2", "flower_parent", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "Old_Car", "Old_Environment", "OldBisonFoods", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "CountDownGroup", "Bison_Grunt_wav", "Car", "Environment", "Cube_1", "Cube_2", "Bison_Group", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "Audios", "Cube", "Transform", "Intro_YellowStone", "Cylinder", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
     float3 xformOp:translate = (-0.2, 0, -0.7)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -592,7 +592,7 @@ def Xform "Root"
 
     def RealityKitTimeline "GeyserBisonTrans"
     {
-        reorder nameChildren = ["Track", "Track2", "Track_3", "Track_1", "Track3", "Track4", "Track5"]
+        reorder nameChildren = ["Track", "Track2", "Track_3", "Track_1", "Track3", "Track4", "Track5", "Track6"]
         def RealityKitTrack "Track"
         {
             def RealityKitAction "Play_Audio"
@@ -755,6 +755,23 @@ def Xform "Root"
                 float3 position = (271.50238, 9.999932, -0.004638672)
                 double startTime = 57.61113298514428
                 rel target = </Root/Car/CarDoor>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track6"
+        {
+            def RealityKitAction "Show"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 5
+                uniform token info:id = "A6DDA580-C411-49CD-966C-9CDD7CF6978B"
+                double startTime = 56.655664417895004
+                rel target = </Root/Bison_Group>
 
                 def RealityKitStruct "timingFunction"
                 {
@@ -1016,6 +1033,7 @@ def Xform "Root"
 
     def RealityKitTimeline "BisonIdle"
     {
+        reorder nameChildren = ["Track", "Track2", "Track3", "Track4"]
         def RealityKitTrack "Track"
         {
             def RealityKitAction "Animation"
@@ -1035,24 +1053,20 @@ def Xform "Root"
                 }
             }
         }
-    }
 
-    def RealityKitTimeline "BisonWalk"
-    {
-        reorder nameChildren = ["Track", "Track2", "Track3", "Track4"]
-        def RealityKitTrack "Track"
+        def RealityKitTrack "Track2"
         {
             def RealityKitAction "Animation"
             {
                 string actionKind = "animation"
-                string animation = "Bison_walk03"
+                string animation = "Bison_rej01"
                 int blendLayer = 500
-                double duration = 2
-                uniform token info:id = "89ECAE7B-8B72-4134-9C63-3303DBE117BF"
-                double loopCount = 1
+                double duration = 5
+                uniform token info:id = "AE015881-4379-4108-8644-F48E74F69EE9"
+                double loopCount = 0
                 bool separateAnimatedValue = 1
-                double startTime = 0
-                rel target = </Root/Bison/BisonParent/Bison_Model>
+                double startTime = 0.39618702081051477
+                rel target = </Root/Bison_Group/Bison_Parent/Bison_walk03>
 
                 def RealityKitStruct "handoffType"
                 {
@@ -1062,6 +1076,51 @@ def Xform "Root"
 
         def RealityKitTrack "Track3"
         {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "Bison_rej01"
+                int blendLayer = 500
+                double duration = 5
+                uniform token info:id = "1702B07C-2C28-4BBF-9CE8-276D72E8DEEB"
+                double loopCount = 0
+                bool separateAnimatedValue = 1
+                double startTime = 1.075434465747427
+                rel target = </Root/Bison_Group/Bison_Parent_1/Bison_walk03>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track4"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "Bison_rej01"
+                int blendLayer = 500
+                double duration = 5
+                uniform token info:id = "96D2F33B-AA34-44D4-A2AF-5426D6B9DA2A"
+                double loopCount = 0
+                bool separateAnimatedValue = 1
+                double startTime = 2.084953780815861
+                rel target = </Root/Bison_Group/Bison_Parent_2/Bison_walk03>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "BisonWalk"
+    {
+        reorder nameChildren = ["Track", "Track2", "Track3", "Track4"]
+        def RealityKitTrack "Track3"
+        {
+            reorder nameChildren = ["Transform_To", "Animation"]
             def RealityKitAction "Transform_To"
             {
                 string actionKind = "moveTo"
@@ -1071,7 +1130,7 @@ def Xform "Root"
                 float3 position = (-1.5, 0, 0)
                 quatf rotation = (0.5, 0.5, -0.5, 0.5)
                 float3 scale = (0.009999999, 0.009999999, 0.009999999)
-                double startTime = 1.9832181373429314
+                double startTime = 1.9980669196378205
                 rel target = </Root/Bison/BisonParent>
 
                 def RealityKitStruct "transformMode"
@@ -1096,7 +1155,27 @@ def Xform "Root"
                 double duration = 11.366666793823242
                 uniform token info:id = "E2E77FA7-A8C9-40C1-9A5C-AEF8E534A8D9"
                 bool separateAnimatedValue = 1
-                double startTime = 2.0171534270047142
+                double startTime = 1.9933548632418372
+                rel target = </Root/Bison/BisonParent/Bison_Model>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "Bison_walk03"
+                int blendLayer = 500
+                double duration = 2
+                uniform token info:id = "89ECAE7B-8B72-4134-9C63-3303DBE117BF"
+                double loopCount = 1
+                bool separateAnimatedValue = 1
+                double startTime = 0
                 rel target = </Root/Bison/BisonParent/Bison_Model>
 
                 def RealityKitStruct "handoffType"
@@ -2104,7 +2183,7 @@ def Xform "Root"
             customData = {
                 float3 rotationEulerHint = (-1.5707959, 0, 0)
             }
-            prepend references = @BisonFoods/flower_blender.usdc@
+            references = @BisonFoods/flower_blender.usdc@
         )
         {
             quatf xformOp:orient = (0.7071069, -0.7071066, 0, 0)
@@ -3273,6 +3352,179 @@ def Xform "Root"
                 float inputs:roughness = 0.75
                 token outputs:surface
             }
+        }
+    }
+
+    def Xform "Bison_Group" (
+        active = true
+    )
+    {
+        reorder nameChildren = ["Bison_walk03", "Bison_Parent"]
+        def Xform "Bison_Parent" (
+            active = true
+            customData = {
+                float3 rotationEulerHint = (1.5707964, 1.5707963, 0)
+            }
+        )
+        {
+            quatf xformOp:orient = (0.5, 0.50000006, 0.49999994, -0.5)
+            float3 xformOp:scale = (0.01, 0.01, 0.01)
+            float3 xformOp:translate = (-24.857002, -1.7066448, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def "Bison_walk03" (
+                active = true
+                references = @ArtAssets/Bisons/Bison_walk03.usdz@
+            )
+            {
+                quatf xformOp:orient = (0.70710677, -0.7071067, -5.0129303e-15, -5.0129303e-15)
+                quatf xformOp:orient.timeSamples = {
+                    0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+                }
+                float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+                float3 xformOp:scale.timeSamples = {
+                    0: (1, 1, 1),
+                }
+                float3 xformOp:translate = (0, 0, 0)
+                float3 xformOp:translate.timeSamples = {
+                    0: (0, 0, 0),
+                }
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "AnimationLibrary"
+                {
+                    token info:id = "RealityKit.AnimationLibrary"
+
+                    def RealityKitAnimationFile "Bison_rej01"
+                    {
+                        uniform asset file = @ArtAssets/Bisons/Bison_rej01.usdz@
+                        uniform bool looping = 1
+                        uniform string name = "Bison_rej01"
+                    }
+                }
+            }
+        }
+
+        def Xform "Bison_Parent_1" (
+            active = true
+            customData = {
+                float3 rotationEulerHint = (1.5707964, 1.5707963, 0)
+            }
+        )
+        {
+            float2 ui:nodegraph:node:pos = (20, 20)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (0.5, 0.50000006, 0.49999994, -0.5)
+            float3 xformOp:scale = (0.009999998, 0.009999998, 0.009999998)
+            float3 xformOp:translate = (-26.097677, -1.7066448, -2.0534084)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def "Bison_walk03" (
+                active = true
+                references = @ArtAssets/Bisons/Bison_walk03.usdz@
+            )
+            {
+                quatf xformOp:orient = (0.70710677, -0.7071067, -5.0129303e-15, -5.0129303e-15)
+                quatf xformOp:orient.timeSamples = {
+                    0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+                }
+                float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+                float3 xformOp:scale.timeSamples = {
+                    0: (1, 1, 1),
+                }
+                float3 xformOp:translate = (0, 0, 0)
+                float3 xformOp:translate.timeSamples = {
+                    0: (0, 0, 0),
+                }
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "AnimationLibrary"
+                {
+                    token info:id = "RealityKit.AnimationLibrary"
+
+                    def RealityKitAnimationFile "Bison_rej01"
+                    {
+                        uniform asset file = @ArtAssets/Bisons/Bison_rej01.usdz@
+                        uniform bool looping = 1
+                        uniform string name = "Bison_rej01"
+                    }
+                }
+            }
+
+            def RealityKitComponent "AnimationLibrary"
+            {
+                token info:id = "RealityKit.AnimationLibrary"
+
+                def RealityKitAnimationFile "Bison_rej01"
+                {
+                    uniform asset file = @ArtAssets/Bisons/Bison_rej01.usdz@
+                    uniform string name = "Bison_rej01"
+                }
+            }
+        }
+
+        def Xform "Bison_Parent_2" (
+            active = true
+            customData = {
+                float3 rotationEulerHint = (4.7123885, 4.712389, 0)
+            }
+        )
+        {
+            float2 ui:nodegraph:node:pos = (40, 40)
+            int ui:nodegraph:node:stackingOrder = 2
+            quatf xformOp:orient = (0.5, 0.5, -0.5, 0.5)
+            float3 xformOp:scale = (0.009999996, 0.009999996, 0.009999996)
+            float3 xformOp:translate = (19.422613, -0.31472373, -2.0534084)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def "Bison_walk03" (
+                active = true
+                references = @ArtAssets/Bisons/Bison_walk03.usdz@
+            )
+            {
+                quatf xformOp:orient = (0.70710677, -0.7071067, -5.0129303e-15, -5.0129303e-15)
+                quatf xformOp:orient.timeSamples = {
+                    0: (0.70710677, -0.70710677, -5.0129303e-15, -5.0129303e-15),
+                }
+                float3 xformOp:scale = (0.99999994, 0.99999994, 0.99999994)
+                float3 xformOp:scale.timeSamples = {
+                    0: (1, 1, 1),
+                }
+                float3 xformOp:translate = (0, 0, 0)
+                float3 xformOp:translate.timeSamples = {
+                    0: (0, 0, 0),
+                }
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "AnimationLibrary"
+                {
+                    token info:id = "RealityKit.AnimationLibrary"
+
+                    def RealityKitAnimationFile "Bison_rej01"
+                    {
+                        uniform asset file = @ArtAssets/Bisons/Bison_rej01.usdz@
+                        uniform bool looping = 1
+                        uniform string name = "Bison_rej01"
+                    }
+                }
+            }
+
+            def RealityKitComponent "AnimationLibrary"
+            {
+                token info:id = "RealityKit.AnimationLibrary"
+
+                def RealityKitAnimationFile "Bison_rej01"
+                {
+                    uniform asset file = @ArtAssets/Bisons/Bison_rej01.usdz@
+                    uniform string name = "Bison_rej01"
+                }
+            }
+        }
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
         }
     }
 }

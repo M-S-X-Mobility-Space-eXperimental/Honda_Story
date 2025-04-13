@@ -1821,11 +1821,14 @@ def Xform "Root"
 
         def Xform "Eating_Reference" (
             active = true
+            customData = {
+                float3 rotationEulerHint = (1.0658144e-14, 3.552713e-15, -5.3290714e-15)
+            }
         )
         {
             quatf xformOp:orient = (1, 5.329072e-15, 1.7763565e-15, -2.6645357e-15)
             float3 xformOp:scale = (3.333333, 3.333333, 3.333333)
-            float3 xformOp:translate = (8.736667, -0.21800566, -2.4078577)
+            float3 xformOp:translate = (10.359086, -0.9190593, -1.9597275)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"

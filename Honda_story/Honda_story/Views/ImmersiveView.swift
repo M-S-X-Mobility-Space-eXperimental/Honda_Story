@@ -31,6 +31,8 @@ struct ImmersiveView: View {
     @State private var eatingRefEntity: Entity?
 
     @State private var ProgressBarEntity: Entity?
+    @State private var HeatBarEntity: Entity?
+    @State private var PressureBarEntity: Entity?
     @State private var EruptionEntity: Entity?
     @State private var GeyserSandboxEntity: Entity?
     @State private var GeyserSoundTLEntity: Entity?
@@ -46,6 +48,8 @@ struct ImmersiveView: View {
     @State private var BisonAttracted: Bool = false
     @State private var BisonRightPlaying: Bool = false
     @State private var BisonWrongPlaying: Bool = false
+    
+    @State private var HeatOrPressure: String = ""
     
     
     @State private var Timeline_GeyserEntity: Entity?
@@ -117,6 +121,9 @@ struct ImmersiveView: View {
                 assignEntity(named: "Bison_Wrong", to: &bisonWrongEntity)
                 assignEntity(named: "Eating_Reference", to: &eatingRefEntity)
                 
+                assignEntity(named: "UIHeat", to: &HeatBarEntity)
+                assignEntity(named: "UIPressure", to: &PressureBarEntity)
+                
                 assignEntity(named: "AudioEmitter", to: &AudioEmitterEntity)
                 assignEntity(named: "Root", to: &RootEntity)
                 
@@ -127,8 +134,15 @@ struct ImmersiveView: View {
                     
                     // controlling different part of
                     assignEntity(named: "UIHeat", to: &ProgressBarEntity)
+                    HeatOrPressure = "Heat"
+                    
+                    dbModel.observePressure()
+                        
                 }else{
                     assignEntity(named: "UIPressure", to: &ProgressBarEntity)
+                    HeatOrPressure = "Pressure"
+                    
+                    dbModel.observeHeat()
                 }
                 
                 
@@ -174,6 +188,13 @@ struct ImmersiveView: View {
             
             //reset ready for next round
             dbModel.playerResetReady()
+        }
+        
+        .onChange(of: dbModel.Heat) {
+            HeatBarEntity?.transform.scale = SIMD3<Float>(x: Float(dbModel.Heat), y: 1, z: 1)
+        }
+        .onChange(of: dbModel.Pressure) {
+            PressureBarEntity?.transform.scale = SIMD3<Float>(x: Float(dbModel.Pressure), y: 1, z: 1)
         }
         
         .onChange(of: dbModel.Geyser) {
@@ -240,21 +261,29 @@ struct ImmersiveView: View {
         }
     }
     
-    func fadeOutOpacity(for entity: Entity, duration: TimeInterval = 1.0, step: TimeInterval = 0.05) {
+    func fadeOutOpacity(for entity: Entity, duration: TimeInterval = 3.0, step: TimeInterval = 0.05) {
         guard let opacityComponent = entity.components[OpacityComponent.self] else {
             print("Entity has no OpacityComponent")
             return
         }
-
+        
+        
         var currentOpacity = opacityComponent.opacity
         let steps = Int(duration / step)
         let decrement = currentOpacity / Float(steps)
+        
+        let startPos = entity.position(relativeTo: nil)
+        let endPos = (eatingRefEntity?.position(relativeTo: nil))!
+        let deltaPos = (endPos - startPos) / Float(steps)
 
         Timer.scheduledTimer(withTimeInterval: step, repeats: true) { timer in
             currentOpacity -= decrement
             currentOpacity = max(0, currentOpacity)
 
             entity.components.set(OpacityComponent(opacity: currentOpacity))
+            
+            let newPos = entity.position(relativeTo: nil) + deltaPos
+            entity.setPosition(newPos, relativeTo: nil)
 
             if currentOpacity <= 0 {
                 entity.isEnabled = false
@@ -290,6 +319,8 @@ struct ImmersiveView: View {
                     
                     ProgressBarEntity?.transform.scale.x += 0.1
                     
+                    dbModel.setHeatPressure(name: HeatOrPressure, value: Float((ProgressBarEntity?.transform.scale.x)!))
+                    
                     
                 }
             } else {
@@ -297,6 +328,8 @@ struct ImmersiveView: View {
                 
                 if ((ProgressBarEntity?.transform.scale.x)! > 0){
                     ProgressBarEntity?.transform.scale.x -= 0.005
+                    
+                    dbModel.setHeatPressure(name: HeatOrPressure, value: Float((ProgressBarEntity?.transform.scale.x)!))
                 }
             }
         }
@@ -351,7 +384,7 @@ struct ImmersiveView: View {
         
         let distance_To_bison = distance(entity?.position(relativeTo: nil) ?? SIMD3<Float>.zero, (eatingRefEntity?.position(relativeTo: nil))! )
         
-        if distance_To_bison > 1 {
+        if distance_To_bison > 2 {
             // Not trigger effects
             return
         }

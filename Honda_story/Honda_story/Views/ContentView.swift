@@ -75,23 +75,23 @@ struct ContentView: View {
                                 .fill(Color.black.opacity(0.6))
                         )
 
-                    Text(displayedDescription)
-                        .font(.system(size: 35, weight: .bold))
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(Color.black.opacity(0.5))
-                        )
-                        .padding(.horizontal, 30)
+//                    Text(displayedDescription)
+//                        .font(.system(size: 35, weight: .bold))
+//                        .foregroundColor(.white)
+//                        .multilineTextAlignment(.center)
+//                        .padding()
+//                        .background(
+//                            RoundedRectangle(cornerRadius: 15)
+//                                .fill(Color.black.opacity(0.5))
+//                        )
+//                        .padding(.horizontal, 30)
                 }
                 .padding(.bottom, 60)
             }
         }
         .onChange(of: showTitle) {
             if !showTitle {
-                startTypingDescription()
+//                startTypingDescription()
                 dbModel.setPlayerReady()
             }
         }

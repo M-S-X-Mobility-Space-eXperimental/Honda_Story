@@ -19,6 +19,8 @@ class DBModel: ObservableObject {
     // Game State Variables
     @Published var Geyser: Bool = false // for eruption
     @Published var startGeyserExp = false
+    @Published var Heat: Float = 0.0
+    @Published var Pressure: Float = 0.0
     private var geyserStarted = false // <-- Add this to prevent multiple triggers
     
     // Player State Variables
@@ -38,6 +40,8 @@ class DBModel: ObservableObject {
         
         // This is for game state changes
         ref.child("Geyser").setValue(false)
+        ref.child("Heat").setValue(0.0)
+        ref.child("Pressure").setValue(0.0)
     }
     
     func getUserID() -> String{
@@ -74,6 +78,39 @@ class DBModel: ObservableObject {
             }
         })
     }
+    
+    func observeHeat() {
+        ref.child("Heat").observe(.value, with: { [weak self] snapshot in
+            guard let self = self else { return }
+
+            if let heatValue = snapshot.value as? Float {
+                DispatchQueue.main.async {
+                    self.Heat = heatValue
+                    print("Heat value changed to: \(heatValue)")
+                }
+            } else {
+                print("Failed to read Heat value")
+            }
+        })
+    }
+
+    func observePressure() {
+        ref.child("Pressure").observe(.value, with: { [weak self] snapshot in
+            guard let self = self else { return }
+
+            if let pressureValue = snapshot.value as? Float {
+                DispatchQueue.main.async {
+                    self.Pressure = pressureValue
+                    print("Pressure value changed to: \(pressureValue)")
+                }
+            } else {
+                print("Failed to read Pressure value")
+            }
+        })
+    }
+
+    
+    
     
     
     func ObserveAllTapped(){
@@ -161,6 +198,9 @@ class DBModel: ObservableObject {
         }
     }
 
+    func setHeatPressure(name:String, value:Float){
+        ref.child(name).setValue(value)
+    }
 
     
     func initializeCurrentPlayer(objectCount: Int = 2) {

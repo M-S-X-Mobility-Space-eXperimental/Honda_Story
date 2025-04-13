@@ -573,6 +573,15 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
+        "Environment"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
         "Bison_Correst",
         "Track"
       ],
@@ -613,6 +622,16 @@
         "Root",
         "GeyserBisonTrans",
         "Track5"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Environment",
+        "roadtest2"
       ],
       {
         "isExpanded" : true,

@@ -459,7 +459,7 @@ def Xform "Root"
     )
     {
         reorder nameChildren = ["BisonParent", "Bison_eat01"]
-        float3 xformOp:translate = (4.4403133, 4.7683716e-7, -0.5849317)
+        float3 xformOp:translate = (4.4403133, -0.1, -0.5849317)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Xform "BisonParent" (
@@ -2633,7 +2633,7 @@ def Xform "Root"
 
         over "CarDoor"
         {
-            float3 xformOp:translate = (0.033654213, 0.019344807, 5.935066)
+            float3 xformOp:translate = (0.39267376, 0.019344807, 5.935066)
         }
 
         over "carseats"
@@ -2846,6 +2846,11 @@ def Xform "Root"
                 }
             }
         }
+
+        over "carTex"
+        {
+            float3 xformOp:translate = (0.35901955, 1.1920929e-7, 7.4505815e-9)
+        }
     }
 
     def Xform "Environment" (
@@ -2980,6 +2985,14 @@ def Xform "Root"
             float3 xformOp:scale = (2, 2, 2)
             float3 xformOp:translate = (-4.325643, -0.5, -80.45137)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "pPlane1"
+            {
+                quatf xformOp:orient = (1, 0, 0, 0)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 0.221, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
         }
     }
 

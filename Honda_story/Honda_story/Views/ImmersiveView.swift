@@ -30,14 +30,14 @@ struct ImmersiveView: View {
     @State private var bisonCorrectEntity: Entity?
     @State private var eatingRefEntity: Entity?
 
-   
+    @State private var ProgressBarEntity: Entity?
     @State private var EruptionEntity: Entity?
     @State private var GeyserSandboxEntity: Entity?
     @State private var GeyserSoundTLEntity: Entity?
     
     @State private var timelineGeyser:Entity?
     @State private var BisonEntity: Entity?
-    @State private var CountDownEntity: Entity?
+//    @State private var CountDownEntity: Entity?
     @State private var TestCubeEntity: Entity?
     
     @State private var RootEntity: Entity?
@@ -76,6 +76,7 @@ struct ImmersiveView: View {
                 self.immersiveContentEntity = immersiveContentEntity
                 self.SceneRootContent = content
                 
+                let occlusionMaterial = OcclusionMaterial()
                 
                 // Hand Tracking Setup
                 let session = SpatialTrackingSession()
@@ -83,9 +84,24 @@ struct ImmersiveView: View {
                 _ = await session.run(configuration)
                 self.session = session
                //Setup an anchor at the user's left palm.
-                self.LeftHandAnchor = AnchorEntity(.hand(.left, location: .indexFingerTip), trackingMode: .continuous)
-                self.RightHandAnchor = AnchorEntity(.hand(.right, location: .indexFingerTip), trackingMode: .continuous)
-
+                self.LeftHandAnchor = AnchorEntity(.hand(.left, location: .palm), trackingMode: .continuous)
+                self.RightHandAnchor = AnchorEntity(.hand(.right, location: .palm), trackingMode: .continuous)
+                
+                let leftSphere = ModelEntity(
+                    mesh: .generateSphere(radius: 0.07), // 1 cm radius
+                    materials: [occlusionMaterial]
+                )
+                
+                let rightSphere = ModelEntity(
+                    mesh: .generateSphere(radius: 0.07),
+                    materials: [occlusionMaterial]
+                )
+                
+                self.LeftHandAnchor?.addChild(leftSphere)
+                self.RightHandAnchor?.addChild(rightSphere)
+                
+                content.add(LeftHandAnchor!)
+                content.add(RightHandAnchor!)
 
                 assignEntity(named: "GeyserSoundTL", to: &GeyserSoundTLEntity)
                 assignEntity(named: "Environment", to: &environmentEntity)
@@ -107,6 +123,12 @@ struct ImmersiveView: View {
                 if(!dbModel.facing_forward){
                     RootEntity?.position = SIMD3<Float>(0.2, 0, -1.3)
                     RootEntity?.transform.rotation = simd_quatf(angle: .pi, axis: SIMD3<Float>(0, 1, 0))
+                    
+                    
+                    // controlling different part of
+                    assignEntity(named: "UIHeat", to: &ProgressBarEntity)
+                }else{
+                    assignEntity(named: "UIPressure", to: &ProgressBarEntity)
                 }
                 
                 
@@ -121,6 +143,7 @@ struct ImmersiveView: View {
             // First stage observe all ready
             dbModel.observeAllRealdy()
             trackGestureStates()
+            trackClappingHands()
         }
         .onChange(of: dbModel.FinishBisonFoodInit){
             dbModel.observeBisonFoodChildUpdates { name, transform in
@@ -160,7 +183,7 @@ struct ImmersiveView: View {
                 bisonFoodsEntity?.isEnabled = true
                 GeyserErupt = true
                 
-                CountDownEntity?.isEnabled = false
+//                CountDownEntity?.isEnabled = false
                 
                 _ = GeyserSandboxEntity?.applyTapForBehaviors()
                 _ = bisonTransitTLEntity?.applyTapForBehaviors()
@@ -239,12 +262,52 @@ struct ImmersiveView: View {
             }
         }
     }
+    
+    func trackClappingHands() {
+        let clapThreshold: Float = 0.05 // 3 cm
+        var hasClapped = false
+
+        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+            guard let leftHand = self.LeftHandAnchor,
+                  let rightHand = self.RightHandAnchor else {
+                return
+            }
+
+            let leftPos = leftHand.position(relativeTo: nil)
+            let rightPos = rightHand.position(relativeTo: nil)
+
+            let distance = simd_distance(leftPos, rightPos)
+
+            if distance < clapThreshold {
+                if !hasClapped {
+                    hasClapped = true
+                    print("👏 Clap detected!")
+                    
+                    if((ProgressBarEntity?.transform.scale.x)! >= 1){
+                        dbModel.tapGeyser()
+                        return
+                    }
+                    
+                    ProgressBarEntity?.transform.scale.x += 0.1
+                    
+                    
+                }
+            } else {
+                hasClapped = false
+                
+                if ((ProgressBarEntity?.transform.scale.x)! > 0){
+                    ProgressBarEntity?.transform.scale.x -= 0.005
+                }
+            }
+        }
+    }
+
 
     
     
     
     func trackGestureStates() {
-        Timer.publish(every: 0.1, on: .main, in: .common)
+        Timer.publish(every: 0.05, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 let state = EntityGestureState.shared
@@ -298,6 +361,7 @@ struct ImmersiveView: View {
         let correct: Bool
         if(name == "bluegrass"){
             correct = true
+            immersiveContentEntity?.stopAllAudio()
         }else{
             correct = false
         }

@@ -1910,6 +1910,11 @@ def Xform "Root"
                 uniform token info:id = "RealityKit.HierarchicalFade"
             }
         }
+
+        over "_bison_basket"
+        {
+            float3 xformOp:translate = (0.12844515, -0.06293857, -0.3053093)
+        }
     }
 
     def RealityKitTimeline "Bison_Correct"

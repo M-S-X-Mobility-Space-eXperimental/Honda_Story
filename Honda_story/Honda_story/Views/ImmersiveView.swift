@@ -11,6 +11,8 @@ import RealityKitContent
 import Combine
 import FirebaseDatabase
 
+import ARKit
+
 struct ImmersiveView: View {
     
     @State private var session: SpatialTrackingSession?
@@ -42,6 +44,8 @@ struct ImmersiveView: View {
 //    @State private var CountDownEntity: Entity?
     @State private var TestCubeEntity: Entity?
     
+    @State private var HumanEntity: Entity?
+    
     @State private var RootEntity: Entity?
     
     @State private var GeyserErupt: Bool = false
@@ -57,6 +61,8 @@ struct ImmersiveView: View {
     @State private var LeftHandAnchor: AnchorEntity?
     @State private var RightHandAnchor: AnchorEntity?
     @State private var CurrentHandAnchor: AnchorEntity?
+    
+    @State private var RefImageAnchor: AnchorEntity?
     
     @State private var lastCubePosition: SIMD3<Float>?
     @State private var cancellables = Set<AnyCancellable>()
@@ -80,16 +86,22 @@ struct ImmersiveView: View {
                 self.immersiveContentEntity = immersiveContentEntity
                 self.SceneRootContent = content
                 
+                
                 let occlusionMaterial = OcclusionMaterial()
                 
                 // Hand Tracking Setup
                 let session = SpatialTrackingSession()
-                let configuration = SpatialTrackingSession.Configuration(tracking: [.hand, .world])
+                let configuration = SpatialTrackingSession.Configuration(tracking: [.hand, .world,.image])
+                
                 _ = await session.run(configuration)
                 self.session = session
                //Setup an anchor at the user's left palm.
                 self.LeftHandAnchor = AnchorEntity(.hand(.left, location: .palm), trackingMode: .continuous)
                 self.RightHandAnchor = AnchorEntity(.hand(.right, location: .palm), trackingMode: .continuous)
+                
+                self.RefImageAnchor = AnchorEntity(.image(group: "MSX_QR", name: "Ref"), trackingMode: .continuous)
+                
+                
                 
                 let leftSphere = ModelEntity(
                     mesh: .generateSphere(radius: 0.07), // 1 cm radius
@@ -104,8 +116,11 @@ struct ImmersiveView: View {
                 self.LeftHandAnchor?.addChild(leftSphere)
                 self.RightHandAnchor?.addChild(rightSphere)
                 
+                self.RefImageAnchor?.addChild(leftSphere)
+                
                 content.add(LeftHandAnchor!)
                 content.add(RightHandAnchor!)
+                content.add(RefImageAnchor!)
 
                 assignEntity(named: "GeyserSoundTL", to: &GeyserSoundTLEntity)
                 assignEntity(named: "Environment", to: &environmentEntity)
@@ -124,8 +139,19 @@ struct ImmersiveView: View {
                 assignEntity(named: "UIHeat", to: &HeatBarEntity)
                 assignEntity(named: "UIPressure", to: &PressureBarEntity)
                 
+                assignEntity(named: "Human0", to: &HumanEntity)
+                
                 assignEntity(named: "AudioEmitter", to: &AudioEmitterEntity)
                 assignEntity(named: "Root", to: &RootEntity)
+                
+                
+                // assign occlusion material to HumanEntity
+                applyOcclusionMaterial(to: HumanEntity!)
+                let capsule = ModelEntity(
+                    mesh: .generateCylinder(height: 0.31, radius: 0.11),
+                    materials: [OcclusionMaterial()]
+                )
+                HumanEntity?.addChild(capsule)
                 
                 if(!dbModel.facing_forward){
                     RootEntity?.position = SIMD3<Float>(0.2, 0, -1.3)
@@ -154,6 +180,7 @@ struct ImmersiveView: View {
         }
         .installGestures()
         .task{
+            
             // First stage observe all ready
             dbModel.observeAllRealdy()
             trackGestureStates()
@@ -312,12 +339,18 @@ struct ImmersiveView: View {
                     hasClapped = true
                     print("👏 Clap detected!")
                     
-                    if((ProgressBarEntity?.transform.scale.x)! >= 1){
+                    if((ProgressBarEntity?.transform.scale.x)! >= 0.95){
+                        
                         dbModel.tapGeyser()
                         return
                     }
                     
                     ProgressBarEntity?.transform.scale.x += 0.1
+                    
+                    if((ProgressBarEntity?.transform.scale.x)! >= 1){
+                        ProgressBarEntity?.transform.scale.x = 1
+                    }
+                    
                     
                     dbModel.setHeatPressure(name: HeatOrPressure, value: Float((ProgressBarEntity?.transform.scale.x)!))
                     
@@ -417,6 +450,18 @@ struct ImmersiveView: View {
             }
         }
     }
+
+    func applyOcclusionMaterial(to entity: Entity) {
+        let capsule = ModelEntity(
+            mesh: .generateCylinder(height: 2, radius: 0.5),
+            materials: [OcclusionMaterial()]
+        )
+        capsule.transform = entity.transform
+        self.SceneRootContent?.add(capsule)
+        self.SceneRootContent?.remove(entity)
+//        entity.components[ModelComponent.self] = updatedModel
+    }
+
     
     func initBisonFoodObjectList() {
         guard let bisonFoods = bisonFoodsEntity else {
@@ -453,7 +498,6 @@ struct ImmersiveView: View {
         
         dbModel.initalizeDB_BisonFoods(objectDict)
     }
-
 
     
 }

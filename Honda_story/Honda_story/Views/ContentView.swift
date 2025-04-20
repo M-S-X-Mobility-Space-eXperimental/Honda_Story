@@ -93,6 +93,8 @@ struct ContentView: View {
             if !showTitle {
 //                startTypingDescription()
                 dbModel.setPlayerReady()
+                
+                
             }
         }
         .onChange(of: dbModel.startGeyserExp) {

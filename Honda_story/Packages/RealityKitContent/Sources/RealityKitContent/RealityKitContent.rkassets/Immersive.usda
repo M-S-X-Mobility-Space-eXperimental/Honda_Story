@@ -5,11 +5,11 @@
     upAxis = "Y"
 )
 
-reorder rootPrims = ["Root", "BisonFoods"]
+reorder rootPrims = ["Root", "Human0"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "CountDownGroup", "Bison_Grunt_wav", "Car", "Environment", "Bison_Group", "Transform_1", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "Audios", "Transform", "Intro_YellowStone", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "CountDownGroup", "Bison_Grunt_wav", "Car", "Environment", "Bison_Group", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "StartCountDown", "Audios", "Transform", "Intro_YellowStone", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal", "Human0"]
     float3 xformOp:translate = (-0.2, 0, -0.7)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -37,6 +37,7 @@ def Xform "Root"
 
         def RealityKitTrack "Track"
         {
+            reorder nameChildren = ["Disable_Entity", "Show"]
             def RealityKitAction "Disable_Entity"
             {
                 string actionKind = "disable"
@@ -44,6 +45,23 @@ def Xform "Root"
                 uniform token info:id = "5A5B7612-1568-4D4E-93CC-FBE0FB80799C"
                 double startTime = 0
                 rel target = </Root/CountDownGroup>
+            }
+        }
+
+        def RealityKitTrack "Track3"
+        {
+            def RealityKitAction "Show"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 5
+                uniform token info:id = "267507F7-7777-4AB9-AD0E-B95AF979AB7C"
+                double startTime = 12.017911402477687
+                rel target = </Root/GeyserSandbox/Pisa>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
             }
         }
     }
@@ -91,6 +109,7 @@ def Xform "Root"
                 int blendLayer = 300
                 double duration = 1
                 uniform token info:id = "1D606F8F-E672-4771-A0EB-6A74F549D071"
+                bool isActive = 0
                 double startTime = 40.350206585405715
                 rel target = </Root/CountDownGroup>
 
@@ -975,7 +994,7 @@ def Xform "Root"
         references = @Sandbox.usda@
     )
     {
-        reorder nameChildren = ["UIHeat", "UIBar", "GeyserSoundTL", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary", "HierarchicalFade"]
+        reorder nameChildren = ["UIBar", "GeyserSoundTL", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary", "HierarchicalFade", "Pisa"]
         float3 xformOp:scale = (0.08, 0.08, 0.08)
         float3 xformOp:translate = (0.010402441, 0.6091858, -0.11982477)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
@@ -1185,6 +1204,46 @@ def Xform "Root"
                 float3 xformOp:scale = (5.551117e-15, 1.0000001, 1.0000006)
                 float3 xformOp:translate = (-5.6367106, 0.0000019073484, 0.00009536742)
                 uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            over "Cube_001"
+            {
+                float3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+        }
+
+        def "Pisa" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            customData = {
+                float3 rotationEulerHint = (-1.5726796, 0, 0)
+            }
+            references = @ArtAssets/Pisa.usdz@
+        )
+        {
+            reorder nameChildren = ["tripo_mat_190f3f7b_0734_4188_afaa_f65cdf5152d4", "tripo_mesh_190f3f7b_0734_4188_afaa_f65cdf5152d4"]
+            rel material:binding = </Root/GeyserSandbox/Pisa/tripo_mat_190f3f7b_0734_4188_afaa_f65cdf5152d4> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            quatf xformOp:orient = (0.7064406, -0.7077723, 0, 0)
+            float3 xformOp:scale = (4.9999995, 4.9999995, 5)
+            float3 xformOp:translate = (-2.013256, 2.5754778, -0.017288206)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def "tripo_mat_190f3f7b_0734_4188_afaa_f65cdf5152d4" (
+                active = true
+                references = @ArtAssets/Pisa.usdz@</_materials/tripo_mat_190f3f7b_0734_4188_afaa_f65cdf5152d4>
+            )
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+            }
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+                float opacity = 0
             }
         }
     }
@@ -1469,7 +1528,7 @@ def Xform "Root"
         def RealityKitComponent "HierarchicalFade"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 1
+            float opacity = 0
         }
 
         over "banana"
@@ -2641,7 +2700,7 @@ def Xform "Root"
 
         over "CarDoor"
         {
-            float3 xformOp:translate = (0.39267376, 0.019344807, 5.935066)
+            float3 xformOp:translate = (0.39267376, -0.0021669867, 5.912475)
         }
 
         over "carseats"
@@ -3174,6 +3233,45 @@ def Xform "Root"
         {
             uniform token info:id = "RealityKit.HierarchicalFade"
             float opacity = 0
+        }
+    }
+
+    def Capsule "Human0" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.2
+        rel material:binding = None (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (2, 2, 2)
+        float3 xformOp:translate = (0.3313796, 0.6781148, 0.6866663)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/Human0/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:occlusion = 0
+                float inputs:roughness = 1
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 1
         }
     }
 }

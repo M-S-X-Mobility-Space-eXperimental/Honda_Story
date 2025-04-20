@@ -44,7 +44,7 @@ struct ImmersiveView: View {
 //    @State private var CountDownEntity: Entity?
     @State private var TestCubeEntity: Entity?
     
-    @State private var HumanEntity: Entity?
+//    @State private var HumanEntity: Entity?
     
     @State private var RootEntity: Entity?
     
@@ -143,7 +143,7 @@ struct ImmersiveView: View {
                 assignEntity(named: "UIHeat", to: &HeatBarEntity)
                 assignEntity(named: "UIPressure", to: &PressureBarEntity)
                 
-                assignEntity(named: "Human0", to: &HumanEntity)
+//                assignEntity(named: "Human0", to: &HumanEntity)
                 
                 assignEntity(named: "AudioEmitter", to: &AudioEmitterEntity)
                 assignEntity(named: "Root", to: &RootEntity)

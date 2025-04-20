@@ -3235,44 +3235,5 @@ def Xform "Root"
             float opacity = 0
         }
     }
-
-    def Capsule "Human0" (
-        active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        uniform token axis = "Y"
-        double height = 0.2
-        rel material:binding = None (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        double radius = 0.1
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (2, 2, 2)
-        float3 xformOp:translate = (0.3313796, 0.6781148, 0.6866663)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def Material "DefaultMaterial"
-        {
-            token outputs:mtlx:surface
-            token outputs:realitykit:vertex
-            token outputs:surface.connect = </Root/Human0/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
-
-            def Shader "DefaultSurfaceShader"
-            {
-                uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (1, 1, 1)
-                float inputs:occlusion = 0
-                float inputs:roughness = 1
-                token outputs:surface
-            }
-        }
-
-        def RealityKitComponent "HierarchicalFade"
-        {
-            uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 1
-        }
-    }
 }
 

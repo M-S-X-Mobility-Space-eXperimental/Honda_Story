@@ -63,6 +63,9 @@ struct ImmersiveView: View {
     @State private var CurrentHandAnchor: AnchorEntity?
     
     @State private var RefImageAnchor: AnchorEntity?
+    @State private var refImageAnchorPosition: SIMD3<Float> = .zero
+    @State private var refImageAnchorOrientation: simd_quatf = simd_quatf(ix: 0, iy: 0, iz: 0, r: 0)
+
     
     @State private var lastCubePosition: SIMD3<Float>?
     @State private var cancellables = Set<AnyCancellable>()
@@ -116,7 +119,8 @@ struct ImmersiveView: View {
                 self.LeftHandAnchor?.addChild(leftSphere)
                 self.RightHandAnchor?.addChild(rightSphere)
                 
-                self.RefImageAnchor?.addChild(leftSphere)
+            
+                
                 
                 content.add(LeftHandAnchor!)
                 content.add(RightHandAnchor!)
@@ -145,13 +149,6 @@ struct ImmersiveView: View {
                 assignEntity(named: "Root", to: &RootEntity)
                 
                 
-                // assign occlusion material to HumanEntity
-                applyOcclusionMaterial(to: HumanEntity!)
-                let capsule = ModelEntity(
-                    mesh: .generateCylinder(height: 0.31, radius: 0.11),
-                    materials: [OcclusionMaterial()]
-                )
-                HumanEntity?.addChild(capsule)
                 
                 if(!dbModel.facing_forward){
                     RootEntity?.position = SIMD3<Float>(0.2, 0, -1.3)
@@ -185,6 +182,25 @@ struct ImmersiveView: View {
             dbModel.observeAllRealdy()
             trackGestureStates()
             trackClappingHands()
+            
+            trackWorldReferenceImage()
+        }
+        .onChange(of: refImageAnchorPosition){
+            
+            print(refImageAnchorPosition)
+            
+            let offset_fromRef = SIMD3<Float>(0, -1, 0)
+            
+            let offset_fromRef_Ori = simd_quatf(angle: .pi/2, axis: SIMD3<Float>(1, 0, 0))
+            
+            
+            if length_squared(refImageAnchorPosition) > 0 {
+                
+                print("Updating Root position")
+                RootEntity?.position = refImageAnchorPosition + offset_fromRef
+                RootEntity?.transform.rotation = simd_mul( refImageAnchorOrientation, offset_fromRef_Ori)
+            }
+            
         }
         .onChange(of: dbModel.FinishBisonFoodInit){
             dbModel.observeBisonFoodChildUpdates { name, transform in
@@ -451,17 +467,6 @@ struct ImmersiveView: View {
         }
     }
 
-    func applyOcclusionMaterial(to entity: Entity) {
-        let capsule = ModelEntity(
-            mesh: .generateCylinder(height: 2, radius: 0.5),
-            materials: [OcclusionMaterial()]
-        )
-        capsule.transform = entity.transform
-        self.SceneRootContent?.add(capsule)
-        self.SceneRootContent?.remove(entity)
-//        entity.components[ModelComponent.self] = updatedModel
-    }
-
     
     func initBisonFoodObjectList() {
         guard let bisonFoods = bisonFoodsEntity else {
@@ -497,6 +502,30 @@ struct ImmersiveView: View {
         }
         
         dbModel.initalizeDB_BisonFoods(objectDict)
+    }
+    
+    func trackWorldReferenceImage(){
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            if let anchor = RefImageAnchor {
+                let newPosition = anchor.position(relativeTo: nil)
+                let newRotation = anchor.orientation(relativeTo: nil)
+                if distance(newPosition, refImageAnchorPosition) > 0.01 {
+                    refImageAnchorPosition = newPosition
+                    refImageAnchorOrientation = newRotation
+                    print(refImageAnchorOrientation)
+                }
+                
+                
+                
+                let deltaQuat  = simd_normalize(simd_mul(simd_inverse(newRotation), refImageAnchorOrientation))
+                
+                let angleDifference = abs(deltaQuat.angle)
+                
+                if angleDifference > 0.01 {
+                    refImageAnchorOrientation = newRotation
+                }
+            }
+        }
     }
 
     

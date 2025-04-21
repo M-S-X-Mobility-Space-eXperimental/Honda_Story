@@ -282,7 +282,11 @@ struct ImmersiveView: View {
         MovingCancellable = Timer.publish(every: 0.01, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
-                self.environmentEntity?.position += SIMD3<Float>(x: 0, y: 0, z: 0.01)
+                self.environmentEntity?.position += SIMD3<Float>(x: 0, y: 0, z: 0.05)
+                print(self.environmentEntity?.position.z ?? "0")
+                if((self.environmentEntity?.position.z)! > 160){
+                    self.environmentEntity?.position.z = 0
+                }
             }
     }
     

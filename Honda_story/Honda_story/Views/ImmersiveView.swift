@@ -252,7 +252,7 @@ struct ImmersiveView: View {
                 _ = GeyserSandboxEntity?.applyTapForBehaviors()
                 _ = bisonTransitTLEntity?.applyTapForBehaviors()
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 55) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 49) {
                     stopMoving()
                     print("🛑 Stopped movement for BisonExp.")
                 }

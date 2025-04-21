@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "Human0"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "CountDownGroup", "Bison_Grunt_wav", "Car", "Environment", "Bison_Group", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "Audios", "Transform", "Intro_YellowStone", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal", "Human0"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "Bison_Grunt_wav", "Car", "Environment", "Bison_Group", "Geyser_Structure", "BisonGrass", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "Audios", "Transform", "Intro_YellowStone", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
     float3 xformOp:translate = (-0.2, 0, -0.7)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -90,6 +90,34 @@ def Xform "Root"
                 uniform token info:id = "00BCDCAC-C234-481D-8A75-1405D497A70B"
                 double startTime = 25.09966373364483
                 rel target = </Root/GeyserSandbox/UIBar>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Show3"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 1
+                uniform token info:id = "ABAFDB1A-E3CB-4E48-9A7F-8317B81FABC1"
+                double startTime = 9.19340649385304
+                rel target = </Root/Geyser_Structure>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Hide"
+            {
+                string actionKind = "hide"
+                int blendLayer = 300
+                double duration = 1
+                uniform token info:id = "A42838EA-2026-4BFC-AFA8-799BFF07C624"
+                double startTime = 15.320343433601991
+                rel target = </Root/Geyser_Structure>
 
                 def RealityKitStruct "timingFunction"
                 {
@@ -263,7 +291,7 @@ def Xform "Root"
 
     def RealityKitTimeline "GeyserBisonTrans"
     {
-        reorder nameChildren = ["Track", "Track2", "Track_3", "Track_1", "Track3", "Track4", "Track5", "Track6"]
+        reorder nameChildren = ["Track", "Track2", "Track_3", "Track_1", "Track3", "Track4", "Track5", "Track6", "Track7"]
         def RealityKitTrack "Track"
         {
             def RealityKitAction "Play_Audio"
@@ -463,6 +491,23 @@ def Xform "Root"
                 }
             }
         }
+
+        def RealityKitTrack "Track7"
+        {
+            def RealityKitAction "Show"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 3
+                uniform token info:id = "EA31BBEB-A7C0-4D00-8438-6F506523CA86"
+                double startTime = 50.014617841383604
+                rel target = </Root/BisonGrass>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
     }
 
     def Xform "Bison" (
@@ -470,7 +515,7 @@ def Xform "Root"
     )
     {
         reorder nameChildren = ["BisonParent", "Bison_eat01"]
-        float3 xformOp:translate = (4.4403133, -0.1, -0.5849317)
+        float3 xformOp:translate = (4.53379, -0.099999994, -0.12075615)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def Xform "BisonParent" (
@@ -1181,7 +1226,7 @@ def Xform "Root"
             def RealityKitComponent "HierarchicalFade"
             {
                 uniform token info:id = "RealityKit.HierarchicalFade"
-                float opacity = 0
+                float opacity = 1
             }
         }
 
@@ -1866,7 +1911,7 @@ def Xform "Root"
         {
             quatf xformOp:orient = (1, 5.329072e-15, 1.7763565e-15, -2.6645357e-15)
             float3 xformOp:scale = (3.333333, 3.333333, 3.333333)
-            float3 xformOp:translate = (10.359086, -0.5537362, -1.9597275)
+            float3 xformOp:translate = (10.359086, -0.5621438, -0.42519403)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def RealityKitComponent "Collider"
@@ -2539,7 +2584,7 @@ def Xform "Root"
         references = @ArtAssets/car_New/car.usda@
     )
     {
-        reorder nameChildren = ["carTex", "carseats", "carseats_1", "CarDoor", "RCP_BehaviorsContainer", "OnAddedToScene", "ColliderGroup"]
+        reorder nameChildren = ["carTex", "carseats", "carseats_1", "CarDoor", "RCP_BehaviorsContainer", "OnAddedToScene", "ColliderGroup", "F_Human", "B_Human"]
         quatf xformOp:orient = (0.70710677, 0, -0.7071067, 0)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0.1, 0, -2.8250268)
@@ -2764,6 +2809,40 @@ def Xform "Root"
         over "carTex"
         {
             float3 xformOp:translate = (0.35901955, 1.1920929e-7, 7.4505815e-9)
+
+            over "Materials"
+            {
+                over "window"
+                {
+                    token outputs:mtlx:surface
+                    token outputs:realitykit:vertex
+
+                    over "PreviewSurface"
+                    {
+                        float inputs:opacity = 0.8
+                    }
+                }
+            }
+        }
+
+        def Xform "F_Human" (
+            active = true
+        )
+        {
+            quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (2.1734502, 0.8435362, -0.2764988)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Xform "B_Human" (
+            active = true
+        )
+        {
+            quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (3.2776628, 0.8236557, -0.20331113)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
         }
     }
 
@@ -2915,6 +2994,9 @@ def Xform "Root"
     )
     {
         reorder nameChildren = ["Bison_walk03", "Bison_Parent"]
+        float3 xformOp:translate = (1.4901161e-8, 1.4633026, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
         def Xform "Bison_Parent" (
             active = true
             customData = {
@@ -2924,7 +3006,7 @@ def Xform "Root"
         {
             quatf xformOp:orient = (0.5, 0.50000006, 0.49999994, -0.5)
             float3 xformOp:scale = (0.01, 0.01, 0.01)
-            float3 xformOp:translate = (-24.857002, -1.7066448, 0)
+            float3 xformOp:translate = (-14.744157, -1.7066448, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def "Bison_walk03" (
@@ -2971,7 +3053,7 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 1
             quatf xformOp:orient = (0.5, 0.50000006, 0.49999994, -0.5)
             float3 xformOp:scale = (0.009999998, 0.009999998, 0.009999998)
-            float3 xformOp:translate = (-26.097677, -1.7066448, -2.0534084)
+            float3 xformOp:translate = (-17.00451, -1.7066448, -2.0534084)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def "Bison_walk03" (
@@ -3029,7 +3111,7 @@ def Xform "Root"
             int ui:nodegraph:node:stackingOrder = 2
             quatf xformOp:orient = (0.5, 0.5, -0.5, 0.5)
             float3 xformOp:scale = (0.009999996, 0.009999996, 0.009999996)
-            float3 xformOp:translate = (19.422613, -0.31472373, -2.0534084)
+            float3 xformOp:translate = (19.422613, -1.5405552, -2.0534084)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
             def "Bison_walk03" (
@@ -3074,6 +3156,100 @@ def Xform "Root"
                     uniform string name = "Bison_rej01"
                 }
             }
+        }
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
+        }
+    }
+
+    def Cube "Geyser_Structure" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0, 0, 0)
+        }
+    )
+    {
+        rel material:binding = </Root/Geyser_Structure/DefaultMaterial>
+        double size = 0.2
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 0.01)
+        float3 xformOp:translate = (0.03896658, 0.8693323, -0.11032766)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token inputs:frame:stPrimvarName = "st" (
+                customData = {
+                    dictionary realitykit = {
+                        bool hide = 1
+                    }
+                }
+            )
+            token outputs:mtlx:surface
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/Geyser_Structure/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                color3f inputs:diffuseColor.connect = </Root/Geyser_Structure/DefaultMaterial/diffuseColor.outputs:rgb>
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+
+            def Shader "diffuseColor"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @ArtAssets/structure.jpg@
+                float2 inputs:st.connect = </Root/Geyser_Structure/DefaultMaterial/diffuseColor/TexCoordReader.outputs:result>
+                color3f outputs:rgb
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname.connect = </Root/Geyser_Structure/DefaultMaterial.inputs:frame:stPrimvarName>
+                    float2 outputs:result
+                }
+            }
+        }
+
+        def RealityKitComponent "HierarchicalFade"
+        {
+            uniform token info:id = "RealityKit.HierarchicalFade"
+            float opacity = 0
+        }
+    }
+
+    def Xform "BisonGrass" (
+        active = true
+    )
+    {
+        reorder nameChildren = ["grass_vegitation_mix", "grass_vegitation_mix_1"]
+        def "grass_vegitation_mix" (
+            active = true
+            references = @ArtAssets/terrain_New/grass_vegitation_mix.usdz@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.01, 0.01, 0.01)
+            float3 xformOp:translate = (4.627257, -0.13426894, 2.218636)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def "grass_vegitation_mix_1" (
+            active = true
+            references = @ArtAssets/terrain_New/grass_vegitation_mix.usdz@
+        )
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.01, 0.01, 0.01)
+            float3 xformOp:translate = (7.1042643, 0, -2.5004113)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
         }
 
         def RealityKitComponent "HierarchicalFade"

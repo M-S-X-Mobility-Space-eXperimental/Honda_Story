@@ -44,7 +44,7 @@ struct ImmersiveView: View {
 //    @State private var CountDownEntity: Entity?
     @State private var TestCubeEntity: Entity?
     
-//    @State private var HumanEntity: Entity?
+    @State private var HumanEntity: Entity? // For Occlusion
     
     @State private var RootEntity: Entity?
     
@@ -106,18 +106,18 @@ struct ImmersiveView: View {
                 
                 
                 
-                let leftSphere = ModelEntity(
-                    mesh: .generateSphere(radius: 0.07), // 1 cm radius
-                    materials: [occlusionMaterial]
-                )
-                
-                let rightSphere = ModelEntity(
-                    mesh: .generateSphere(radius: 0.07),
-                    materials: [occlusionMaterial]
-                )
-                
-                self.LeftHandAnchor?.addChild(leftSphere)
-                self.RightHandAnchor?.addChild(rightSphere)
+//                let leftSphere = ModelEntity(
+//                    mesh: .generateSphere(radius: 0.07), // 1 cm radius
+//                    materials: [occlusionMaterial]
+//                )
+//                
+//                let rightSphere = ModelEntity(
+//                    mesh: .generateSphere(radius: 0.07),
+//                    materials: [occlusionMaterial]
+//                )
+//                
+//                self.LeftHandAnchor?.addChild(leftSphere)
+//                self.RightHandAnchor?.addChild(rightSphere)
                 
             
                 
@@ -151,7 +151,7 @@ struct ImmersiveView: View {
                 
                 
                 if(!dbModel.facing_forward){
-                    RootEntity?.position = SIMD3<Float>(0.2, 0, -1.3)
+                    RootEntity?.position = SIMD3<Float>(0.2, 0, -1.5)
                     RootEntity?.transform.rotation = simd_quatf(angle: .pi, axis: SIMD3<Float>(0, 1, 0))
                     
                     
@@ -159,14 +159,30 @@ struct ImmersiveView: View {
                     assignEntity(named: "UIHeat", to: &ProgressBarEntity)
                     HeatOrPressure = "Heat"
                     
+                    
+                    
+                    assignEntity(named: "B_Human", to: &HumanEntity)
                     dbModel.observePressure()
                         
                 }else{
                     assignEntity(named: "UIPressure", to: &ProgressBarEntity)
                     HeatOrPressure = "Pressure"
                     
+                    assignEntity(named: "F_Human", to: &HumanEntity)
                     dbModel.observeHeat()
+                    
                 }
+
+
+                // Create the capsule ModelEntity
+                let capsuleEntity = ModelEntity(
+                    mesh: .generateCylinder(height: 0.7, radius: 0.25),
+                    materials: [occlusionMaterial]
+                )
+                
+                // Match the transform of the target entity
+                capsuleEntity.position = HumanEntity!.position(relativeTo: nil)
+                content.add(capsuleEntity)
                 
                 
 //                let hoverComponent = HoverEffectComponent()
@@ -183,25 +199,25 @@ struct ImmersiveView: View {
             trackGestureStates()
             trackClappingHands()
             
-            trackWorldReferenceImage()
+//            trackWorldReferenceImage()
         }
-        .onChange(of: refImageAnchorPosition){
-            
-            print(refImageAnchorPosition)
-            
-            let offset_fromRef = SIMD3<Float>(0, -1, 0)
-            
-            let offset_fromRef_Ori = simd_quatf(angle: .pi/2, axis: SIMD3<Float>(1, 0, 0))
-            
-            
-            if length_squared(refImageAnchorPosition) > 0 {
-                
-                print("Updating Root position")
-                RootEntity?.position = refImageAnchorPosition + offset_fromRef
-                RootEntity?.transform.rotation = simd_mul( refImageAnchorOrientation, offset_fromRef_Ori)
-            }
-            
-        }
+//        .onChange(of: refImageAnchorPosition){
+//            
+//            print(refImageAnchorPosition)
+//            
+//            let offset_fromRef = SIMD3<Float>(-2, -1, 1)
+//            
+//            let offset_fromRef_Ori = simd_mul(simd_quatf(angle: .pi/2, axis: SIMD3<Float>(1, 0, 0)), simd_quatf(angle: .pi/2, axis: SIMD3<Float>(0, 1, 0)))
+//            
+//            
+//            if length_squared(refImageAnchorPosition) > 0 {
+//                
+//                print("Updating Root position")
+//                RootEntity?.position = refImageAnchorPosition + offset_fromRef
+//                RootEntity?.transform.rotation = simd_mul( refImageAnchorOrientation, offset_fromRef_Ori)
+//            }
+//            
+//        }
         .onChange(of: dbModel.FinishBisonFoodInit){
             dbModel.observeBisonFoodChildUpdates { name, transform in
                 
@@ -283,7 +299,7 @@ struct ImmersiveView: View {
             .autoconnect()
             .sink { _ in
                 self.environmentEntity?.position += SIMD3<Float>(x: 0, y: 0, z: 0.05)
-                print(self.environmentEntity?.position.z ?? "0")
+//                print(self.environmentEntity?.position.z ?? "0")
                 if((self.environmentEntity?.position.z)! > 160){
                     self.environmentEntity?.position.z = 0
                 }
@@ -332,7 +348,7 @@ struct ImmersiveView: View {
             let newPos = entity.position(relativeTo: nil) + deltaPos
             entity.setPosition(newPos, relativeTo: nil)
 
-            if currentOpacity <= 0 {
+            if distance(newPos, endPos) <= 0.1 {
                 entity.isEnabled = false
                 timer.invalidate()
             }

@@ -68,7 +68,7 @@ def Xform "Root"
 
     def RealityKitTimeline "IntroGeyser"
     {
-        reorder nameChildren = ["Track", "Track2", "Track3"]
+        reorder nameChildren = ["Track", "Track2"]
         def RealityKitTrack "Track"
         {
             def RealityKitAction "Play_Audio"
@@ -107,11 +107,10 @@ def Xform "Root"
             {
                 string actionKind = "show"
                 int blendLayer = 300
-                double duration = 1
-                uniform token info:id = "1D606F8F-E672-4771-A0EB-6A74F549D071"
-                bool isActive = 0
-                double startTime = 40.350206585405715
-                rel target = </Root/CountDownGroup>
+                double duration = 5
+                uniform token info:id = "00BCDCAC-C234-481D-8A75-1405D497A70B"
+                double startTime = 25.09966373364483
+                rel target = </Root/GeyserSandbox/UIBar>
 
                 def RealityKitStruct "timingFunction"
                 {
@@ -293,7 +292,7 @@ def Xform "Root"
                 string actionKind = "audio"
                 string audioResourceName = "Geyser End.mp3"
                 bool controlPlayback = 1
-                double duration = 56.595540734085205
+                double duration = 50.01806832414833
                 uniform token info:id = "95B8B835-4C0D-438B-AC10-19B5B237C5DE"
                 double startTime = 0
                 rel target = </Root/Audios/AudioEmitter>
@@ -310,7 +309,7 @@ def Xform "Root"
                 bool controlPlayback = 1
                 double duration = 44.98285416666667
                 uniform token info:id = "987429BA-FE06-4263-924B-6025A6CCD932"
-                double startTime = 56.60131879509593
+                double startTime = 50.021085396730676
                 rel target = </Root/Audios/AudioEmitter>
 
                 def RealityKitStruct "handoffType"
@@ -322,13 +321,24 @@ def Xform "Root"
         def RealityKitTrack "Track2"
         {
             reorder nameChildren = ["Hide", "Disable_Entity", "Hide_12", "Disable_Entity_1", "Show"]
+            def RealityKitAction "Disable_Entity_1"
+            {
+                string actionKind = "disable"
+                double duration = 0
+                uniform token info:id = "E71480E4-3EB4-4887-888C-2A1F7492E9BB"
+                double startTime = 50.089975137604796
+                rel target = </Root/Eruption>
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+            }
+
             def RealityKitAction "Hide_12"
             {
                 string actionKind = "hide"
                 int blendLayer = 300
                 double duration = 5
                 uniform token info:id = "35A010AA-5FC9-4D19-A56A-E52F2F250F56"
-                double startTime = 51.59174354550458
+                double startTime = 45.025219332457134
                 rel target = </Root/GeyserSandbox>
                 float2 ui:nodegraph:node:pos = (20, 20)
                 int ui:nodegraph:node:stackingOrder = 1
@@ -336,17 +346,6 @@ def Xform "Root"
                 def RealityKitStruct "timingFunction"
                 {
                 }
-            }
-
-            def RealityKitAction "Disable_Entity_1"
-            {
-                string actionKind = "disable"
-                double duration = 0
-                uniform token info:id = "E71480E4-3EB4-4887-888C-2A1F7492E9BB"
-                double startTime = 56.72242203034002
-                rel target = </Root/Eruption>
-                float2 ui:nodegraph:node:pos = (20, 20)
-                int ui:nodegraph:node:stackingOrder = 1
             }
         }
 
@@ -358,7 +357,7 @@ def Xform "Root"
                 int blendLayer = 300
                 double duration = 5
                 uniform token info:id = "76F9D941-4022-45C7-93D7-132F27654DBD"
-                double startTime = 56.643216772881885
+                double startTime = 50.051211629492606
                 rel target = </Root/BisonFoods>
                 float2 ui:nodegraph:node:pos = (20, 20)
                 int ui:nodegraph:node:stackingOrder = 1
@@ -378,7 +377,7 @@ def Xform "Root"
                 int blendLayer = 300
                 double duration = 5
                 uniform token info:id = "B52A2139-20BC-48CF-B9FD-2E6CCB7CC441"
-                double startTime = 51.58784153172642
+                double startTime = 45.03250490762865
                 rel target = </Root/Eruption>
                 float2 ui:nodegraph:node:pos = (20, 20)
                 int ui:nodegraph:node:stackingOrder = 1
@@ -393,7 +392,7 @@ def Xform "Root"
                 string actionKind = "disable"
                 double duration = 0
                 uniform token info:id = "387D65B5-14A0-4CD6-8D55-05192242CD57"
-                double startTime = 56.72776674983105
+                double startTime = 50.08906367487657
                 rel target = </Root/GeyserSandbox>
                 float2 ui:nodegraph:node:pos = (20, 20)
                 int ui:nodegraph:node:stackingOrder = 1
@@ -408,7 +407,7 @@ def Xform "Root"
                 int blendLayer = 300
                 double duration = 5
                 uniform token info:id = "7625FC0A-2882-4A00-88FA-A0FCA65D1439"
-                double startTime = 56.64120986647835
+                double startTime = 50.0488057318761
                 rel target = </Root/Bison>
 
                 def RealityKitStruct "timingFunction"
@@ -428,7 +427,7 @@ def Xform "Root"
                 uniform token info:id = "C5020C26-6A6D-44CA-A7D7-5C59E6F02BEC"
                 float3 position = (0.9950919, -2.3841858e-7, -30.01886)
                 quatf rotation = (1, 0, 0, 0)
-                double startTime = 56.640602739477046
+                double startTime = 50.04586849619111
                 rel target = </Root/Car/CarDoor>
 
                 def RealityKitStruct "timingFunction"
@@ -446,7 +445,7 @@ def Xform "Root"
                 double duration = 3
                 uniform token info:id = "544CD60C-7C2F-4111-A07B-B60C7AF1671E"
                 float3 position = (271.50238, 9.999932, -0.004638672)
-                double startTime = 57.61113298514428
+                double startTime = 51.047360459984276
                 rel target = </Root/Car/CarDoor>
 
                 def RealityKitStruct "timingFunction"
@@ -463,7 +462,7 @@ def Xform "Root"
                 int blendLayer = 300
                 double duration = 5
                 uniform token info:id = "A6DDA580-C411-49CD-966C-9CDD7CF6978B"
-                double startTime = 56.655664417895004
+                double startTime = 50.023808032154975
                 rel target = </Root/Bison_Group>
 
                 def RealityKitStruct "timingFunction"
@@ -1210,6 +1209,12 @@ def Xform "Root"
             {
                 float3 xformOp:translate = (0, 0, 0)
                 uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+                float opacity = 0
             }
         }
 

@@ -53,7 +53,7 @@ class DBModel: ObservableObject {
             "tapped": true,
         ])
         
-        self.ObserveAllTapped()
+//        self.ObserveAllTapped()
         self.resetTapAfterDelay()
     }
 

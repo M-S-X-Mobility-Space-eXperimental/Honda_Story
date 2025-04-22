@@ -90,7 +90,7 @@ struct ImmersiveView: View {
                 self.SceneRootContent = content
                 
                 
-                let occlusionMaterial = OcclusionMaterial()
+//                let occlusionMaterial = OcclusionMaterial()
                 
                 // Hand Tracking Setup
                 let session = SpatialTrackingSession()
@@ -187,6 +187,8 @@ struct ImmersiveView: View {
             trackGestureStates()
             trackClappingHands()
             
+            trackGeyserState()
+            
 //            trackWorldReferenceImage()
         }
 //        .onChange(of: refImageAnchorPosition){
@@ -234,7 +236,8 @@ struct ImmersiveView: View {
            }
             
             //reset ready for next round
-            dbModel.playerResetReady()
+            // Does this cause sandbox disappear?
+//            dbModel.playerResetReady()
         }
         
         .onChange(of: dbModel.Heat) {
@@ -251,6 +254,8 @@ struct ImmersiveView: View {
                 bisonFoodsEntity?.isEnabled = true
                 GeyserErupt = true
                 
+                AudioEmitterEntity?.stopAllAudio()
+                
 //                CountDownEntity?.isEnabled = false
                 
                 _ = GeyserSandboxEntity?.applyTapForBehaviors()
@@ -265,16 +270,16 @@ struct ImmersiveView: View {
         }
 
         
-        .simultaneousGesture(TapGesture().targetedToAnyEntity()
-             .onEnded { value in
-                 
-                 let tappedEntity = value.entity
-                 
-                 if tappedEntity.name == "GeyserSandbox" {
-                     dbModel.tapGeyser()
-                 }
-                 
-         })
+//        .simultaneousGesture(TapGesture().targetedToAnyEntity()
+//             .onEnded { value in
+//                 
+//                 let tappedEntity = value.entity
+//                 
+//                 if tappedEntity.name == "GeyserSandbox" {
+//                     dbModel.tapGeyser()
+//                 }
+//                 
+//         })
         .onDisappear {
                 
             MovingCancellable?.cancel()
@@ -336,7 +341,7 @@ struct ImmersiveView: View {
             let newPos = entity.position(relativeTo: nil) + deltaPos
             entity.setPosition(newPos, relativeTo: nil)
 
-            if distance(newPos, endPos) <= 0.1 {
+            if simd_distance(newPos, endPos) <= 0.1 {
                 entity.isEnabled = false
                 timer.invalidate()
             }
@@ -344,7 +349,7 @@ struct ImmersiveView: View {
     }
     
     func trackClappingHands() {
-        let clapThreshold: Float = 0.05 // 3 cm
+        let clapThreshold: Float = 0.05
         var hasClapped = false
 
         Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
@@ -435,11 +440,22 @@ struct ImmersiveView: View {
             .store(in: &cancellables)
     }
     
+    func trackGeyserState() {
+        Timer.publish(every: 1, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                print(GeyserSandboxEntity?.isEnabled ?? "No Geyser")
+                print(GeyserSandboxEntity?.components[OpacityComponent.self]?.opacity ?? "No Opacity")
+
+            }
+            .store(in: &cancellables)
+    }
+    
     
     func bisonFeedBackSequence(name: String, entity: Entity?){
         
         
-        let distance_To_bison = distance(entity?.position(relativeTo: nil) ?? SIMD3<Float>.zero, (eatingRefEntity?.position(relativeTo: nil))! )
+        let distance_To_bison = simd_distance(entity?.position(relativeTo: nil) ?? SIMD3<Float>.zero, (eatingRefEntity?.position(relativeTo: nil))! )
         
         if distance_To_bison > 2 {
             // Not trigger effects
@@ -451,7 +467,7 @@ struct ImmersiveView: View {
         let correct: Bool
         if(name == "bluegrass"){
             correct = true
-            immersiveContentEntity?.stopAllAudio()
+            AudioEmitterEntity?.stopAllAudio()
         }else{
             correct = false
         }
@@ -517,7 +533,7 @@ struct ImmersiveView: View {
             if let anchor = RefImageAnchor {
                 let newPosition = anchor.position(relativeTo: nil)
                 let newRotation = anchor.orientation(relativeTo: nil)
-                if distance(newPosition, refImageAnchorPosition) > 0.01 {
+                if simd_distance(newPosition, refImageAnchorPosition) > 0.01 {
                     refImageAnchorPosition = newPosition
                     refImageAnchorOrientation = newRotation
                     print(refImageAnchorOrientation)

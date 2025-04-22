@@ -9,21 +9,30 @@ reorder rootPrims = ["Root", "Human0"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "Bison_Grunt_wav", "Car", "Environment", "Bison_Group", "Geyser_Structure", "BisonGrass", "Occlusion_M", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "Audios", "Transform", "Intro_YellowStone", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "Bison_Grunt_wav", "Car", "Environment", "Bison_Group", "Geyser_Structure", "msx_geyser_sfx_v1_wav", "BisonGrass", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "Audios", "Transform", "Intro_YellowStone", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
     float3 xformOp:translate = (-0.2, 0, -0.7)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitTimeline "GeyserErupt"
     {
         reorder nameChildren = ["Track2", "Track", "Track3"]
+        def RealityKitTrack "Track"
+        {
+            reorder nameChildren = ["Disable_Entity", "Show"]
+        }
+
+        def RealityKitTrack "Track3"
+        {
+        }
+
         def RealityKitTrack "Track2"
         {
             def RealityKitAction "Play_Audio"
             {
                 string actionKind = "audio"
-                string audioResourceName = "msx geyser sfx v1.wav"
+                string audioResourceName = "msx geyser sfx v1.wav 1"
                 bool controlPlayback = 1
-                double duration = 20.439504058367262
+                double duration = 19.18
                 double gain = -11.25424208144797
                 uniform token info:id = "4460F7F5-0807-4692-9C2E-47FC5B7D0CAB"
                 double startTime = 0
@@ -33,15 +42,6 @@ def Xform "Root"
                 {
                 }
             }
-        }
-
-        def RealityKitTrack "Track"
-        {
-            reorder nameChildren = ["Disable_Entity", "Show"]
-        }
-
-        def RealityKitTrack "Track3"
-        {
         }
     }
 
@@ -363,6 +363,20 @@ def Xform "Root"
                 uniform token info:id = "8760CD2A-00A8-4AE1-AD77-F0C27B11E0BF"
                 double startTime = 22.012839968281945
                 rel target = </Root/GeyserSandbox/Pisa>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+
+            def RealityKitAction "Show2"
+            {
+                string actionKind = "show"
+                int blendLayer = 300
+                double duration = 0.01
+                uniform token info:id = "4A8C2A11-4932-41BB-A9DD-FC775C00ED8E"
+                double startTime = 0
+                rel target = </Root/GeyserSandbox>
 
                 def RealityKitStruct "timingFunction"
                 {
@@ -1005,7 +1019,7 @@ def Xform "Root"
         references = @Sandbox.usda@
     )
     {
-        reorder nameChildren = ["UIBar", "GeyserSoundTL", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary", "HierarchicalFade", "Pisa"]
+        reorder nameChildren = ["UIBar", "GeyserSoundTL", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary", "HierarchicalFade", "Pisa", "msx_geyser_sfx_v1_wav", "Cube_1"]
         float3 xformOp:scale = (0.08, 0.08, 0.08)
         float3 xformOp:translate = (0.010402441, 0.6091858, -0.11982477)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
@@ -1109,17 +1123,6 @@ def Xform "Root"
                 references = @ArtAssets/geyser.usdz@
             )
             {
-            }
-        }
-
-        def RealityKitComponent "AudioLibrary"
-        {
-            uniform token info:id = "RealityKit.AudioLibrary"
-
-            def RealityKitDict "resources"
-            {
-                string[] keys = ["msx geyser sfx v1.wav", "msx geyser sfx v1.wav 1"]
-                rel values = </Root/Audios/msx_geyser_sfx_v1_wav>
             }
         }
 
@@ -1262,6 +1265,23 @@ def Xform "Root"
                 uniform token info:id = "RealityKit.HierarchicalFade"
                 float opacity = 0
             }
+        }
+
+        def RealityKitComponent "AudioLibrary"
+        {
+            uniform token info:id = "RealityKit.AudioLibrary"
+
+            def RealityKitDict "resources"
+            {
+                string[] keys = ["msx geyser sfx v1.wav 1", "msx geyser sfx v1.wav"]
+                rel values = </Root/GeyserSandbox/msx_geyser_sfx_v1_wav>
+            }
+        }
+
+        def RealityKitAudioFile "msx_geyser_sfx_v1_wav"
+        {
+            uniform asset file = @Sounds/msx geyser sfx v1.wav@
+            uniform bool shouldLoop = 0
         }
     }
 
@@ -2856,15 +2876,6 @@ def Xform "Root"
                     token outputs:surface
                 }
 
-                def Shader "PreviewSurface"
-                {
-                    uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
-                    token outputs:out
-                    float2 ui:nodegraph:node:pos = (-484.75, 162.52344)
-                    int ui:nodegraph:node:stackingOrder = 37
-                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out"]
-                }
-
                 def Shader "OcclusionSurface"
                 {
                     uniform token info:id = "ND_realitykit_occlusion_surfaceshader"
@@ -2878,35 +2889,7 @@ def Xform "Root"
                 {
                     uniform token info:id = "ND_noise2d_float"
                     float2 ui:nodegraph:node:pos = (-678.58203, 90.86328)
-                    int ui:nodegraph:node:stackingOrder = 22
-                }
-
-                def Shader "Mix"
-                {
-                    uniform token info:id = "ND_mix_float"
-                    float inputs:bg
-                    float inputs:fg
-                    float inputs:mix
-                    float2 ui:nodegraph:node:pos = (-266.84375, 239.91797)
-                    int ui:nodegraph:node:stackingOrder = 43
-                }
-
-                def Shader "Multiply"
-                {
-                    uniform token info:id = "ND_multiply_float"
-                    float inputs:in1
-                    float inputs:in2
-                    float outputs:out
-                    float2 ui:nodegraph:node:pos = (-169.29297, -49.05078)
-                    int ui:nodegraph:node:stackingOrder = 41
-                }
-
-                def Shader "Dot"
-                {
-                    uniform token info:id = "ND_dot_surfaceshader"
-                    token inputs:in.connect = </Root/Car/B_Human/DefaultMaterial/OcclusionSurface.outputs:out>
-                    float2 ui:nodegraph:node:pos = (-75.90339, -2.174041)
-                    int ui:nodegraph:node:stackingOrder = 44
+                    int ui:nodegraph:node:stackingOrder = 23
                 }
             }
         }
@@ -2942,20 +2925,12 @@ def Xform "Root"
                     token outputs:surface
                 }
 
-                def Shader "PreviewSurface"
-                {
-                    uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
-                    token outputs:out
-                    float2 ui:nodegraph:node:pos = (-352.6797, 118.09375)
-                    int ui:nodegraph:node:stackingOrder = 6
-                }
-
                 def Shader "OcclusionSurface"
                 {
                     uniform token info:id = "ND_realitykit_occlusion_surfaceshader"
                     token outputs:out
-                    float2 ui:nodegraph:node:pos = (-309.0078, -45.91797)
-                    int ui:nodegraph:node:stackingOrder = 4
+                    float2 ui:nodegraph:node:pos = (-488.21484, -59.67578)
+                    int ui:nodegraph:node:stackingOrder = 12
                 }
             }
         }

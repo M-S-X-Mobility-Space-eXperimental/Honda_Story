@@ -172,21 +172,9 @@ struct ImmersiveView: View {
                     dbModel.observeHeat()
                     
                 }
+                
+                HumanEntity?.isEnabled = false
 
-
-                // Create the capsule ModelEntity
-                let capsuleEntity = ModelEntity(
-                    mesh: .generateCylinder(height: 0.7, radius: 0.25),
-                    materials: [occlusionMaterial]
-                )
-                
-                // Match the transform of the target entity
-                capsuleEntity.position = HumanEntity!.position(relativeTo: nil)
-                content.add(capsuleEntity)
-                
-                
-//                let hoverComponent = HoverEffectComponent()
-//                GeyserSandboxEntity?.components.set(hoverComponent)
                 
                 initBisonFoodObjectList()
             }

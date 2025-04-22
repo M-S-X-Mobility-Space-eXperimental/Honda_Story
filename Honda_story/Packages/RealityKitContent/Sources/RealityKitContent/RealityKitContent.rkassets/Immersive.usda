@@ -9,7 +9,7 @@ reorder rootPrims = ["Root", "Human0"]
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Eruption", "GeyserSandbox", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "Bison_Grunt_wav", "Car", "Environment", "Bison_Group", "Geyser_Structure", "BisonGrass", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "Audios", "Transform", "Intro_YellowStone", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
+    reorder nameChildren = ["Eruption", "GeyserSandbox", "SKYBOX", "Bison", "Sphere", "GeyserErupt", "IntroGeyser", "Bison_Grunt_wav", "Car", "Environment", "Bison_Group", "Geyser_Structure", "BisonGrass", "Occlusion_M", "GeyserBisonTrans", "BisonIdle", "BisonWalk", "Audios", "Transform", "Intro_YellowStone", "BisonFoods", "Bison_Correct", "Bison_Wrong", "bluegrassFinal"]
     float3 xformOp:translate = (-0.2, 0, -0.7)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
@@ -2584,7 +2584,7 @@ def Xform "Root"
         references = @ArtAssets/car_New/car.usda@
     )
     {
-        reorder nameChildren = ["carTex", "carseats", "carseats_1", "CarDoor", "RCP_BehaviorsContainer", "OnAddedToScene", "ColliderGroup", "F_Human", "B_Human"]
+        reorder nameChildren = ["carTex", "carseats", "carseats_1", "CarDoor", "RCP_BehaviorsContainer", "OnAddedToScene", "ColliderGroup", "F_Human", "B_Human", "F_Human"]
         quatf xformOp:orient = (0.70710677, 0, -0.7071067, 0)
         float3 xformOp:scale = (1, 1, 1)
         float3 xformOp:translate = (0.1, 0, -2.8250268)
@@ -2825,24 +2825,139 @@ def Xform "Root"
             }
         }
 
-        def Xform "F_Human" (
+        def Capsule "B_Human" (
             active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
+            uniform token axis = "Y"
+            double height = 0.2
+            rel material:binding = </Root/Car/B_Human/DefaultMaterial>
+            double radius = 0.1
             quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
-            float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (2.1734502, 0.8435362, -0.2764988)
+            float3 xformOp:scale = (2.4999995, 2.4999995, 2.4999995)
+            float3 xformOp:translate = (2.0363839, 0.7509714, -0.25750056)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token outputs:mtlx:surface.connect = </Root/Car/B_Human/DefaultMaterial/OcclusionSurface.outputs:out>
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/Car/B_Human/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+                def Shader "DefaultSurfaceShader" (
+                    active = false
+                )
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (1, 1, 1)
+                    float inputs:roughness = 0.75
+                    token outputs:surface
+                }
+
+                def Shader "PreviewSurface"
+                {
+                    uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-484.75, 162.52344)
+                    int ui:nodegraph:node:stackingOrder = 37
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out"]
+                }
+
+                def Shader "OcclusionSurface"
+                {
+                    uniform token info:id = "ND_realitykit_occlusion_surfaceshader"
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-473.0078, -47.972656)
+                    int ui:nodegraph:node:stackingOrder = 10
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["outputs:out"]
+                }
+
+                def Shader "Noise2D"
+                {
+                    uniform token info:id = "ND_noise2d_float"
+                    float2 ui:nodegraph:node:pos = (-678.58203, 90.86328)
+                    int ui:nodegraph:node:stackingOrder = 22
+                }
+
+                def Shader "Mix"
+                {
+                    uniform token info:id = "ND_mix_float"
+                    float inputs:bg
+                    float inputs:fg
+                    float inputs:mix
+                    float2 ui:nodegraph:node:pos = (-266.84375, 239.91797)
+                    int ui:nodegraph:node:stackingOrder = 43
+                }
+
+                def Shader "Multiply"
+                {
+                    uniform token info:id = "ND_multiply_float"
+                    float inputs:in1
+                    float inputs:in2
+                    float outputs:out
+                    float2 ui:nodegraph:node:pos = (-169.29297, -49.05078)
+                    int ui:nodegraph:node:stackingOrder = 41
+                }
+
+                def Shader "Dot"
+                {
+                    uniform token info:id = "ND_dot_surfaceshader"
+                    token inputs:in.connect = </Root/Car/B_Human/DefaultMaterial/OcclusionSurface.outputs:out>
+                    float2 ui:nodegraph:node:pos = (-75.90339, -2.174041)
+                    int ui:nodegraph:node:stackingOrder = 44
+                }
+            }
         }
 
-        def Xform "B_Human" (
+        def Capsule "F_Human" (
             active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
+            uniform token axis = "Y"
+            double height = 0.2
+            rel material:binding = </Root/Car/F_Human/DefaultMaterial>
+            double radius = 0.1
             quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
-            float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (3.2776628, 0.8236557, -0.20331113)
+            float3 xformOp:scale = (2.4999995, 2.4999998, 2.4999998)
+            float3 xformOp:translate = (3.5082572, 0.75620794, -0.22688346)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Material "DefaultMaterial"
+            {
+                token outputs:mtlx:surface.connect = </Root/Car/F_Human/DefaultMaterial/OcclusionSurface.outputs:out>
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/Car/F_Human/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+                def Shader "DefaultSurfaceShader" (
+                    active = false
+                )
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (1, 1, 1)
+                    float inputs:roughness = 0.75
+                    token outputs:surface
+                }
+
+                def Shader "PreviewSurface"
+                {
+                    uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-352.6797, 118.09375)
+                    int ui:nodegraph:node:stackingOrder = 6
+                }
+
+                def Shader "OcclusionSurface"
+                {
+                    uniform token info:id = "ND_realitykit_occlusion_surfaceshader"
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-309.0078, -45.91797)
+                    int ui:nodegraph:node:stackingOrder = 4
+                }
+            }
         }
     }
 

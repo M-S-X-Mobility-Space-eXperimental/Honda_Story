@@ -443,15 +443,6 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "GeyserSandbox"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
         "GeyserErupt",
         "Track"
       ],
@@ -492,16 +483,6 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "BisonIdle",
-        "Track5"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
         "Bison_Correst",
         "Track"
       ],
@@ -525,6 +506,16 @@
         "AIBison",
         "Armature",
         "char1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Audios",
+        "BisonFeedBacks"
       ],
       {
         "isExpanded" : true,
@@ -621,6 +612,15 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
+        "Audios"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
         "Car",
         "B_Human",
         "DefaultMaterial"
@@ -634,6 +634,15 @@
         "Root",
         "GeyserIntro",
         "Track2"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "Environment"
       ],
       {
         "isExpanded" : true,

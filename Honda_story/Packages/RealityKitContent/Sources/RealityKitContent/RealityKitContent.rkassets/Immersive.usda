@@ -251,6 +251,22 @@ def Xform "Root"
                 {
                 }
             }
+
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "Bison Breathing.wav"
+                bool controlPlayback = 1
+                double duration = 17.808125
+                uniform token info:id = "E256F527-4023-455C-BB2E-E88D19547A6A"
+                double loopCount = 0
+                double startTime = 95.01318329442817
+                rel target = </Root/Audios/AudioEmitter>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
         }
 
         def RealityKitTrack "Track_1"
@@ -729,25 +745,6 @@ def Xform "Root"
                 bool separateAnimatedValue = 1
                 double startTime = 2.084953780815861
                 rel target = </Root/Bison_Group/Bison_Parent_2/Bison_walk03>
-
-                def RealityKitStruct "handoffType"
-                {
-                }
-            }
-        }
-
-        def RealityKitTrack "Track5"
-        {
-            def RealityKitAction "Play_Audio"
-            {
-                string actionKind = "audio"
-                string audioResourceName = "Bison Breathing.wav"
-                bool controlPlayback = 1
-                double duration = 17.808125
-                uniform token info:id = "A358FE4E-8BD9-4107-B23C-95304715555C"
-                double loopCount = 0
-                double startTime = 0
-                rel target = </Root/Audios/AudioEmitter>
 
                 def RealityKitStruct "handoffType"
                 {

@@ -19,14 +19,6 @@ def Xform "Root"
         def RealityKitTrack "Track"
         {
             reorder nameChildren = ["Disable_Entity", "Show"]
-        }
-
-        def RealityKitTrack "Track3"
-        {
-        }
-
-        def RealityKitTrack "Track2"
-        {
             def RealityKitAction "Play_Audio"
             {
                 string actionKind = "audio"
@@ -35,13 +27,17 @@ def Xform "Root"
                 double duration = 19.18
                 double gain = -11.25424208144797
                 uniform token info:id = "4460F7F5-0807-4692-9C2E-47FC5B7D0CAB"
-                double startTime = 0
+                double startTime = 0.0007825549521408303
                 rel target = </Root/GeyserSandbox>
 
                 def RealityKitStruct "handoffType"
                 {
                 }
             }
+        }
+
+        def RealityKitTrack "Track3"
+        {
         }
     }
 
@@ -178,117 +174,6 @@ def Xform "Root"
         }
     }
 
-    def "Eruption" (
-        customData = {
-            float3 rotationEulerHint = (0, 0, 0)
-        }
-        references = @ArtAssets/Eruption.usdz@
-    )
-    {
-        reorder nameChildren = ["smoke", "smoke_1", "AudioLibrary", "HierarchicalFade"]
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1.0000002, 1.0000002, 1.0000002)
-        float3 xformOp:translate = (0.0464889, 0.6164453, -0.097720265)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "smoke_1"
-        {
-            quatf xformOp:orient = (0.99999994, 0, 0, 0)
-            float3 xformOp:scale = (0.07895726, 0.07895726, 0.07895726)
-            float3 xformOp:translate = (1.8626451e-9, -0.031540036, -7.450581e-9)
-
-            over "VFXEmitter"
-            {
-                over "currentState"
-                {
-                    bool isEmitting = 1
-
-                    over "mainEmitter"
-                    {
-                        float birthRate = 200
-                        float dampingFactor = 15
-                        float particleSize = 0.05
-                        float radialGravityStrength = -0.1
-                        float sizeMultiplierAtEndOfLifespan = 13
-                        float4 startColorA = (0.5343751, 0.72773063, 0.7319911, 0.19882016)
-                        float4 startColorB = (1, 1, 1, 0.11891475)
-                        bool useStartColorRange = 1
-                        float3 vortexDirection = (0.1, 0, 0)
-                    }
-
-                    over "spawnedEmitter"
-                    {
-                        float3 acceleration = (0, -0.1, 0)
-                        float birthRate = 100
-                        float dampingFactor = 0.1
-                        float4 endColorA = (0.18195641, 0.26261774, 0.24874541, 0.15154654)
-                        float particleAngle = 0.017453292
-                        float particleMass = 1
-                        float particleSize = 0.05
-                        float3 radialGravityCenter = (0, 0.1, 0)
-                        float4 startColorA = (0.35071167, 0.42040566, 0.40221477, 0.04737989)
-                        bool useEndColor = 1
-                        bool useEndColorRange = 0
-                        bool useStartColorRange = 0
-                        float3 vortexDirection = (0.02, -0.03, 0.02)
-                        float vortexStrength = 0.15
-                    }
-                }
-            }
-        }
-
-        over "smoke" (
-            customData = {
-                float3 rotationEulerHint = (-0.08726621, 0, 0)
-            }
-        )
-        {
-            quatf xformOp:orient = (0.99904823, -0.043619264, 0, 0)
-
-            over "VFXEmitter"
-            {
-                over "currentState"
-                {
-                    float3 shapeSize = (0.1, 0.1, 0.1)
-
-                    over "mainEmitter"
-                    {
-                        float3 acceleration = (0, -0.2, 0)
-                        float birthRate = 100
-                        float dampingFactor = 15
-                        float4 endColorA = (0.59082115, 0.7648289, 0.66320205, 0.3903327)
-                        float4 endColorB = (1, 1, 1, 1)
-                        float noiseScale = 0.5
-                        float particleMass = 1.3
-                        float particleSize = 0.02
-                        float3 radialGravityCenter = (0, 0, 0)
-                        float sizeMultiplierAtEndOfLifespan = 7
-                        bool useEndColor = 1
-                        bool useEndColorRange = 1
-                        float3 vortexDirection = (0.5, -0.5, 0.5)
-                    }
-                }
-            }
-        }
-
-        def RealityKitComponent "AudioLibrary"
-        {
-            uniform token info:id = "RealityKit.AudioLibrary"
-
-            def RealityKitDict "resources"
-            {
-                string[] keys = ["msx geyser sfx v1.wav"]
-                rel values = </Root/Audios/msx_geyser_sfx_v1_wav2>
-            }
-        }
-
-        def RealityKitComponent "HierarchicalFade"
-        {
-            uniform token info:id = "RealityKit.HierarchicalFade"
-            float opacity = 1
-        }
-    }
-
     def RealityKitTimeline "GeyserBisonTrans"
     {
         reorder nameChildren = ["Track", "Track2", "Track_3", "Track_1", "Track3", "Track4", "Track5", "Track6", "Track7"]
@@ -334,25 +219,9 @@ def Xform "Root"
                 double duration = 0
                 uniform token info:id = "E71480E4-3EB4-4887-888C-2A1F7492E9BB"
                 double startTime = 50.089975137604796
-                rel target = </Root/Eruption>
+                rel target = </Root/GeyserSandbox/Eruption>
                 float2 ui:nodegraph:node:pos = (20, 20)
                 int ui:nodegraph:node:stackingOrder = 1
-            }
-
-            def RealityKitAction "Hide_12"
-            {
-                string actionKind = "hide"
-                int blendLayer = 300
-                double duration = 5
-                uniform token info:id = "35A010AA-5FC9-4D19-A56A-E52F2F250F56"
-                double startTime = 45.025219332457134
-                rel target = </Root/GeyserSandbox>
-                float2 ui:nodegraph:node:pos = (20, 20)
-                int ui:nodegraph:node:stackingOrder = 1
-
-                def RealityKitStruct "timingFunction"
-                {
-                }
             }
 
             def RealityKitAction "Show"
@@ -369,13 +238,13 @@ def Xform "Root"
                 }
             }
 
-            def RealityKitAction "Show2"
+            def RealityKitAction "Hide"
             {
-                string actionKind = "show"
+                string actionKind = "hide"
                 int blendLayer = 300
-                double duration = 0.01
-                uniform token info:id = "4A8C2A11-4932-41BB-A9DD-FC775C00ED8E"
-                double startTime = 0
+                double duration = 5
+                uniform token info:id = "DC092020-07FE-4BF0-AE50-E7A54D073D69"
+                double startTime = 45.03967620518848
                 rel target = </Root/GeyserSandbox>
 
                 def RealityKitStruct "timingFunction"
@@ -413,7 +282,7 @@ def Xform "Root"
                 double duration = 5
                 uniform token info:id = "B52A2139-20BC-48CF-B9FD-2E6CCB7CC441"
                 double startTime = 45.03250490762865
-                rel target = </Root/Eruption>
+                rel target = </Root/GeyserSandbox/Eruption>
                 float2 ui:nodegraph:node:pos = (20, 20)
                 int ui:nodegraph:node:stackingOrder = 1
 
@@ -503,6 +372,15 @@ def Xform "Root"
                 def RealityKitStruct "timingFunction"
                 {
                 }
+            }
+
+            def RealityKitAction "Enable_Entity"
+            {
+                string actionKind = "enable"
+                double duration = 0
+                uniform token info:id = "0247B195-FFD5-4AE1-BCE0-4C010B32BDDB"
+                double startTime = 49.62240947904081
+                rel target = </Root/Bison>
             }
         }
 
@@ -863,8 +741,9 @@ def Xform "Root"
             def RealityKitAction "Play_Audio"
             {
                 string actionKind = "audio"
+                string audioResourceName = "Bison Breathing.wav"
                 bool controlPlayback = 1
-                double duration = 1
+                double duration = 17.808125
                 uniform token info:id = "A358FE4E-8BD9-4107-B23C-95304715555C"
                 double loopCount = 0
                 double startTime = 0
@@ -1019,7 +898,7 @@ def Xform "Root"
         references = @Sandbox.usda@
     )
     {
-        reorder nameChildren = ["UIBar", "GeyserSoundTL", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary", "HierarchicalFade", "Pisa", "msx_geyser_sfx_v1_wav", "Cube_1"]
+        reorder nameChildren = ["UIBar", "GeyserSoundTL", "GeyserGroup", "Collider", "InputTarget", "RCP_BehaviorsContainer", "OnTap", "AnimationLibrary", "Cube", "AudioLibrary", "HierarchicalFade", "Pisa", "msx_geyser_sfx_v1_wav", "Eruption"]
         float3 xformOp:scale = (0.08, 0.08, 0.08)
         float3 xformOp:translate = (0.010402441, 0.6091858, -0.11982477)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
@@ -1283,6 +1162,117 @@ def Xform "Root"
             uniform asset file = @Sounds/msx geyser sfx v1.wav@
             uniform bool shouldLoop = 0
         }
+
+        def "Eruption" (
+            customData = {
+                float3 rotationEulerHint = (0, 0, 0)
+            }
+            references = @ArtAssets/Eruption.usdz@
+        )
+        {
+            reorder nameChildren = ["smoke", "smoke_1", "AudioLibrary", "HierarchicalFade"]
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (12.500003, 12.500003, 12.500003)
+            float3 xformOp:translate = (0.4510808, 0.09074354, 0.27630615)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            over "smoke_1"
+            {
+                quatf xformOp:orient = (0.99999994, 0, 0, 0)
+                float3 xformOp:scale = (0.07895726, 0.07895726, 0.07895726)
+                float3 xformOp:translate = (1.8626451e-9, -0.031540036, -7.450581e-9)
+
+                over "VFXEmitter"
+                {
+                    over "currentState"
+                    {
+                        bool isEmitting = 1
+
+                        over "mainEmitter"
+                        {
+                            float birthRate = 200
+                            float dampingFactor = 15
+                            float particleSize = 0.05
+                            float radialGravityStrength = -0.1
+                            float sizeMultiplierAtEndOfLifespan = 13
+                            float4 startColorA = (0.5343751, 0.72773063, 0.7319911, 0.19882016)
+                            float4 startColorB = (1, 1, 1, 0.11891475)
+                            bool useStartColorRange = 1
+                            float3 vortexDirection = (0.1, 0, 0)
+                        }
+
+                        over "spawnedEmitter"
+                        {
+                            float3 acceleration = (0, -0.1, 0)
+                            float birthRate = 100
+                            float dampingFactor = 0.1
+                            float4 endColorA = (0.18195641, 0.26261774, 0.24874541, 0.15154654)
+                            float particleAngle = 0.017453292
+                            float particleMass = 1
+                            float particleSize = 0.05
+                            float3 radialGravityCenter = (0, 0.1, 0)
+                            float4 startColorA = (0.35071167, 0.42040566, 0.40221477, 0.04737989)
+                            bool useEndColor = 1
+                            bool useEndColorRange = 0
+                            bool useStartColorRange = 0
+                            float3 vortexDirection = (0.02, -0.03, 0.02)
+                            float vortexStrength = 0.15
+                        }
+                    }
+                }
+            }
+
+            over "smoke" (
+                customData = {
+                    float3 rotationEulerHint = (-0.08726621, 0, 0)
+                }
+            )
+            {
+                quatf xformOp:orient = (0.99904823, -0.043619264, 0, 0)
+
+                over "VFXEmitter"
+                {
+                    over "currentState"
+                    {
+                        float3 shapeSize = (0.1, 0.1, 0.1)
+
+                        over "mainEmitter"
+                        {
+                            float3 acceleration = (0, -0.2, 0)
+                            float birthRate = 100
+                            float dampingFactor = 15
+                            float4 endColorA = (0.59082115, 0.7648289, 0.66320205, 0.3903327)
+                            float4 endColorB = (1, 1, 1, 1)
+                            float noiseScale = 0.5
+                            float particleMass = 1.3
+                            float particleSize = 0.02
+                            float3 radialGravityCenter = (0, 0, 0)
+                            float sizeMultiplierAtEndOfLifespan = 7
+                            bool useEndColor = 1
+                            bool useEndColorRange = 1
+                            float3 vortexDirection = (0.5, -0.5, 0.5)
+                        }
+                    }
+                }
+            }
+
+            def RealityKitComponent "AudioLibrary"
+            {
+                uniform token info:id = "RealityKit.AudioLibrary"
+
+                def RealityKitDict "resources"
+                {
+                    string[] keys = ["msx geyser sfx v1.wav"]
+                    rel values = </Root/Audios/msx_geyser_sfx_v1_wav2>
+                }
+            }
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+                float opacity = 1
+            }
+        }
     }
 
     def Xform "Audios" (
@@ -1528,7 +1518,7 @@ def Xform "Root"
         def RealityKitAudioFile "Bison_Breathing_wav"
         {
             uniform asset file = @Sounds/Bison Breathing.wav@
-            uniform bool shouldLoop = 0
+            uniform bool shouldLoop = 1
         }
     }
 

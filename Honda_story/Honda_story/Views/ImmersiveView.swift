@@ -187,7 +187,7 @@ struct ImmersiveView: View {
             trackGestureStates()
             trackClappingHands()
             
-            trackGeyserState()
+//            trackGeyserState()
             
 //            trackWorldReferenceImage()
         }
